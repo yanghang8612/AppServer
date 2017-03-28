@@ -1,10 +1,9 @@
 package com.huachuang.server.entity;
 
-import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.*;
 
+import javax.persistence.*;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
 
@@ -13,31 +12,43 @@ import java.util.Date;
  */
 
 @Entity
+@Table(name = "user")
 public class User {
 
     @Id
+    @Column(name = "user_id")
     @GeneratedValue(generator="increment")
     @GenericGenerator(name="increment", strategy = "increment")
     private long userId;
 
+    @Column(name = "user_phone_number")
     private String userPhoneNumber;
 
+    @Column(name = "user_password")
     private String userPassword;
 
+    @Column(name = "user_type")
     private byte userType;
 
+    @Column(name = "is_vip")
     private boolean isVip;
 
+    @Column(name = "invitation_code")
     private String invitationCode;
 
+    @Column(name = "superior_user_id")
     private long superiorUserId;
 
+    @Column(name = "register_time")
     private Date registerTime;
 
+    @Column(name = "last_login_time")
     private Date lastLoginTime;
 
+    @Column(name = "certification_state")
     private boolean certificationState;
 
+    @Column(name = "debit_card_state")
     private boolean debitCardState;
 
     public long getUserId() {

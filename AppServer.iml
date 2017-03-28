@@ -17,9 +17,10 @@
     <facet type="hibernate" name="Hibernate">
       <configuration>
         <datasource-map>
-          <unit-entry name="sessionFactory" value="dataSource" />
+          <unit-entry name="sessionFactory" value="88ca9641-1727-42ab-bf73-d2cc4b552063" />
         </datasource-map>
         <naming-strategy-map />
+        <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/src/hibernate.cfg.xml" />
       </configuration>
     </facet>
   </component>
@@ -31,7 +32,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Spring-4.3.7.RELEASE" level="project" />
-    <orderEntry type="library" name="Hibernate 5.2.3-5.2.3" level="project" />
+    <orderEntry type="library" name="Hibernate 5.2.9-5.2.9" level="project" />
     <orderEntry type="library" name="Spring MVC-4.3.7.RELEASE" level="project" />
     <orderEntry type="library" name="mysql:mysql-connector-java:6.0.6" level="project" />
   </component>

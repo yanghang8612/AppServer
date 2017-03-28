@@ -7,7 +7,8 @@ import java.util.List;
 /**
  * Created by Asuka on 2017/3/19.
  */
-public interface IUserManager {
+
+public interface UserManagerDao {
     // 获取用户信息
     List<User> getUserInfo(String userPhoneNumber);
 
