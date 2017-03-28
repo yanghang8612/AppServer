@@ -26,6 +26,8 @@ public class User {
 
     private byte userType;
 
+    private boolean isVip;
+
     private String invitationCode;
 
     private long superiorUserId;
@@ -34,7 +36,9 @@ public class User {
 
     private Date lastLoginTime;
 
-    private char certificationState;
+    private boolean certificationState;
+
+    private boolean debitCardState;
 
     public long getUserId() {
         return userId;
@@ -66,6 +70,14 @@ public class User {
 
     public void setUserType(byte userType) {
         this.userType = userType;
+    }
+
+    public boolean isVip() {
+        return isVip;
+    }
+
+    public void setVip(boolean vip) {
+        isVip = vip;
     }
 
     public String getInvitationCode() {
@@ -100,11 +112,19 @@ public class User {
         this.lastLoginTime = lastLoginTime;
     }
 
-    public char getCertificationState() {
+    public boolean isCertificationState() {
         return certificationState;
     }
 
-    public void setCertificationState(char certificationState) {
+    public void setCertificationState(boolean certificationState) {
         this.certificationState = certificationState;
+    }
+
+    public boolean isDebitCardState() {
+        return debitCardState;
+    }
+
+    public void setDebitCardState(boolean debitCardState) {
+        this.debitCardState = debitCardState;
     }
 }
