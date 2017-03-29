@@ -9,21 +9,20 @@ import java.util.List;
  */
 
 public interface UserManagerDao {
-    // 获取用户信息
-    List<User> getUserInfo(String userPhoneNumber);
 
-    // 注册
-    void register(User user);
+    boolean verifyPhoneNumber(String phoneNumber);
 
-    // 增
+    boolean verifyMessageCode(String phoneNumber, String messageCode);
+
+    boolean verifyInvitationCode(String invitationCode);
+
+    List<User> getUserInfo(String phoneNumber);
+
     void create(User user);
 
-    // 删
     void delete(User user);
 
-    // 改
     void update(User user);
 
-    // 查
     List<User> retrieve(User user);
 }
