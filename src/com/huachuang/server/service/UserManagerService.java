@@ -28,24 +28,6 @@ public class UserManagerService {
     @Resource
     private UserTokenDao userTokenDao;
 
-    public Map<String, String> verifyPhoneNumber(String phoneNumber) {
-        Map<String, String> result = new HashMap<>();
-        return result;
-    }
-
-    public Map<String, String> verifyMessageCode(String phoneNumber, String messageCode) {
-        Map<String, String> result = new HashMap<>();
-        if (userManagerDao.verifyMessageCode(phoneNumber, messageCode)) {
-            result.put("Status", "true");
-            result.put("Info", "短信验证码通过");
-        }
-        else {
-            result.put("Status", "false");
-            result.put("Info", "短信验证码失效");
-        }
-        return result;
-    }
-
     public Map<String, String> verifyInvitationCode(String invitationCode) {
         Map<String, String> result = new HashMap<>();
         if (userManagerDao.verifyInvitationCode(invitationCode)) {
@@ -59,30 +41,44 @@ public class UserManagerService {
         return result;
     }
 
+    public Map<String, String> verifyRecommenderID(String recommendID) {
+        Map<String, String> result = new HashMap<>();
+        if (userManagerDao.verifyRecommenderID(recommendID)) {
+            result.put("Status", "true");
+            result.put("Info", "推荐人ID验证通过");
+        }
+        else {
+            result.put("Status", "false");
+            result.put("Info", "推荐人ID验证失败");
+        }
+        return result;
+    }
+
     public int getUserCountByPhoneNumber(String phoneNumber) {
         return userManagerDao.getUserInfo(phoneNumber).size();
     }
 
-//    public Object register(String phoneNumber, String messageCode, String invitationCode, String recommenderID){
-//        Map<String, String> result = new HashMap<>();
-//        List<User> userList = userManagerDao.getUserInfo(phoneNumber);
-//        if (userList != null && userList.size() == 0){
-//            if (userManagerDao.create(userInfo)){
-//                map.put("Status", "true");
-//                map.put("Info", "注册成功");
-//            }
-//            else {
-//                map.put("Status", "false");
-//                map.put("Info", "注册异常：创建账号失败");
-//            }
-//        }
-//        else{
-//            // 对象已存在
-//            map.put("Status", "false");
-//            map.put("Info", "注册异常：账号已存在");
-//        }
-//        return map;
-//    }
+    public Map<String, String> register(String phoneNumber, String invitationCode, String recommenderID){
+        Map<String, String> result = new HashMap<>();
+        List<User> userList = userManagerDao.getUserInfo(phoneNumber);
+        if (userList != null && userList.size() == 0){
+            User user = new User();
+            user.setUserPhoneNumber(phoneNumber);
+            if (userManagerDao.create(null)){
+                result.put("Status", "true");
+                result.put("Info", "注册成功");
+            }
+            else {
+                result.put("Status", "false");
+                result.put("Info", "注册异常：创建账号失败");
+            }
+        }
+        else{
+            result.put("Status", "false");
+            result.put("Info", "注册异常：账号已存在");
+        }
+        return result;
+    }
 //
 //    /*
 //        登录

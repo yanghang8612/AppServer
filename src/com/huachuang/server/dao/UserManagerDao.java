@@ -10,19 +10,17 @@ import java.util.List;
 
 public interface UserManagerDao {
 
-    boolean verifyPhoneNumber(String phoneNumber);
-
-    boolean verifyMessageCode(String phoneNumber, String messageCode);
-
     boolean verifyInvitationCode(String invitationCode);
+
+    boolean verifyRecommenderID(String recommenderID);
 
     List<User> getUserInfo(String phoneNumber);
 
-    void create(User user);
+    boolean create(User user);
 
-    void delete(User user);
+    boolean delete(User user);
 
-    void update(User user);
+    boolean update(User user);
 
     List<User> retrieve(User user);
 }
