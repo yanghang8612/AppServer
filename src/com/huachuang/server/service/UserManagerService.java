@@ -55,7 +55,7 @@ public class UserManagerService {
         }
         else {
             result.put("Status", "false");
-            result.put("Info", "邀请码验证失败");
+            result.put("Info", "邀请码无效，请检查");
         }
         return result;
     }

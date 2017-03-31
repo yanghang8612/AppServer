@@ -12,6 +12,7 @@ import java.util.Date;
  */
 
 @Entity
+@DynamicInsert
 @Table(name = "user")
 public class User {
 
@@ -21,10 +22,10 @@ public class User {
     @GenericGenerator(name="increment", strategy = "increment")
     private long userId;
 
-    @Column(name = "user_phone_number")
+    @Column(name = "user_phone_number", length = 11, nullable = false, unique = true)
     private String userPhoneNumber;
 
-    @Column(name = "user_password")
+    @Column(name = "user_password", length = 16, nullable = false)
     private String userPassword;
 
     @Column(name = "user_type")
@@ -33,7 +34,7 @@ public class User {
     @Column(name = "is_vip")
     private boolean isVip;
 
-    @Column(name = "invitation_code")
+    @Column(name = "invitation_code", length = 6, unique = true)
     private String invitationCode;
 
     @Column(name = "superior_user_id")

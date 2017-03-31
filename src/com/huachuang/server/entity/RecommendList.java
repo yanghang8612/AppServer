@@ -1,5 +1,6 @@
 package com.huachuang.server.entity;
 
+import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import java.util.Date;
  */
 
 @Entity
+@DynamicInsert
 @Table(name = "recommend_list")
 public class RecommendList {
 
@@ -19,10 +21,10 @@ public class RecommendList {
     @GenericGenerator(name="increment", strategy = "increment")
     private long id;
 
-    @Column(name = "recommender_id")
+    @Column(name = "recommender_id", nullable = false)
     private long recommenderId;
 
-    @Column(name = "recommended_id")
+    @Column(name = "recommended_id", nullable = false)
     private long recommendedId;
 
     @Column(name = "recommend_time")
