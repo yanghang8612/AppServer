@@ -21,18 +21,37 @@ public class UserManagerController {
     @Resource
     private UserManagerService userManagerService;
 
+    @ResponseBody
     @RequestMapping(value = "/Register", method = RequestMethod.POST)
-    public String register() {
-        return "Login";
+    public Map<String, String> register(
+            @RequestParam String phoneNumber,
+            @RequestParam String invitationCode,
+            @RequestParam String recommenderID,
+            @RequestParam String password) {
+        return userManagerService.register(phoneNumber, invitationCode, recommenderID, password);
     }
 
+    @ResponseBody
     @RequestMapping(value = "/Login", method = RequestMethod.POST)
-    public @ResponseBody String login() {
-        return String.valueOf(userManagerService.getUserCountByPhoneNumber("18511838501"));
+    public String login() {
+        return "shabi";
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/VerifyPhoneNumber", method = RequestMethod.POST)
+    public Object verifyPhoneNumber(@RequestParam String phoneNumber) {
+        return userManagerService.verifyPhoneNumber(phoneNumber);
+    }
+
+    @ResponseBody
     @RequestMapping(value = "/VerifyInvitationCode", method = RequestMethod.POST)
-    public @ResponseBody Object verifyInvitationCode(@RequestParam String invitationCode) {
+    public Object verifyInvitationCode(@RequestParam String invitationCode) {
         return userManagerService.verifyInvitationCode(invitationCode);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/VerifyRecommenderID", method = RequestMethod.POST)
+    public Object verifyRecommenderID(@RequestParam String recommenderID) {
+        return userManagerService.verifyRecommenderID(recommenderID);
     }
 }

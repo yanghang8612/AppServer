@@ -1,7 +1,10 @@
 package com.huachuang.server.service;
 
+import com.huachuang.server.CommonUtils;
+import com.huachuang.server.dao.RecommendListDao;
 import com.huachuang.server.dao.UserManagerDao;
 import com.huachuang.server.dao.UserTokenDao;
+import com.huachuang.server.entity.RecommendList;
 import com.huachuang.server.entity.User;
 import com.huachuang.server.entity.UserToken;
 import org.springframework.stereotype.Service;
@@ -26,7 +29,23 @@ public class UserManagerService {
     private UserManagerDao userManagerDao;
 
     @Resource
+    private RecommendListDao recommendListDao;
+
+    @Resource
     private UserTokenDao userTokenDao;
+
+    public Map<String, String> verifyPhoneNumber(String phoneNumber) {
+        Map<String, String> result = new HashMap<>();
+        if (userManagerDao.verifyPhoneNumber(phoneNumber)) {
+            result.put("Status", "true");
+            result.put("Info", "该手机号尚未注册");
+        }
+        else {
+            result.put("Status", "false");
+            result.put("Info", "该手机号已注册，请登录");
+        }
+        return result;
+    }
 
     public Map<String, String> verifyInvitationCode(String invitationCode) {
         Map<String, String> result = new HashMap<>();
@@ -45,38 +64,32 @@ public class UserManagerService {
         Map<String, String> result = new HashMap<>();
         if (userManagerDao.verifyRecommenderID(recommendID)) {
             result.put("Status", "true");
-            result.put("Info", "推荐人ID验证通过");
+            result.put("Info", "推荐人验证通过");
         }
         else {
             result.put("Status", "false");
-            result.put("Info", "推荐人ID验证失败");
+            result.put("Info", "该推荐人不存在");
         }
         return result;
     }
 
-    public int getUserCountByPhoneNumber(String phoneNumber) {
-        return userManagerDao.getUserInfo(phoneNumber).size();
-    }
+    public Map<String, String> register(String phoneNumber, String invitationCode, String recommenderID, String password){
 
-    public Map<String, String> register(String phoneNumber, String invitationCode, String recommenderID){
+        String generatedInvitationCode;
+        while (true) {
+            generatedInvitationCode = CommonUtils.generateInvitationCode();
+            if (!userManagerDao.verifyInvitationCode(generatedInvitationCode)) {
+                break;
+            }
+        }
+        User user = new User(phoneNumber, password, generatedInvitationCode, userManagerDao.findUserByInvitationCode(invitationCode).getUserId());
+        long userID = userManagerDao.create(user);
+        if (recommenderID != null && !recommenderID.equals("")) {
+            recommendListDao.create(new RecommendList(userManagerDao.findUserByPhoneNumber(recommenderID).getUserId(), userID));
+        }
         Map<String, String> result = new HashMap<>();
-        List<User> userList = userManagerDao.getUserInfo(phoneNumber);
-        if (userList != null && userList.size() == 0){
-            User user = new User();
-            user.setUserPhoneNumber(phoneNumber);
-            if (userManagerDao.create(null)){
-                result.put("Status", "true");
-                result.put("Info", "注册成功");
-            }
-            else {
-                result.put("Status", "false");
-                result.put("Info", "注册异常：创建账号失败");
-            }
-        }
-        else{
-            result.put("Status", "false");
-            result.put("Info", "注册异常：账号已存在");
-        }
+        result.put("Status", "true");
+        result.put("Info", "注册成功");
         return result;
     }
 //

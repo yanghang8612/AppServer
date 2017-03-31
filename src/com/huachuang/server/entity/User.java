@@ -51,6 +51,15 @@ public class User {
     @Column(name = "debit_card_state")
     private boolean debitCardState;
 
+    public User(){}
+
+    public User(String userPhoneNumber, String userPassword, String invitationCode, long superiorUserId) {
+        this.userPhoneNumber = userPhoneNumber;
+        this.userPassword = userPassword;
+        this.invitationCode = invitationCode;
+        this.superiorUserId = superiorUserId;
+    }
+
     public long getUserId() {
         return userId;
     }

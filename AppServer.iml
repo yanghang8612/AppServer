@@ -36,6 +36,6 @@
     <orderEntry type="library" name="Spring MVC-4.3.7.RELEASE" level="project" />
     <orderEntry type="library" name="mysql:mysql-connector-java:6.0.6" level="project" />
     <orderEntry type="library" name="org.codehaus.jackson:jackson-core-asl:1.9.11" level="project" />
-    <orderEntry type="library" name="com.fasterxml.jackson.core:jackson-databind:2.8.7" level="project" />
+    <orderEntry type="library" name="com.fasterxml.jackson.core:jackson-databind:Release" level="project" />
   </component>
 </module>

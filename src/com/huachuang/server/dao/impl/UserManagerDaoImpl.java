@@ -26,6 +26,20 @@ public class UserManagerDaoImpl implements UserManagerDao {
     private SessionFactory sessionFactory;
 
     @Override
+    public boolean verifyPhoneNumber(String phoneNumber) {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        Query<User> query = session.createQuery("from User where userPhoneNumber = ?", User.class);
+        query.setParameter(0, phoneNumber);
+        List<User> result = query.getResultList();
+        tx.commit();
+        if (result != null && result.size() > 1) {
+            LogFactory.getLog("Yang").error("Duplicate Phone number");
+        }
+        return (result != null && result.size() == 0);
+    }
+
+    @Override
     public boolean verifyInvitationCode(String invitationCode) {
         Session session = sessionFactory.getCurrentSession();
         Transaction tx = session.beginTransaction();
@@ -54,19 +68,12 @@ public class UserManagerDaoImpl implements UserManagerDao {
     }
 
     @Override
-    public List<User> getUserInfo(String phoneNumber) {
+    public long create(User user) {
         Session session = sessionFactory.getCurrentSession();
         Transaction tx = session.beginTransaction();
-        Query<User> query = session.createQuery("from User where userPhoneNumber = ?", User.class);
-        query.setParameter(0, phoneNumber);
-        List<User> result = query.getResultList();
+        long id = (long) session.save(user);
         tx.commit();
-        return result;
-    }
-
-    @Override
-    public boolean create(User user) {
-        return true;
+        return id;
     }
 
     @Override
@@ -82,5 +89,45 @@ public class UserManagerDaoImpl implements UserManagerDao {
     @Override
     public List<User> retrieve(User user) {
         return null;
+    }
+
+    @Override
+    public User findUserByPhoneNumber(String phoneNumber) {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        Query<User> query = session.createQuery("from User where userPhoneNumber = ?", User.class);
+        query.setParameter(0, phoneNumber);
+        List<User> result = query.getResultList();
+        tx.commit();
+        if (result == null || result.size() == 0) {
+            return null;
+        }
+        else if (result.size() > 1) {
+            LogFactory.getLog("Yang").error("Duplicate phone number");
+            return null;
+        }
+        else {
+            return result.get(0);
+        }
+    }
+
+    @Override
+    public User findUserByInvitationCode(String invitationNumber) {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        Query<User> query = session.createQuery("from User where invitationCode = ?", User.class);
+        query.setParameter(0, invitationNumber);
+        List<User> result = query.getResultList();
+        tx.commit();
+        if (result == null || result.size() == 0) {
+            return null;
+        }
+        else if (result.size() > 1) {
+            LogFactory.getLog("Yang").error("Duplicate invitation code");
+            return null;
+        }
+        else {
+            return result.get(0);
+        }
     }
 }
