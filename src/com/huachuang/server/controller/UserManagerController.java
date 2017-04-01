@@ -33,7 +33,7 @@ public class UserManagerController {
 
     @ResponseBody
     @RequestMapping(value = "/Login", method = RequestMethod.POST)
-    public String login() {
+    public String login(@RequestParam String phoneNumber, @RequestParam String password) {
         return "shabi";
     }
 

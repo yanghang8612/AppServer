@@ -52,6 +52,9 @@ public class User {
     @Column(name = "debit_card_state")
     private boolean debitCardState;
 
+    @Column(name = "header_state")
+    private boolean headerState;
+
     public User(){}
 
     public User(String userPhoneNumber, String userPassword, String invitationCode, long superiorUserId) {
@@ -147,5 +150,13 @@ public class User {
 
     public void setDebitCardState(boolean debitCardState) {
         this.debitCardState = debitCardState;
+    }
+
+    public boolean isHeaderState() {
+        return headerState;
+    }
+
+    public void setHeaderState(boolean headerState) {
+        this.headerState = headerState;
     }
 }

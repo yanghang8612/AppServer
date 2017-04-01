@@ -92,27 +92,25 @@ public class UserManagerService {
         result.put("Info", "注册成功");
         return result;
     }
-//
+
 //    /*
 //        登录
 //     */
-//    public Object login(String account, String password, HttpServletRequest request){
-//        Map<String, Object> map = new HashMap<String, Object>();
-//        UserInfo userInfo = new UserInfo();
-//        UserInfo userInfoRet = new UserInfo();
-//        UserInfoDao userInfoDao = new UserInfoDao();
-//        List<UserInfo> userInfoList = new ArrayList<UserInfo>();
+//    public Object login(String phoneNumber, String password){
+//        Map<String, Object> result = new HashMap<String, Object>();
+//        User user = new User();
+//        user.setUserPhoneNumber(phoneNumber);
+//        user.setUserPassword(password);
+//        List<User> userList = new ArrayList<User>();
 //
 //        final int userID;
 //        String token = "";
 //
-//        // 将account解析为手机号 尝试登录
-//        userInfo.setPhoneNum(account);
-//        userInfo.setPassword(password);
-//        userInfoList = userInfoDao.Retrieve(userInfo);
-//        if (userInfoList.size() != 0){
-//            userInfoRet = userInfoList.get(0);
-//            userInfoRet.setPassword("");
+//
+//        userList = userManagerDao.retrieve(user);
+//        if (userList != null && userList.size() == 1){
+//            user = userList.get(0);
+//            user.setUserPassword("");
 //            String picPath = userInfoRet.gethPicPath();
 //            String[] picPathArray = picPath.split("/");
 //            String picName = picPathArray[picPathArray.length - 1];
@@ -122,65 +120,19 @@ public class UserManagerService {
 //            }
 //            userID = userInfoRet.getUserID();
 //            token = UpdateToken(userID);
-//            map.put("Status", "true");
-//            map.put("Info", "登录成功");
-//            map.put("User", userInfoRet);
-//            map.put("Token", token);
+//            result.put("Status", "true");
+//            result.put("Info", "登录成功");
+//            result.put("User", userInfoRet);
+//            result.put("Token", token);
 //            Define.onlineUser.add(String.valueOf(userID));
-//            Executors.newSingleThreadExecutor().execute(new Runnable() {
-//                public void run() {
-//                    try {
-//                        TimeUnit.SECONDS.sleep(1);
-//                        JPushService.getInstance().pushMessagesWhenLogin(String.valueOf(userID));
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-//
-//                }
-//            });
-//            return map;
+//            return result;
 //        }
 //
-//        // 将account解析为邮箱 尝试登录
-//        userInfo.setPhoneNum(null);
-//        userInfo.setEmail(account);
-//        userInfoList = userInfoDao.Retrieve(userInfo);
-//        if (userInfoList.size() != 0){
-//            userInfoRet = userInfoList.get(0);
-//            userInfoRet.setPassword("");
-//            String picPath = userInfoRet.gethPicPath();
-//            String[] picPathArray = picPath.split("/");
-//            String picName = picPathArray[picPathArray.length - 1];
-//            userInfoRet.sethPicPath("");
-//            if(picName != null && !picName.isEmpty()) {
-//                userInfoRet.sethPicPath(Define.serverName + "/UserManage/DownloadHPic?phoneNum=" + userInfoRet.getPhoneNum() + "&picName=" + picName);
-//            }
-//            userID = userInfoRet.getUserID();
-//            token = UpdateToken(userID);
-//            map.put("Status", "true");
-//            map.put("Info", "登录成功");
-//            map.put("User", userInfoRet);
-//            map.put("Token", token);
-//            Define.onlineUser.add(String.valueOf(userID));
-//            Executors.newSingleThreadExecutor().execute(new Runnable() {
-//                public void run() {
-//                    try {
-//                        TimeUnit.SECONDS.sleep(1);
-//                        JPushService.getInstance().pushMessagesWhenLogin(String.valueOf(userID));
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-//
-//                }
-//            });
-//            return map;
-//        }
-//
-//        map.put("Status", "false");
-//        map.put("Info", "登录失败");
-//        map.put("User", "");
-//        map.put("Token", "");
-//        return map;
+//        result.put("Status", "false");
+//        result.put("Info", "登录失败");
+//        result.put("User", "");
+//        result.put("Token", "");
+//        return result;
 //    }
 //
 //    /*
