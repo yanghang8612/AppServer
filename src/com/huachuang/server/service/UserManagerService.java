@@ -1,9 +1,7 @@
 package com.huachuang.server.service;
 
 import com.huachuang.server.CommonUtils;
-import com.huachuang.server.dao.RecommendListDao;
-import com.huachuang.server.dao.UserManagerDao;
-import com.huachuang.server.dao.UserTokenDao;
+import com.huachuang.server.dao.*;
 import com.huachuang.server.entity.RecommendList;
 import com.huachuang.server.entity.User;
 import com.huachuang.server.entity.UserToken;
@@ -33,6 +31,9 @@ public class UserManagerService {
 
     @Resource
     private UserTokenDao userTokenDao;
+
+    @Resource
+    private UserInfoService userInfoService;
 
     public Map<String, String> verifyPhoneNumber(String phoneNumber) {
         Map<String, String> result = new HashMap<>();
@@ -73,7 +74,11 @@ public class UserManagerService {
         return result;
     }
 
-    public Map<String, String> register(String phoneNumber, String invitationCode, String recommenderID, String password){
+    public Map<String, String> register(
+            String phoneNumber,
+            String invitationCode,
+            String recommenderID,
+            String password){
 
         String generatedInvitationCode;
         while (true) {
@@ -93,47 +98,33 @@ public class UserManagerService {
         return result;
     }
 
-//    /*
-//        登录
-//     */
-//    public Object login(String phoneNumber, String password){
-//        Map<String, Object> result = new HashMap<String, Object>();
-//        User user = new User();
-//        user.setUserPhoneNumber(phoneNumber);
-//        user.setUserPassword(password);
-//        List<User> userList = new ArrayList<User>();
-//
-//        final int userID;
-//        String token = "";
-//
-//
-//        userList = userManagerDao.retrieve(user);
-//        if (userList != null && userList.size() == 1){
-//            user = userList.get(0);
-//            user.setUserPassword("");
-//            String picPath = userInfoRet.gethPicPath();
-//            String[] picPathArray = picPath.split("/");
-//            String picName = picPathArray[picPathArray.length - 1];
-//            userInfoRet.sethPicPath("");
-//            if(picName != null && !picName.isEmpty()) {
-//                userInfoRet.sethPicPath(Define.serverName + "/UserManage/DownloadHPic?phoneNum=" + userInfoRet.getPhoneNum() + "&picName=" + picName);
-//            }
-//            userID = userInfoRet.getUserID();
-//            token = UpdateToken(userID);
-//            result.put("Status", "true");
-//            result.put("Info", "登录成功");
-//            result.put("User", userInfoRet);
-//            result.put("Token", token);
-//            Define.onlineUser.add(String.valueOf(userID));
-//            return result;
-//        }
-//
-//        result.put("Status", "false");
-//        result.put("Info", "登录失败");
-//        result.put("User", "");
-//        result.put("Token", "");
-//        return result;
-//    }
+    public Map<String, Object> login(
+            String phoneNumber,
+            String password){
+
+        Map<String, Object> result = new HashMap<String, Object>();
+
+        User user = userManagerDao.findUserByPhoneNumber(phoneNumber);
+        if (user == null) {
+            result.put("Status", "false");
+            result.put("Info", "该手机号尚未注册");
+        }
+        else if (!user.getUserPassword().equals(password)) {
+            result.put("Status", "false");
+            result.put("Info", "密码错误,请检查后重试");
+        }
+        else {
+            user.setLastLoginTime(Calendar.getInstance().getTime());
+            userManagerDao.update(user);
+            result.put("Status", "true");
+            result.put("Info", "登录成功");
+            result.put("User", user);
+            if (user.isCertificationState()) {
+                result.put("CertificationInfo", userInfoService.getUserCertificationInfo(user.getUserId()).get("CertificationInfo"));
+            }
+        }
+        return result;
+    }
 //
 //    /*
 //        登出

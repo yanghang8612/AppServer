@@ -28,30 +28,40 @@ public class UserManagerController {
             @RequestParam String invitationCode,
             @RequestParam String recommenderID,
             @RequestParam String password) {
+
         return userManagerService.register(phoneNumber, invitationCode, recommenderID, password);
     }
 
     @ResponseBody
     @RequestMapping(value = "/Login", method = RequestMethod.POST)
-    public String login(@RequestParam String phoneNumber, @RequestParam String password) {
-        return "shabi";
+    public Map<String, Object> login(
+            @RequestParam String phoneNumber,
+            @RequestParam String password) {
+
+        return userManagerService.login(phoneNumber, password);
     }
 
     @ResponseBody
     @RequestMapping(value = "/VerifyPhoneNumber", method = RequestMethod.POST)
-    public Object verifyPhoneNumber(@RequestParam String phoneNumber) {
+    public Map<String, String> verifyPhoneNumber(
+            @RequestParam String phoneNumber) {
+
         return userManagerService.verifyPhoneNumber(phoneNumber);
     }
 
     @ResponseBody
     @RequestMapping(value = "/VerifyInvitationCode", method = RequestMethod.POST)
-    public Object verifyInvitationCode(@RequestParam String invitationCode) {
+    public Map<String, String> verifyInvitationCode(
+            @RequestParam String invitationCode) {
+
         return userManagerService.verifyInvitationCode(invitationCode);
     }
 
     @ResponseBody
     @RequestMapping(value = "/VerifyRecommenderID", method = RequestMethod.POST)
-    public Object verifyRecommenderID(@RequestParam String recommenderID) {
+    public Map<String, String> verifyRecommenderID(
+            @RequestParam String recommenderID) {
+
         return userManagerService.verifyRecommenderID(recommenderID);
     }
 }

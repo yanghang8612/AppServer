@@ -24,11 +24,14 @@ public class UserCertificationInfo {
     @Column(name = "user_name")
     private String userName;
 
+    @Column(name = "user_spell")
+    private String userSpell;
+
     @Column(name = "user_identity_card")
     private String userIdentityCard;
 
     @Column(name = "user_sex")
-    private String userSex;
+    private char userSex;
 
     public long getId() {
         return id;
@@ -54,6 +57,14 @@ public class UserCertificationInfo {
         this.userName = userName;
     }
 
+    public String getUserSpell() {
+        return userSpell;
+    }
+
+    public void setUserSpell(String userSpell) {
+        this.userSpell = userSpell;
+    }
+
     public String getUserIdentityCard() {
         return userIdentityCard;
     }
@@ -62,11 +73,11 @@ public class UserCertificationInfo {
         this.userIdentityCard = userIdentityCard;
     }
 
-    public String getUserSex() {
+    public char getUserSex() {
         return userSex;
     }
 
-    public void setUserSex(String userSex) {
+    public void setUserSex(char userSex) {
         this.userSex = userSex;
     }
 }

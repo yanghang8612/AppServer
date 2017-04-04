@@ -77,18 +77,40 @@ public class UserManagerDaoImpl implements UserManagerDao {
     }
 
     @Override
-    public boolean delete(User user) {
-        return true;
+    public void delete(User user) {
     }
 
     @Override
-    public boolean update(User user) {
-        return true;
+    public void update(User user) {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        session.update(user);
+        tx.commit();
     }
 
     @Override
     public List<User> retrieve(User user) {
         return null;
+    }
+
+    @Override
+    public User findUserByUserID(long userID) {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        Query<User> query = session.createQuery("from User where userId = ?", User.class);
+        query.setParameter(0, userID);
+        List<User> result = query.getResultList();
+        tx.commit();
+        if (result == null || result.size() == 0) {
+            return null;
+        }
+        else if (result.size() > 1) {
+            LogFactory.getLog("Yang").error("Duplicate user id");
+            return null;
+        }
+        else {
+            return result.get(0);
+        }
     }
 
     @Override

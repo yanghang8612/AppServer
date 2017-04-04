@@ -18,11 +18,13 @@ public interface UserManagerDao {
 
     long create(User user);
 
-    boolean delete(User user);
+    void delete(User user);
 
-    boolean update(User user);
+    void update(User user);
 
     List<User> retrieve(User user);
+
+    User findUserByUserID(long userID);
 
     User findUserByPhoneNumber(String phoneNumber);
 

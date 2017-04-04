@@ -11,6 +11,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 
@@ -23,18 +24,19 @@ import java.io.IOException;
 public class PictureRequestController {
 
     @Resource
-    private HttpServletRequest request;
-
-    @Resource
     private PictureRequestService pictureRequestService;
 
     @ResponseBody
     @RequestMapping(value = "/UploadHeader", method = RequestMethod.POST)
-    public boolean EditHPic(@RequestParam String userID, @RequestParam("header") CommonsMultipartFile header){
+    public boolean EditHPic(
+            HttpServletRequest request,
+            @RequestParam String userID,
+            @RequestParam("header") CommonsMultipartFile header){
+
         String path = request.getSession().getServletContext().getRealPath("/resources/header/");
         if (!header.isEmpty()) {
             try {
-                header.transferTo(new File(path + userID));
+                header.transferTo(new File(path + userID + ".jpg"));
             } catch (IOException e) {
                 e.printStackTrace();
                 return false;
@@ -43,33 +45,11 @@ public class PictureRequestController {
         return true;
     }
 
-//    /*
-//        下载头像
-//     */
-//    @RequestMapping(value = "/DownloadHeader", method = RequestMethod.GET)
-//    public void DownloadHPic(ModelMap modelMap, @RequestParam String phoneNum, HttpServletResponse response){
-//        UserManageService userManageService = new UserManageService();
-//        BufferedInputStream bufferedInputStream = userManageService.DownloadHPic(phoneNum);
-//        if (bufferedInputStream != null){
-//            byte[] buffer = new byte[1024];
-//            try {
-//                OutputStream outputStream = response.getOutputStream();
-//                int i = bufferedInputStream.read(buffer);
-//                while (i != -1){
-//                    outputStream.write(buffer, 0, i);
-//                    i = bufferedInputStream.read(buffer);
-//                }
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            } finally {
-//                if (bufferedInputStream != null){
-//                    try {
-//                        bufferedInputStream.close();
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//        }
-//    }
+    @ResponseBody
+    @RequestMapping(value = "/DownloadHeader", method = RequestMethod.POST)
+    public void DownloadHPic(
+            HttpServletResponse response,
+            @RequestParam String userID){
+
+    }
 }

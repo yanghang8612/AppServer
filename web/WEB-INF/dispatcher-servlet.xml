@@ -49,7 +49,7 @@
         <property name="resolveLazily" value="true" />
     </bean>
 
-    <!--<mvc:resources mapping="/img/**" location="/img/"/>-->
+    <mvc:resources mapping="/header/**" location="/resources/header/"/>
 
     <!--<mvc:annotation-driven>-->
         <!--<mvc:message-converters>-->

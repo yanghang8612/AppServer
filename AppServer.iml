@@ -9,6 +9,9 @@
         <webroots>
           <root url="file://$MODULE_DIR$/web" relative="/" />
         </webroots>
+        <sourceRoots>
+          <root url="file://$MODULE_DIR$/src" />
+        </sourceRoots>
       </configuration>
     </facet>
     <facet type="Spring" name="Spring">
@@ -38,5 +41,6 @@
     <orderEntry type="library" name="mysql:mysql-connector-java:6.0.6" level="project" />
     <orderEntry type="library" name="com.fasterxml.jackson.core:jackson-databind:Latest" level="project" />
     <orderEntry type="library" name="commons-fileupload:commons-fileupload:Latest" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Tomcat 8.5.12" level="application_server_libraries" />
   </component>
 </module>
