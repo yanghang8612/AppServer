@@ -64,4 +64,13 @@ public class UserManagerController {
 
         return userManagerService.verifyRecommenderID(recommenderID);
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/ChangePassword", method = RequestMethod.POST)
+    public Map<String, String> verifyRecommenderID(
+            @RequestParam long userID,
+            @RequestParam String newPassword) {
+
+        return userManagerService.changePassword(userID, newPassword);
+    }
 }

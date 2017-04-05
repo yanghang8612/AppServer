@@ -1,6 +1,7 @@
 package com.huachuang.server.controller;
 
 import com.huachuang.server.service.PictureRequestService;
+import com.huachuang.server.service.UserManagerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Asuka on 2017/3/31.
@@ -24,25 +27,34 @@ import java.io.IOException;
 public class PictureRequestController {
 
     @Resource
+    private UserManagerService userManagerService;
+
+    @Resource
     private PictureRequestService pictureRequestService;
 
     @ResponseBody
     @RequestMapping(value = "/UploadHeader", method = RequestMethod.POST)
-    public boolean EditHPic(
+    public Map<String, String> EditHPic(
             HttpServletRequest request,
-            @RequestParam String userID,
+            @RequestParam long userID,
             @RequestParam("header") CommonsMultipartFile header){
 
+        Map<String, String> result = new HashMap<>();
         String path = request.getSession().getServletContext().getRealPath("/resources/header/");
         if (!header.isEmpty()) {
             try {
                 header.transferTo(new File(path + userID + ".jpg"));
             } catch (IOException e) {
                 e.printStackTrace();
-                return false;
+                result.put("Status", "false");
+                result.put("Info", "头像设置失败");
+                return result;
             }
+            userManagerService.setUserHeaderState(userID);
         }
-        return true;
+        result.put("Status", "true");
+        result.put("Info", "头像设置成功");
+        return result;
     }
 
     @ResponseBody

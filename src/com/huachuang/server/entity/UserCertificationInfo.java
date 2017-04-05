@@ -30,6 +30,9 @@ public class UserCertificationInfo {
     @Column(name = "user_identity_card")
     private String userIdentityCard;
 
+    @Column(name = "user_address")
+    private String userAddress;
+
     @Column(name = "user_sex")
     private char userSex;
 
@@ -71,6 +74,14 @@ public class UserCertificationInfo {
 
     public void setUserIdentityCard(String userIdentityCard) {
         this.userIdentityCard = userIdentityCard;
+    }
+
+    public String getUserAddress() {
+        return userAddress;
+    }
+
+    public void setUserAddress(String userAddress) {
+        this.userAddress = userAddress;
     }
 
     public char getUserSex() {

@@ -18,5 +18,5 @@ public interface UserDebitCardDao {
 
     List<User> retrieve(UserDebitCard debitCard);
 
-    UserDebitCard findDebitCardByUserID(String userID);
+    UserDebitCard findDebitCardByUserID(long userID);
 }

@@ -122,9 +122,40 @@ public class UserManagerService {
             if (user.isCertificationState()) {
                 result.put("CertificationInfo", userInfoService.getUserCertificationInfo(user.getUserId()).get("CertificationInfo"));
             }
+            if (user.isDebitCardState()) {
+                result.put("DebitCard", userInfoService.getUserDebitCard(user.getUserId()).get("DebitCard"));
+            }
         }
         return result;
     }
+
+    public Map<String, String> changePassword(
+            long userID,
+            String newPassword) {
+
+        Map<String, String> result = new HashMap<>();
+        User user = userManagerDao.findUserByUserID(userID);
+        if (user != null) {
+            user.setUserPassword(newPassword);
+            userManagerDao.update(user);
+            result.put("Status", "true");
+            result.put("Status", "密码修改成功");
+        }
+        else {
+            result.put("Status", "false");
+            result.put("Status", "密码修改失败");
+        }
+        return result;
+    }
+
+    public void setUserHeaderState(long userID) {
+        User user = userManagerDao.findUserByUserID(userID);
+        if (user != null) {
+            user.setHeaderState(true);
+            userManagerDao.update(user);
+        }
+    }
+
 //
 //    /*
 //        登出

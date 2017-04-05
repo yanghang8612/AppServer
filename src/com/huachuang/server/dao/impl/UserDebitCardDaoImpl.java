@@ -50,7 +50,7 @@ public class UserDebitCardDaoImpl implements UserDebitCardDao {
     }
 
     @Override
-    public UserDebitCard findDebitCardByUserID(String userID) {
+    public UserDebitCard findDebitCardByUserID(long userID) {
         Session session = sessionFactory.getCurrentSession();
         Transaction tx = session.beginTransaction();
         Query<UserDebitCard> query = session.createQuery("from UserDebitCard where userId = ?", UserDebitCard.class);

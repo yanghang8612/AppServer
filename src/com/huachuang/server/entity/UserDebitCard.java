@@ -21,15 +21,6 @@ public class UserDebitCard {
     @Column(name = "user_id")
     private long userId;
 
-    @Column(name = "province")
-    private String province;
-
-    @Column(name = "head_office")
-    private String headOffice;
-
-    @Column(name = "branch")
-    private String branch;
-
     @Column(name = "owner_name")
     private String ownerName;
 
@@ -38,6 +29,15 @@ public class UserDebitCard {
 
     @Column(name = "card_type")
     private String cardType;
+
+    @Column(name = "head_office")
+    private String headOffice;
+
+    @Column(name = "branch")
+    private String branch;
+
+    @Column(name = "province")
+    private String province;
 
     public long getId() {
         return id;
@@ -53,30 +53,6 @@ public class UserDebitCard {
 
     public void setUserId(long userId) {
         this.userId = userId;
-    }
-
-    public String getProvince() {
-        return province;
-    }
-
-    public void setProvince(String province) {
-        this.province = province;
-    }
-
-    public String getHeadOffice() {
-        return headOffice;
-    }
-
-    public void setHeadOffice(String headOffice) {
-        this.headOffice = headOffice;
-    }
-
-    public String getBranch() {
-        return branch;
-    }
-
-    public void setBranch(String branch) {
-        this.branch = branch;
     }
 
     public String getOwnerName() {
@@ -101,5 +77,29 @@ public class UserDebitCard {
 
     public void setCardType(String cardType) {
         this.cardType = cardType;
+    }
+
+    public String getHeadOffice() {
+        return headOffice;
+    }
+
+    public void setHeadOffice(String headOffice) {
+        this.headOffice = headOffice;
+    }
+
+    public String getBranch() {
+        return branch;
+    }
+
+    public void setBranch(String branch) {
+        this.branch = branch;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
     }
 }
