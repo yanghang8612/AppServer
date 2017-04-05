@@ -148,6 +148,63 @@ public class UserManagerService {
         return result;
     }
 
+    public Map<String, Object> getSubUser(long userID) {
+        Map<String, Object> result = new HashMap<>();
+        User user = userManagerDao.findUserByUserID(userID);
+        if (user != null) {
+            if (user.getUserType() == 0) {
+                result.put("Status", "true");
+                result.put("Info", "普通及VIP用户没有下属用户");
+            }
+            else if (user.getUserType() == 3) {
+                List<User> users = userManagerDao.findSubUsers(userID);
+                result.put("Status", "true");
+                result.put("Users", users);
+            }
+            else if (user.getUserType() == 2) {
+                List<User> users = new ArrayList<>();
+                List<User> levelThreeUsers = userManagerDao.findSubUsers(userID);
+                if (levelThreeUsers != null) {
+                    for (User levelThreeUser : levelThreeUsers) {
+                        users.add(levelThreeUser);
+                        if (levelThreeUser.getUserType() != 0) {
+                            users.addAll(userManagerDao.findSubUsers(levelThreeUser.getUserId()));
+                        }
+                    }
+                }
+                result.put("Status", "true");
+                result.put("Users", users);
+            }
+            else {
+                List<User> users = new ArrayList<>();
+                List<User> levelTwoUsers = userManagerDao.findSubUsers(userID);
+                if (levelTwoUsers != null) {
+                    for (User levelTwoUser : levelTwoUsers) {
+                        users.add(levelTwoUser);
+                        if (levelTwoUser.getUserType() != 0) {
+                            List<User> levelThreeUsers = userManagerDao.findSubUsers(levelTwoUser.getUserId());
+                            if (levelThreeUsers != null) {
+                                for (User levelThreeUser : levelThreeUsers) {
+                                    users.add(levelThreeUser);
+                                    if (levelThreeUser.getUserType() != 0) {
+                                        users.addAll(userManagerDao.findSubUsers(levelThreeUser.getUserId()));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                result.put("Status", "true");
+                result.put("Users", users);
+            }
+        }
+        else {
+            result.put("Status", "false");
+            result.put("Info", "查询下级用户出错");
+        }
+        return result;
+    }
+
     public void setUserHeaderState(long userID) {
         User user = userManagerDao.findUserByUserID(userID);
         if (user != null) {
