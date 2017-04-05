@@ -1,18 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="aa4642b6-733a-47cf-8f92-682a043288f6" name="Default" comment="Add header image upload.">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources/88ca9641-1727-42ab-bf73-d2cc4b552063.xml" afterPath="$PROJECT_DIR$/.idea/dataSources/88ca9641-1727-42ab-bf73-d2cc4b552063.xml" />
+    <list default="true" id="aa4642b6-733a-47cf-8f92-682a043288f6" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tables.sql" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/huachuang/server/controller/PictureRequestController.java" afterPath="$PROJECT_DIR$/src/com/huachuang/server/controller/PictureRequestController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/huachuang/server/controller/UserInfoController.java" afterPath="$PROJECT_DIR$/src/com/huachuang/server/controller/UserInfoController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/huachuang/server/controller/UserManagerController.java" afterPath="$PROJECT_DIR$/src/com/huachuang/server/controller/UserManagerController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/huachuang/server/dao/UserDebitCardDao.java" afterPath="$PROJECT_DIR$/src/com/huachuang/server/dao/UserDebitCardDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/huachuang/server/dao/impl/UserDebitCardDaoImpl.java" afterPath="$PROJECT_DIR$/src/com/huachuang/server/dao/impl/UserDebitCardDaoImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/huachuang/server/entity/UserCertificationInfo.java" afterPath="$PROJECT_DIR$/src/com/huachuang/server/entity/UserCertificationInfo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/huachuang/server/entity/UserDebitCard.java" afterPath="$PROJECT_DIR$/src/com/huachuang/server/entity/UserDebitCard.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/huachuang/server/service/UserInfoService.java" afterPath="$PROJECT_DIR$/src/com/huachuang/server/service/UserInfoService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/huachuang/server/service/UserManagerService.java" afterPath="$PROJECT_DIR$/src/com/huachuang/server/service/UserManagerService.java" />
     </list>
     <list id="77603ad9-0141-4cc3-9951-41618914dd4c" name="Revert: " comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -125,11 +116,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserManagerService.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="UserManagerService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/huachuang/server/service/UserManagerService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="229">
-              <caret line="128" column="22" lean-forward="true" selection-start-line="128" selection-start-column="22" selection-end-line="128" selection-end-column="22" />
+            <state relative-caret-position="489">
+              <caret line="141" column="43" lean-forward="true" selection-start-line="141" selection-start-column="43" selection-end-line="141" selection-end-column="43" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tables.sql" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tables.sql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -294,24 +295,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppServer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppServer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -534,12 +517,13 @@
     <property name="Repository.Attach.Sources" value="false" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Asuka.Asuka-PC\IdeaProjects\AppServer\web\img" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Asuka.Asuka-PC\IdeaProjects\AppServer\web" />
       <recent name="C:\Users\Asuka.Asuka-PC\IdeaProjects\AppServer\web\WEB-INF" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Asuka.Asuka-PC\IdeaProjects\AppServer" />
+      <recent name="C:\Users\Asuka.Asuka-PC\IdeaProjects\AppServer\web\img" />
     </key>
   </component>
   <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
@@ -1249,7 +1233,7 @@
       <workItem from="1490582636328" duration="3363000" />
       <workItem from="1490693883960" duration="15872000" />
       <workItem from="1491054198243" duration="1887000" />
-      <workItem from="1491350634765" duration="12036000" />
+      <workItem from="1491350634765" duration="12162000" />
     </task>
     <task id="LOCAL-00001" summary="Connect with Hibernate.">
       <created>1490001100147</created>
@@ -1279,11 +1263,18 @@
       <option name="project" value="LOCAL" />
       <updated>1491054244991</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Add some api.">
+      <created>1491382657278</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1491382657278</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="94702000" />
+    <option name="totallyTimeSpent" value="94828000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -1377,7 +1368,8 @@
     <MESSAGE value="Connect with app successfully." />
     <MESSAGE value="Add jump img.&#10;Fix bug which user register time is not set." />
     <MESSAGE value="Add header image upload." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add header image upload." />
+    <MESSAGE value="Add some api." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add some api." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1390,13 +1382,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/.idea/kotlinc.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.idea/dataSources.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1787,8 +1772,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/huachuang/server/service/UserManagerService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="128" column="22" lean-forward="true" selection-start-line="128" selection-start-column="22" selection-end-line="128" selection-end-column="22" />
+        <state relative-caret-position="489">
+          <caret line="141" column="43" lean-forward="true" selection-start-line="141" selection-start-column="43" selection-end-line="141" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tables.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
