@@ -49,6 +49,12 @@
         <property name="resolveLazily" value="true" />
     </bean>
 
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+        <property name="prefix" value="/WEB-INF/pages/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+
     <mvc:resources mapping="/header/**" location="/resources/header/"/>
 
     <!--<mvc:annotation-driven>-->

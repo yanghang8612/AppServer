@@ -41,6 +41,6 @@
     <orderEntry type="library" name="mysql:mysql-connector-java:6.0.6" level="project" />
     <orderEntry type="library" name="com.fasterxml.jackson.core:jackson-databind:Latest" level="project" />
     <orderEntry type="library" name="commons-fileupload:commons-fileupload:Latest" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Tomcat 8.5.12" level="application_server_libraries" />
+    <orderEntry type="library" name="javax.servlet:jstl:1.2" level="project" />
   </component>
 </module>
