@@ -1,0 +1,33 @@
+.header-container {
+	padding: 5vw;
+	background-color: #fdf3e0;
+}
+
+.header-image {
+	width: 100vw;
+	height: 55vw;
+}
+
+.body-image {
+	width: 100vw;
+	height: 40vw;
+}
+
+.content-container {
+	padding: 15px;
+	background-color: #ffe9bf;
+}
+
+.rules-content {
+	font-size: 15px;
+}
+
+.rate-table {
+	font-size: 10px;
+}
+
+.register-form {
+	padding-top: 20px;
+	padding-bottom: 10px;
+	background-color: #E0E0E0;
+}

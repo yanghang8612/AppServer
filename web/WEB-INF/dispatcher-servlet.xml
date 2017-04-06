@@ -55,7 +55,12 @@
         <property name="suffix" value=".jsp" />
     </bean>
 
+    <mvc:resources mapping="/css/**" location="/resources/css/"/>
     <mvc:resources mapping="/header/**" location="/resources/header/"/>
+    <mvc:resources mapping="/imgs/**" location="/resources/imgs/"/>
+    <mvc:resources mapping="/js/**" location="/resources/js/"/>
+
+    <mvc:default-servlet-handler/>
 
     <!--<mvc:annotation-driven>-->
         <!--<mvc:message-converters>-->

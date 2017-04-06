@@ -14,10 +14,21 @@ import java.util.Map;
 @Controller
 public class RootController {
 
-    @RequestMapping(value = {"index.html", "index"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"index.html", "index", "/"}, method = RequestMethod.GET)
     public ModelAndView renderIndexPage() {
         ModelAndView mv = new ModelAndView("index");
         return mv;
     }
 
+    @RequestMapping(value = {"register_step_one.html"}, method = RequestMethod.GET)
+    public ModelAndView renderRegisterStepOnePage() {
+        ModelAndView mv = new ModelAndView("register_step_one");
+        return mv;
+    }
+
+    @RequestMapping(value = {"register_step_two.html"}, method = RequestMethod.GET)
+    public ModelAndView renderRegisterStepTwoPage() {
+        ModelAndView mv = new ModelAndView("register_step_two");
+        return mv;
+    }
 }

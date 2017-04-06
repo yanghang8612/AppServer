@@ -51,7 +51,7 @@
 		<img class="img-fluid body-image" src="/imgs/act_body.png">
 
 		<div class="content-container">
-			<p class="rules-content">掌触金控，邀请好友一起加入我们。手机号码只能注册一次，分享朋友注册或办理信用卡、贷款、刷卡都可获得积分，积分可兑换现金。杜绝恶意刷单，违反者将取消所有返佣及相应的处罚，具体奖励如下：</p>
+			<p class="rules-content">掌触金控，邀请好友一起加入我们。每个手机号码只能注册一次，推荐好友注册可获得现金奖励，分享朋友注册或办理信用卡、贷款、刷卡都可获得积分，积分可兑换现金。杜绝恶意刷单，违反者将取消所有返佣及相应的处罚，具体奖励如下：</p>
 			<table class="table table-sm rate-table">
 			  <thead>
 			    <tr>
@@ -76,12 +76,18 @@
 			    </tr>
 			  </tbody>
 			</table>
-			<a class="btn btn-primary btn-block btn-danger next-step" href="#" role="button">注册</a>
+			<button class="btn btn-primary btn-block btn-danger next-step" role="button">注册</button>
 		</div>
 
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
     <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
     <script src="https://cdn.bootcss.com/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="https://cdn.bootcss.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+    	$('.next-step').click(function(){
+    		var url = window.location.href;
+    		window.location.href = url.replace('one', 'two');
+    	})
+    </script>
   </body>
 </html>
