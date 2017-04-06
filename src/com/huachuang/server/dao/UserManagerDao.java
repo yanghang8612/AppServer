@@ -29,4 +29,6 @@ public interface UserManagerDao {
     User findUserByPhoneNumber(String phoneNumber);
 
     User findUserByInvitationCode(String invitationNumber);
+
+    List<User> findSubUsers(long userID);
 }

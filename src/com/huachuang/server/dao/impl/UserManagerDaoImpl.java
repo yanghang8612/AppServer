@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import sun.rmi.runtime.Log;
 
 import javax.annotation.Resource;
+import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -151,5 +152,30 @@ public class UserManagerDaoImpl implements UserManagerDao {
         else {
             return result.get(0);
         }
+    }
+
+    @Override
+    public List<User> findSubUsers(long userID) {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        Query<User> query = session.createQuery("from User where superiorUserId = ?", User.class);
+        query.setParameter(0, userID);
+        List<User> result = query.getResultList();
+        result.sort(new Comparator<User>() {
+            @Override
+            public int compare(User o1, User o2) {
+                if (o1.getUserType() == o2.getUserType()) {
+                    return 0;
+                }
+                else if (o1.getUserType() == 0 || o2.getUserType() == 0) {
+                    return o1.getUserType() < o2.getUserType() ? 1 : -1;
+                }
+                else {
+                    return o1.getUserType() > o2.getUserType() ? 1 : -1;
+                }
+            }
+        });
+        tx.commit();
+        return result;
     }
 }

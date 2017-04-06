@@ -73,4 +73,12 @@ public class UserManagerController {
 
         return userManagerService.changePassword(userID, newPassword);
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/GetSubUser", method = RequestMethod.POST)
+    public Map<String, Object> getSubUser(
+            @RequestParam long userID) {
+
+        return userManagerService.getSubUser(userID);
+    }
 }
