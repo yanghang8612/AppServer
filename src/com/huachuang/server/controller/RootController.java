@@ -5,8 +5,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Map;
-
 /**
  * Created by Asuka on 2017/4/6.
  */
@@ -20,15 +18,21 @@ public class RootController {
         return mv;
     }
 
-    @RequestMapping(value = {"register_step_one.html"}, method = RequestMethod.GET)
+    @RequestMapping(value = "register_step_one.html", method = RequestMethod.GET)
     public ModelAndView renderRegisterStepOnePage() {
         ModelAndView mv = new ModelAndView("register_step_one");
         return mv;
     }
 
-    @RequestMapping(value = {"register_step_two.html"}, method = RequestMethod.GET)
+    @RequestMapping(value = "register_step_two.html", method = RequestMethod.GET)
     public ModelAndView renderRegisterStepTwoPage() {
         ModelAndView mv = new ModelAndView("register_step_two");
+        return mv;
+    }
+
+    @RequestMapping(value = "success.html", method = RequestMethod.GET)
+    public ModelAndView renderSuccessPage() {
+        ModelAndView mv = new ModelAndView("success");
         return mv;
     }
 }

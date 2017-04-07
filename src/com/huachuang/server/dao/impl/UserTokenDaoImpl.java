@@ -4,7 +4,6 @@ import com.huachuang.server.dao.UserTokenDao;
 import com.huachuang.server.entity.UserToken;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.Entity;
 import java.util.List;
 
 /**

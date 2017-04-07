@@ -2,7 +2,6 @@ package com.huachuang.server.dao.impl;
 
 import com.huachuang.server.dao.UserDebitCardDao;
 import com.huachuang.server.entity.User;
-import com.huachuang.server.entity.UserCertificationInfo;
 import com.huachuang.server.entity.UserDebitCard;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Session;

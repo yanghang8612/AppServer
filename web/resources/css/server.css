@@ -31,3 +31,30 @@
 	padding-bottom: 10px;
 	background-color: #E0E0E0;
 }
+
+.content-image {
+	width: 100vw;
+	height: 177vw;
+}
+
+.content-container {
+	width: 100vw;
+	height: 177vw;
+	background-image: url(/imgs/content.png);
+}
+
+.android-img {
+	width: 40vw;
+	height: 15vw;
+	position: relative;
+	top: -45vw;
+	left: 50vw;
+}
+
+.iphone-img {
+	width: 40vw;
+	height: 15vw;
+	position: relative;
+	top: -25vw;
+	left: 9vw;
+}

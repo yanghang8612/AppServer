@@ -8,13 +8,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-import sun.rmi.runtime.Log;
 
 import javax.annotation.Resource;
 import java.util.Comparator;
 import java.util.List;
-import java.util.logging.Logger;
 
 /**
  * Created by Asuka on 2017/3/19.

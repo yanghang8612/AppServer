@@ -1,20 +1,15 @@
 package com.huachuang.server.service;
 
 import com.huachuang.server.CommonUtils;
-import com.huachuang.server.dao.*;
+import com.huachuang.server.dao.RecommendListDao;
+import com.huachuang.server.dao.UserManagerDao;
+import com.huachuang.server.dao.UserTokenDao;
 import com.huachuang.server.entity.RecommendList;
 import com.huachuang.server.entity.User;
-import com.huachuang.server.entity.UserToken;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.*;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Asuka on 2017/3/28.
