@@ -7,7 +7,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/server.css">
+    <link rel="stylesheet" href="/AppServer/css/server.css">
   </head>
   <body>
 
@@ -16,7 +16,7 @@
 		    <span class="navbar-toggler-icon"></span>
 		  </button>
 		  <a class="navbar-brand" href="#">
-		  	<img src="/imgs/icon.png" width="30" height="30" alt="">
+		  	<img src="/AppServer/imgs/icon.png" width="30" height="30" alt="">
 		  	掌触金控
 		  </a>
 		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -100,7 +100,7 @@
     		if (!phoneNumberCheckState){
     			$.ajax({
              type: "POST",
-             url: "/UserManager/VerifyPhoneNumber",
+             url: "/AppServer/UserManager/VerifyPhoneNumber",
              data: {phoneNumber:$("#inputPhoneNumber").val()},
              dataType: "json",
              success: function(data){
@@ -124,7 +124,7 @@
     		if (!invitationCodeCheckState){
     			$.ajax({
              type: "POST",
-             url: "/UserManager/VerifyInvitationCode",
+             url: "/AppServer/UserManager/VerifyInvitationCode",
              data: {invitationCode:$("#invitationCode").val()},
              dataType: "json",
              success: function(data){
@@ -162,7 +162,7 @@
         	if(phoneNumberCheckState&&invitationCodeCheckState){
         		$.ajax({
              type: "POST",
-             url: "/UserManager/Register",
+             url: "/AppServer/UserManager/Register",
              data: {phoneNumber:$("#inputPhoneNumber").val(),invitationCode:$("#invitationCode").val(),recommenderID:$("#recommenderID").val(),password:$("#inputPassword").val()},
              dataType: "json",
              success: function(data){
@@ -188,7 +188,7 @@
     		if (!phoneNumberCheckState){
     			$.ajax({
              type: "POST",
-             url: "/UserManager/VerifyPhoneNumber",
+             url: "/AppServer/UserManager/VerifyPhoneNumber",
              data: {phoneNumber:$("#inputPhoneNumber").val()},
              dataType: "json",
              success: function(data){

@@ -35,4 +35,10 @@ public class RootController {
         ModelAndView mv = new ModelAndView("success");
         return mv;
     }
+
+    @RequestMapping(value = "tables.html", method = RequestMethod.GET)
+    public ModelAndView renderTablesPage() {
+        ModelAndView mv = new ModelAndView("tables");
+        return mv;
+    }
 }

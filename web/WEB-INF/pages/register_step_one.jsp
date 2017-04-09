@@ -7,7 +7,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/server.css">
+    <link rel="stylesheet" href="/AppServer/css/server.css">
   </head>
   <body>
     
@@ -22,19 +22,19 @@
 			  </ol>
 			  <div class="carousel-inner" role="listbox">
 			    <div class="carousel-item active">
-			      <img class="d-block img-fluid header-image" src="/imgs/ad_1.png" alt="First slide">
+			      <img class="d-block img-fluid header-image" src="/AppServer/imgs/ad_1.png" alt="First slide">
 			    </div>
 			    <div class="carousel-item">
-			      <img class="d-block img-fluid header-image" src="/imgs/ad_2.png" alt="Second slide">
+			      <img class="d-block img-fluid header-image" src="/AppServer/imgs/ad_2.png" alt="Second slide">
 			    </div>
 			    <div class="carousel-item">
-			      <img class="d-block img-fluid header-image" src="/imgs/ad_3.png" alt="Third slide">
+			      <img class="d-block img-fluid header-image" src="/AppServer/imgs/ad_3.png" alt="Third slide">
 			    </div>
 			    <div class="carousel-item">
-			      <img class="d-block img-fluid header-image" src="/imgs/ad_4.png" alt="Fourth slide">
+			      <img class="d-block img-fluid header-image" src="/AppServer/imgs/ad_4.png" alt="Fourth slide">
 			    </div>
 			    <div class="carousel-item">
-			      <img class="d-block img-fluid header-image" src="/imgs/ad_5.png" alt="Fifth slide">
+			      <img class="d-block img-fluid header-image" src="/AppServer/imgs/ad_5.png" alt="Fifth slide">
 			    </div>
 			  </div>
 			  <a class="carousel-control-prev" href="#headerCarouselIndicators" role="button" data-slide="prev">
@@ -48,7 +48,7 @@
 			</div>
   	</div>
 
-		<img class="img-fluid body-image" src="/imgs/act_body.png">
+		<img class="img-fluid body-image" src="/AppServer/imgs/act_body.png">
 
 		<div class="content-container">
 			<p class="rules-content">掌触金控，邀请好友一起加入我们。每个手机号码只能注册一次，推荐好友注册可获得现金奖励，分享朋友注册或办理信用卡、贷款、刷卡都可获得积分，积分可兑换现金。杜绝恶意刷单，违反者将取消所有返佣及相应的处罚，具体奖励如下：</p>

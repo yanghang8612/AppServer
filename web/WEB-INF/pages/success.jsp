@@ -7,14 +7,14 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/server.css">
+    <link rel="stylesheet" href="/AppServer/css/server.css">
   </head>
   <body>
 
-    <img class="img-fluid content-image" src="/imgs/content.png">
+    <img class="img-fluid content-image" src="/AppServer/imgs/content.png">
     <div class="img-container">
-        <img class="android-img" src="/imgs/android.png">
-        <img class="iphone-img" src="/imgs/iphone.png">
+        <img class="android-img" src="/AppServer/imgs/android.png">
+        <img class="iphone-img" src="/AppServer/imgs/iphone.png">
       </div>
 
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
@@ -23,7 +23,7 @@
     <script src="https://cdn.bootcss.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
     <script type="text/javascript">
       $('.android-img').click(function(){
-        window.location.href='/apk/palmtouch.apk';
+        window.location.href='/AppServer/apk/palmtouch.apk';
       })
     </script>
   </body>

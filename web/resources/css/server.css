@@ -58,3 +58,14 @@
 	top: -25vw;
 	left: 9vw;
 }
+
+.header-row {
+	margin-top: 24px;
+	margin-bottom: 24px;
+}
+
+.center-vertical {
+    position:relative;
+    top:50%;
+    transform:translateY(-50%);
+}

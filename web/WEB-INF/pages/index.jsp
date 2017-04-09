@@ -6,82 +6,121 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap-treeview/1.2.0/bootstrap-treeview.min.css">
     <link rel="stylesheet" href="/css/server.css">
   </head>
   <body>
     
-  	<div class="header-container">
-  		<div id="headerCarouselIndicators" class="carousel slide" data-ride="carousel">
-			  <ol class="carousel-indicators">
-			    <li data-target="#headerCarouselIndicators" data-slide-to="0" class="active"></li>
-			    <li data-target="#headerCarouselIndicators" data-slide-to="1"></li>
-			    <li data-target="#headerCarouselIndicators" data-slide-to="2"></li>
-			    <li data-target="#headerCarouselIndicators" data-slide-to="3"></li>
-			    <li data-target="#headerCarouselIndicators" data-slide-to="4"></li>
-			  </ol>
-			  <div class="carousel-inner" role="listbox">
-			    <div class="carousel-item active">
-			      <img class="d-block img-fluid header-image" src="/imgs/ad_1.png" alt="First slide">
-			    </div>
-			    <div class="carousel-item">
-			      <img class="d-block img-fluid header-image" src="/imgs/ad_2.png" alt="Second slide">
-			    </div>
-			    <div class="carousel-item">
-			      <img class="d-block img-fluid header-image" src="/imgs/ad_3.png" alt="Third slide">
-			    </div>
-			    <div class="carousel-item">
-			      <img class="d-block img-fluid header-image" src="/imgs/ad_4.png" alt="Fourth slide">
-			    </div>
-			    <div class="carousel-item">
-			      <img class="d-block img-fluid header-image" src="/imgs/ad_5.png" alt="Fifth slide">
-			    </div>
-			  </div>
-			  <a class="carousel-control-prev" href="#headerCarouselIndicators" role="button" data-slide="prev">
-			    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-			    <span class="sr-only">Previous</span>
-			  </a>
-			  <a class="carousel-control-next" href="#headerCarouselIndicators" role="button" data-slide="next">
-			    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-			    <span class="sr-only">Next</span>
-			  </a>
-			</div>
-  	</div>
+  	<nav class="navbar navbar-default">
+		  <div class="container-fluid">
+		    <!-- Brand and toggle get grouped for better mobile display -->
+		    <div class="navbar-header">
+		      <a class="navbar-brand" href="#">Brand</a>
+		    </div>
 
-		<img class="img-fluid body-image" src="/imgs/act_body.png">
+		    <!-- Collect the nav links, forms, and other content for toggling -->
+		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		      <ul class="nav navbar-nav">
+		        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+		        <li><a href="#">Link</a></li>
+		      </ul>
+		      <form class="navbar-form navbar-left">
+		        <div class="form-group">
+		          <input type="text" class="form-control" placeholder="Search">
+		        </div>
+		        <button type="submit" class="btn btn-default">Submit</button>
+		      </form>
+		      <ul class="nav navbar-nav navbar-right">
+		        <li><a href="#">Link</a></li>
+		        <li class="dropdown">
+		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+		          <ul class="dropdown-menu">
+		            <li><a href="#">Action</a></li>
+		            <li><a href="#">Another action</a></li>
+		            <li><a href="#">Something else here</a></li>
+		            <li role="separator" class="divider"></li>
+		            <li><a href="#">Separated link</a></li>
+		          </ul>
+		        </li>
+		      </ul>
+		    </div><!-- /.navbar-collapse -->
+		  </div><!-- /.container-fluid -->
+		</nav>
 
-		<div class="content-container">
-			<p class="rules-content">掌触金控，邀请好友一起加入我们。手机号码只能注册一次，分享朋友注册或办理信用卡、贷款、刷卡都可获得积分，积分可兑换现金。杜绝恶意刷单，违反者将取消所有返佣及相应的处罚，具体奖励如下：</p>
-			<table class="table table-sm rate-table">
-			  <thead>
-			    <tr>
-			      <th>奖励类型</th>
-			      <th>一级好友</th>
-			      <th>二级好友</th>
-			      <th>三级好友</th>
-			    </tr>
-			  </thead>
-			  <tbody>
-			    <tr>
-			      <th scope="row">推荐好友</th>
-			      <td>25元</td>
-			      <td>12.5元</td>
-			      <td>5元</td>
-			    </tr>
-			    <tr>
-			      <th scope="row">积分返佣</th>
-			      <td>0.005%</td>
-			      <td>0.003%</td>
-			      <td>0.001%</td>
-			    </tr>
-			  </tbody>
-			</table>
-			<a class="btn btn-primary btn-block btn-danger next-step" href="#" role="button">注册</a>
-		</div>
+    <div class="container-fluid">
+    	<div class="row">
+    		<div id="tree" class="col-4"></div>
+    		<main class="col-8"></main>
+    	</div>
+    </div>
 
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
-    <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-    <script src="https://cdn.bootcss.com/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-    <script src="https://cdn.bootcss.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.slim.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
+    <script type="text/javascript">
+    	function getTree() {
+			  // Some logic to retrieve, or generate tree structure
+			  var tree = [
+          {
+            text: 'Parent 1',
+            href: '#parent1',
+            tags: ['4'],
+            nodes: [
+              {
+                text: 'Child 1',
+                href: '#child1',
+                tags: ['2'],
+                nodes: [
+                  {
+                    text: 'Grandchild 1',
+                    href: '#grandchild1',
+                    tags: ['0']
+                  },
+                  {
+                    text: 'Grandchild 2',
+                    href: '#grandchild2',
+                    tags: ['0']
+                  }
+                ]
+              },
+              {
+                text: 'Child 2',
+                href: '#child2',
+                tags: ['0']
+              }
+            ]
+          },
+          {
+            text: 'Parent 2',
+            href: '#parent2',
+            tags: ['0']
+          },
+          {
+            text: 'Parent 3',
+            href: '#parent3',
+             tags: ['0']
+          },
+          {
+            text: 'Parent 4',
+            href: '#parent4',
+            tags: ['0']
+          },
+          {
+            text: 'Parent 5',
+            href: '#parent5'  ,
+            tags: ['0']
+          }
+        ];
+			  return tree;
+			}
+
+			$('#tree').treeview({
+					showBorder: false,
+          data: getTree()
+        });
+    </script>
   </body>
 </html>
