@@ -175,4 +175,14 @@ public class UserManagerDaoImpl implements UserManagerDao {
         tx.commit();
         return result;
     }
+
+    @Override
+    public List<User> findAllAgents() {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        Query<User> query = session.createQuery("from User where userType > 0", User.class);
+        List<User> result = query.getResultList();
+        tx.commit();
+        return result;
+    }
 }

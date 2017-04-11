@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -92,6 +94,32 @@
                             </div>
                             <!-- /input-group -->
                         </li>
+                        <%@ page import="com.huachuang.server.entity.User" %>
+                        <%@ page import="java.util.List" %>
+                        <%@ page import="java.util.ArrayList" %>
+                        <%!
+                            List<User> agents;
+                            List<User> levelOneAgents = new ArrayList<>();
+                            List<User> levelTwoAgents = new ArrayList<>();
+                            List<User> levelThreeAgents = new ArrayList<>();
+                        %>
+                        <%
+                            agents = (List<User>) request.getAttribute("agents");
+                            for (User user : agents) {
+                                if (user.getUserType() == 1) {
+                                    levelOneAgents.add(user);
+                                }
+                                else if (user.getUserType() == 2) {
+                                    levelTwoAgents.add(user);
+                                }
+                                else {
+                                    levelThreeAgents.add(user);
+                                }
+                            }
+                        %>
+                        <c:forEach var="user" items="${agents}">
+
+                        </c:forEach>
                         <li>
                             <a href="#"><i class="fa fa-user fa-fw"></i>18511838501<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -141,7 +169,7 @@
                     <div class="col-lg-2">
                         <h3>18511838501</h3>
                         <h4>杨行</h4>
-                        <p>级别:<一级代理商></p>
+                        <p>级别:一级代理商</p>
                         <p>邀请码:ABCDEF</p>
                     </div>
                     <!-- /.col-lg-12 -->

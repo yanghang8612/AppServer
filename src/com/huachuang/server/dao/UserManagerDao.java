@@ -31,4 +31,6 @@ public interface UserManagerDao {
     User findUserByInvitationCode(String invitationNumber);
 
     List<User> findSubUsers(long userID);
+
+    List<User> findAllAgents();
 }
