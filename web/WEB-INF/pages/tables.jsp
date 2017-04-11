@@ -97,14 +97,11 @@
                         <%@ page import="com.huachuang.server.entity.User" %>
                         <%@ page import="java.util.List" %>
                         <%@ page import="java.util.ArrayList" %>
-                        <%!
-                            List<User> agents;
+                        <%
+                            List<User> agents = (List<User>) request.getAttribute("agents");
                             List<User> levelOneAgents = new ArrayList<>();
                             List<User> levelTwoAgents = new ArrayList<>();
                             List<User> levelThreeAgents = new ArrayList<>();
-                        %>
-                        <%
-                            agents = (List<User>) request.getAttribute("agents");
                             for (User user : agents) {
                                 if (user.getUserType() == 1) {
                                     levelOneAgents.add(user);
@@ -116,10 +113,76 @@
                                     levelThreeAgents.add(user);
                                 }
                             }
+                            for (User levelOneAgent : levelOneAgents) {
+                                boolean levelOneHasChild = false;
+                                for (User agent : levelTwoAgents) {
+                                    if (agent.getSuperiorUserId() == levelOneAgent.getUserId()) {
+                                        levelOneHasChild = true;
+                                    }
+                                }
+                                if (levelOneHasChild) {
+                                    %>
+                                    <li>
+                                        <a href="#"><i class="fa fa-user fa-fw"></i><%=levelOneAgent.getUserPhoneNumber()%><span class="fa arrow"></span></a>
+                                        <ul class="nav nav-second-level">
+                                            <li>
+                                                <a class="agent-info-link" href="<%=levelOneAgent.getUserPhoneNumber()%>"><i class="fa fa-info-circle fa-fw"></i>代理商信息</a>
+                                            </li>
+                                            <%
+                                                for (User levelTwoAgent : levelTwoAgents) {
+                                                    if (levelTwoAgent.getSuperiorUserId() == levelOneAgent.getUserId()) {
+                                                        boolean levelTwoHasChild = false;
+                                                        for (User agent : levelThreeAgents) {
+                                                            if (agent.getSuperiorUserId() == levelTwoAgent.getUserId()) {
+                                                                levelTwoHasChild = true;
+                                                            }
+                                                        }
+                                                        if (levelTwoHasChild) {
+                                                            %>
+                                                            <li>
+                                                                <a href="#"><i class="fa fa-user fa-fw"></i><%=levelTwoAgent.getUserPhoneNumber()%><span class="fa arrow"></span></a>
+                                                                <ul class="nav nav-third-level">
+                                                                    <li>
+                                                                        <a class="agent-info-link" href="<%=levelTwoAgent.getUserPhoneNumber()%>"><i class="fa fa-info-circle fa-fw"></i>代理商信息</a>
+                                                                    </li>
+                                                                    <%
+                                                                        for (User levelThreeAgent : levelThreeAgents) {
+                                                                            if (levelThreeAgent.getSuperiorUserId() == levelTwoAgent.getUserId()) {
+                                                                                %>
+                                                                                <li>
+                                                                                    <a class="agent-info-link" href="<%=levelThreeAgent.getUserPhoneNumber()%>"><i class="fa fa-user fa-fw"></i><%=levelThreeAgent.getUserPhoneNumber()%></a>
+                                                                                </li>
+                                                                                <%
+                                                                            }
+                                                                        }
+                                                                    %>
+                                                                </ul>
+                                                            </li>
+                                                            <%
+                                                        }
+                                                        else {
+                                                            %>
+                                                            <li>
+                                                                <a class="agent-info-link" href="<%=levelTwoAgent.getUserPhoneNumber()%>"><i class="fa fa-user fa-fw"></i><%=levelTwoAgent.getUserPhoneNumber()%></a>
+                                                            </li>
+                                                            <%
+                                                        }
+                                                    }
+                                                }
+                                            %>
+                                        </ul>
+                                    </li>
+                                    <%
+                                }
+                                else {
+                                    %>
+                                    <li>
+                                        <a class="agent-info-link" href="<%=levelOneAgent.getUserPhoneNumber()%>"><i class="fa fa-user fa-fw"></i><%=levelOneAgent.getUserPhoneNumber()%></a>
+                                    </li>
+                                    <%
+                                }
+                            }
                         %>
-                        <c:forEach var="user" items="${agents}">
-
-                        </c:forEach>
                         <li>
                             <a href="#"><i class="fa fa-user fa-fw"></i>18511838501<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">

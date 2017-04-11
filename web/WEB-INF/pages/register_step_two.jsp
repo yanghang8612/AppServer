@@ -168,7 +168,7 @@
              dataType: "json",
              success: function(data){
                          if(data.Status=='true'){
-                         	window.location.href="/success.html";
+                         	window.location.href="/AppServer/success.html";
                          }
                          else{
                          	alert(data.Info);
