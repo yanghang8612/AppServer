@@ -216,6 +216,9 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                        <li>
+                            <a href="javascript:void(0)" onclick="add_new_agent()"><i class="fa fa-plus fa-fw"></i>添加一级代理商</a>
+                        </li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
@@ -224,7 +227,172 @@
         </nav>
 
         <div id="page-wrapper">
-
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">控制台</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-comments fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">26</div>
+                                    <div>新消息！</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">查看详细</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-users fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">12</div>
+                                    <div>新用户！</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">查看详细</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-yellow">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-shopping-cart fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">124</div>
+                                    <div>新订单！</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">查看详细</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-red">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-support fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">13</div>
+                                    <div>系统事件！</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">查看详细</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-bar-chart-o fa-fw"></i> 终端在线用户数
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div id="morris-area-chart"></div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-8 -->
+                <div class="col-lg-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-bell fa-fw"></i> 系统通知
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="list-group">
+                                <a href="#" class="list-group-item">
+                                    <i class="fa fa-comment fa-fw"></i> 新消息
+                                    <span class="pull-right text-muted small"><em>4 minutes ago</em>
+                                    </span>
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <i class="fa fa-envelope fa-fw"></i> 收到新的用户反馈
+                                    <span class="pull-right text-muted small"><em>27 minutes ago</em>
+                                    </span>
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <i class="fa fa-user fa-fw"></i> 新用户注册
+                                    <span class="pull-right text-muted small"><em>43 minutes ago</em>
+                                    </span>
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <i class="fa fa-upload fa-fw"></i> 系统重启
+                                    <span class="pull-right text-muted small"><em>11:32 AM</em>
+                                    </span>
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <i class="fa fa-bolt fa-fw"></i> 系统崩溃
+                                    <span class="pull-right text-muted small"><em>11:13 AM</em>
+                                    </span>
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <i class="fa fa-shopping-cart fa-fw"></i> 新订单产生
+                                    <span class="pull-right text-muted small"><em>9:49 AM</em>
+                                    </span>
+                                </a>
+                                <a href="#" class="list-group-item">
+                                    <i class="fa fa-money fa-fw"></i> 用户支付请求
+                                    <span class="pull-right text-muted small"><em>Yesterday</em>
+                                    </span>
+                                </a>
+                            </div>
+                            <!-- /.list-group -->
+                            <a href="#" class="btn btn-default btn-block">查看所有消息</a>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                </div>
+                <!-- /.col-lg-4 -->
+            </div>
+            <!-- /.row -->
         </div>
         <!-- /#page-wrapper -->
     </div>
@@ -244,6 +412,10 @@
     <script src="/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
     <script src="/vendor/datatables-responsive/dataTables.responsive.js"></script>
 
+    <!-- Morris Charts JavaScript -->
+    <script src="/vendor/raphael/raphael.min.js"></script>
+    <script src="/vendor/morrisjs/morris.min.js"></script>
+
     <!-- Custom Theme JavaScript -->
     <script src="/vendor/sb-admin/js/sb-admin-2.js"></script>
 
@@ -252,6 +424,124 @@
         function get_agent_info(phone_number) {
             $('#page-wrapper').load("/agent_info.html?phoneNumber=" + phone_number);
         }
+        $(function() {
+
+            Morris.Area({
+                element: 'morris-area-chart',
+                data: [{
+                    period: '2010 Q1',
+                    iphone: 2666,
+                    ipad: null,
+                    android: 2647
+                }, {
+                    period: '2010 Q2',
+                    iphone: 2778,
+                    ipad: 2294,
+                    android: 2441
+                }, {
+                    period: '2010 Q3',
+                    iphone: 4912,
+                    ipad: 1969,
+                    android: 2501
+                }, {
+                    period: '2010 Q4',
+                    iphone: 3767,
+                    ipad: 3597,
+                    android: 5689
+                }, {
+                    period: '2011 Q1',
+                    iphone: 6810,
+                    ipad: 1914,
+                    android: 2293
+                }, {
+                    period: '2011 Q2',
+                    iphone: 5670,
+                    ipad: 4293,
+                    android: 1881
+                }, {
+                    period: '2011 Q3',
+                    iphone: 4820,
+                    ipad: 3795,
+                    android: 1588
+                }, {
+                    period: '2011 Q4',
+                    iphone: 15073,
+                    ipad: 5967,
+                    android: 5175
+                }, {
+                    period: '2012 Q1',
+                    iphone: 10687,
+                    ipad: 4460,
+                    android: 2028
+                }, {
+                    period: '2012 Q2',
+                    iphone: 8432,
+                    ipad: 5713,
+                    android: 1791
+                }],
+                xkey: 'period',
+                ykeys: ['iphone', 'ipad', 'android'],
+                labels: ['iPhone', 'iPad', 'Android'],
+                pointSize: 2,
+                hideHover: 'auto',
+                resize: true
+            });
+
+            Morris.Donut({
+                element: 'morris-donut-chart',
+                data: [{
+                    label: "Download Sales",
+                    value: 12
+                }, {
+                    label: "In-Store Sales",
+                    value: 30
+                }, {
+                    label: "Mail-Order Sales",
+                    value: 20
+                }],
+                resize: true
+            });
+
+            Morris.Bar({
+                element: 'morris-bar-chart',
+                data: [{
+                    y: '2006',
+                    a: 100,
+                    b: 90
+                }, {
+                    y: '2007',
+                    a: 75,
+                    b: 65
+                }, {
+                    y: '2008',
+                    a: 50,
+                    b: 40
+                }, {
+                    y: '2009',
+                    a: 75,
+                    b: 65
+                }, {
+                    y: '2010',
+                    a: 50,
+                    b: 40
+                }, {
+                    y: '2011',
+                    a: 75,
+                    b: 65
+                }, {
+                    y: '2012',
+                    a: 100,
+                    b: 90
+                }],
+                xkey: 'y',
+                ykeys: ['a', 'b'],
+                labels: ['Series A', 'Series B'],
+                hideHover: 'auto',
+                resize: true
+            });
+
+        });
+
     </script>
 
 </body>
