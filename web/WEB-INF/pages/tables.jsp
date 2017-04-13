@@ -126,7 +126,7 @@
                                         <a href="#"><i class="fa fa-user fa-fw"></i><%=levelOneAgent.getUserPhoneNumber()%><span class="fa arrow"></span></a>
                                         <ul class="nav nav-second-level">
                                             <li>
-                                                <a class="agent-info-link" href="<%=levelOneAgent.getUserPhoneNumber()%>"><i class="fa fa-info-circle fa-fw"></i>代理商信息</a>
+                                                <a href="javascript:void(0)" onclick="get_agent_info(<%=levelOneAgent.getUserPhoneNumber()%>)"><i class="fa fa-info-circle fa-fw"></i>代理商信息</a>
                                             </li>
                                             <%
                                                 for (User levelTwoAgent : levelTwoAgents) {
@@ -143,14 +143,14 @@
                                                                 <a href="#"><i class="fa fa-user fa-fw"></i><%=levelTwoAgent.getUserPhoneNumber()%><span class="fa arrow"></span></a>
                                                                 <ul class="nav nav-third-level">
                                                                     <li>
-                                                                        <a class="agent-info-link" href="<%=levelTwoAgent.getUserPhoneNumber()%>"><i class="fa fa-info-circle fa-fw"></i>代理商信息</a>
+                                                                        <a href="javascript:void(0)" onclick="get_agent_info(<%=levelTwoAgent.getUserPhoneNumber()%>)"><i class="fa fa-info-circle fa-fw"></i>代理商信息</a>
                                                                     </li>
                                                                     <%
                                                                         for (User levelThreeAgent : levelThreeAgents) {
                                                                             if (levelThreeAgent.getSuperiorUserId() == levelTwoAgent.getUserId()) {
                                                                                 %>
                                                                                 <li>
-                                                                                    <a class="agent-info-link" href="<%=levelThreeAgent.getUserPhoneNumber()%>"><i class="fa fa-user fa-fw"></i><%=levelThreeAgent.getUserPhoneNumber()%></a>
+                                                                                    <a href="javascript:void(0)" onclick="get_agent_info(<%=levelThreeAgent.getUserPhoneNumber()%>)"><i class="fa fa-user fa-fw"></i><%=levelThreeAgent.getUserPhoneNumber()%></a>
                                                                                 </li>
                                                                                 <%
                                                                             }
@@ -163,7 +163,7 @@
                                                         else {
                                                             %>
                                                             <li>
-                                                                <a class="agent-info-link" href="<%=levelTwoAgent.getUserPhoneNumber()%>"><i class="fa fa-user fa-fw"></i><%=levelTwoAgent.getUserPhoneNumber()%></a>
+                                                                <a href="javascript:void(0)" onclick="get_agent_info(<%=levelTwoAgent.getUserPhoneNumber()%>)"><i class="fa fa-user fa-fw"></i><%=levelTwoAgent.getUserPhoneNumber()%></a>
                                                             </li>
                                                             <%
                                                         }
@@ -177,7 +177,7 @@
                                 else {
                                     %>
                                     <li>
-                                        <a class="agent-info-link" href="<%=levelOneAgent.getUserPhoneNumber()%>"><i class="fa fa-user fa-fw"></i><%=levelOneAgent.getUserPhoneNumber()%></a>
+                                        <a href="javascript:void(0)" onclick="get_agent_info(<%=levelOneAgent.getUserPhoneNumber()%>)"><i class="fa fa-user fa-fw"></i><%=levelOneAgent.getUserPhoneNumber()%></a>
                                     </li>
                                     <%
                                 }
@@ -224,140 +224,7 @@
         </nav>
 
         <div id="page-wrapper">
-            <div class="container">
-                <div class="row header-row">
-                    <div class="col-lg-2 col-md-2">
-                        <img src="/imgs/default_header_image.jpg" class="img-circle img-responsive center-block">
-                    </div>
-                    <div class="col-lg-2">
-                        <h3>18511838501</h3>
-                        <h4>杨行</h4>
-                        <p>级别:一级代理商</p>
-                        <p>邀请码:ABCDEF</p>
-                    </div>
-                    <!-- /.col-lg-12 -->
-                </div>
-                <!-- /.row -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                名下普通用户列表
-                            </div>
-                            <!-- /.panel-heading -->
-                            <div class="panel-body">
-                                <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
-                                    <thead>
-                                        <tr>
-                                            <th>手机号码</th>
-                                            <th>用户类型</th>
-                                            <th>注册日期</th>
-                                            <th>上次登录时间</th>
-                                            <th>在线状态</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr class="odd gradeX">
-                                            <td>18511838502</td>
-                                            <td>Internet Explorer 4.0</td>
-                                            <td>Win 95+</td>
-                                            <td class="center">4</td>
-                                            <td class="center">X</td>
-                                        </tr>
-                                        <tr class="even gradeC">
-                                            <td>18511838502</td>
-                                            <td>Internet Explorer 5.0</td>
-                                            <td>Win 95+</td>
-                                            <td class="center">5</td>
-                                            <td class="center">C</td>
-                                        </tr>
-                                        <tr class="odd gradeA">
-                                            <td>Trident</td>
-                                            <td>Internet Explorer 5.5</td>
-                                            <td>Win 95+</td>
-                                            <td class="center">5.5</td>
-                                            <td class="center">A</td>
-                                        </tr>
-                                        <tr class="even gradeA">
-                                            <td>Trident</td>
-                                            <td>Internet Explorer 6</td>
-                                            <td>Win 98+</td>
-                                            <td class="center">6</td>
-                                            <td class="center">A</td>
-                                        </tr>
-                                        <tr class="odd gradeA">
-                                            <td>Trident</td>
-                                            <td>Internet Explorer 7</td>
-                                            <td>Win XP SP2+</td>
-                                            <td class="center">7</td>
-                                            <td class="center">A</td>
-                                        </tr>
-                                        <tr class="even gradeA">
-                                            <td>Trident</td>
-                                            <td>AOL browser (AOL desktop)</td>
-                                            <td>Win XP</td>
-                                            <td class="center">6</td>
-                                            <td class="center">A</td>
-                                        </tr>
-                                        <tr class="gradeA">
-                                            <td>Gecko</td>
-                                            <td>Firefox 1.0</td>
-                                            <td>Win 98+ / OSX.2+</td>
-                                            <td class="center">1.7</td>
-                                            <td class="center">A</td>
-                                        </tr>
-                                        <tr class="gradeA">
-                                            <td>Gecko</td>
-                                            <td>Firefox 1.5</td>
-                                            <td>Win 98+ / OSX.2+</td>
-                                            <td class="center">1.8</td>
-                                            <td class="center">A</td>
-                                        </tr>
-                                        <tr class="gradeA">
-                                            <td>Gecko</td>
-                                            <td>Firefox 2.0</td>
-                                            <td>Win 98+ / OSX.2+</td>
-                                            <td class="center">1.8</td>
-                                            <td class="center">A</td>
-                                        </tr>
-                                        <tr class="gradeA">
-                                            <td>Gecko</td>
-                                            <td>Firefox 3.0</td>
-                                            <td>Win 2k+ / OSX.3+</td>
-                                            <td class="center">1.9</td>
-                                            <td class="center">A</td>
-                                        </tr>
-                                        <tr class="gradeA">
-                                            <td>Gecko</td>
-                                            <td>Camino 1.0</td>
-                                            <td>OSX.2+</td>
-                                            <td class="center">1.8</td>
-                                            <td class="center">A</td>
-                                        </tr>
-                                        <tr class="gradeA">
-                                            <td>Gecko</td>
-                                            <td>Camino 1.5</td>
-                                            <td>OSX.3+</td>
-                                            <td class="center">1.8</td>
-                                            <td class="center">A</td>
-                                        </tr>
-                                        <tr class="gradeA">
-                                            <td>Gecko</td>
-                                            <td>Netscape 7.2</td>
-                                            <td>Win 95+ / Mac OS 8.6-9.2</td>
-                                            <td class="center">1.7</td>
-                                            <td class="center">A</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- /.panel-body -->
-                        </div>
-                        <!-- /.panel -->
-                    </div>
-                    <!-- /.col-lg-12 -->
-                </div>
-            </div>
+
         </div>
         <!-- /#page-wrapper -->
     </div>
@@ -382,11 +249,9 @@
 
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>
-    $(document).ready(function() {
-        $('#dataTables-example').DataTable({
-            responsive: true
-        });
-    });
+        function get_agent_info(phone_number) {
+            $('#page-wrapper').load("/agent_info.html?phoneNumber=" + phone_number);
+        }
     </script>
 
 </body>

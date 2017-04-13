@@ -177,6 +177,18 @@ public class UserManagerDaoImpl implements UserManagerDao {
     }
 
     @Override
+    public List<User> findSubCommonUsers(long userID) {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        Query<User> query = session.createQuery("from User where superiorUserId = ? and userType = ?", User.class);
+        query.setParameter(0, userID);
+        query.setParameter(1, (byte) 0);
+        List<User> result = query.getResultList();
+        tx.commit();
+        return result;
+    }
+
+    @Override
     public List<User> findAllAgents() {
         Session session = sessionFactory.getCurrentSession();
         Transaction tx = session.beginTransaction();

@@ -32,5 +32,7 @@ public interface UserManagerDao {
 
     List<User> findSubUsers(long userID);
 
+    List<User> findSubCommonUsers(long userID);
+
     List<User> findAllAgents();
 }
