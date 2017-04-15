@@ -32,6 +32,24 @@ CREATE TABLE `user_wallet` (
 	FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`)
 );
 
+CREATE TABLE `user_wallet_balance_record` (
+	`id` bigint(20) NOT NULL AUTO_INCREMENT,
+	`user_id` bigint(20) NOT NULL UNIQUE,
+	`amount` decimal(10,2) NOT NULL,
+	`time` datetime DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (`id`),
+	FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`)
+);
+
+CREATE TABLE `user_wallet_points_record` (
+	`id` bigint(20) NOT NULL AUTO_INCREMENT,
+	`user_id` bigint(20) NOT NULL UNIQUE,
+	`amount` int(10) NOT NULL,
+	`time` datetime DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (`id`),
+	FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`)
+);
+
 CREATE TABLE `user_certification_info` (
 	`id` bigint(20) NOT NULL AUTO_INCREMENT,
 	`user_id` bigint(20) NOT NULL UNIQUE,
@@ -73,11 +91,24 @@ CREATE TABLE `apply_credit_card` (
 CREATE TABLE `apply_loan` (
 	`id` bigint(20) NOT NULL AUTO_INCREMENT,
 	`user_id` bigint(20) NOT NULL,
-	`apply_loan_type` tinyint(1) NOT NULL,
-	`apply_user_name` varchar(32) NOT NULL,
-	`apply_user_identify_card` char(18) NOT NULL,
-	`apply_user_contact_way` varchar(128) NOT NULL,
+	`house_address` varchar(128) NOT NULL,
+	`house_property_card` varchar(128) NOT NULL,
+	`house_land_sources` varchar(16) NOT NULL,
+	`house_type` varchar(16) NOT NULL,
+	`house_build_year` varchar(16) NOT NULL,
+	`house_build_area` varchar(16) NOT NULL,
+	`house_owned_by_others` boolean DEFAULT FALSE,
+	`house_is_mortgaged` boolean DEFAULT FALSE,
+	`house_borrower_is_owner` boolean DEFAULT FALSE,
+	`house_handing_time` varchar(16) NOT NULL,
+	`borrower_name` varchar(32) NOT NULL,
+	`borrower_phone_number` char(11) NOT NULL,
+	`borrower_amount` varchar(16) NOT NULL,
+	`borrower_marriage` varchar(16) NOT NULL,
+	`borrower_address` varchar(128) NOT NULL,
+	`borrower_detailed_address` varchar(128) NOT NULL,
 	`apply_time` datetime DEFAULT CURRENT_TIMESTAMP,
+	`apply_state` tinyint(1) DEFAULT 0;
 	PRIMARY KEY (`id`),
 	FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`)
 );

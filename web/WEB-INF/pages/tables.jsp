@@ -397,6 +397,40 @@
         <!-- /#page-wrapper -->
     </div>
     <!-- /#wrapper -->
+    <!-- Modal -->
+    <div class="modal fade" id="newAgentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">添加一级代理商</h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form">
+                        <div class="form-group">
+                            <label>手机号</label>
+                            <input class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>密码</label>
+                            <input class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>确认密码</label>
+                            <input class="form-control">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary">提交</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
 
     <!-- jQuery -->
     <script src="/vendor/jquery/jquery.min.js"></script>
@@ -424,8 +458,10 @@
         function get_agent_info(phone_number) {
             $('#page-wrapper').load("/agent_info.html?phoneNumber=" + phone_number);
         }
+        function add_new_agent() {
+            $('#newAgentModal').modal(0);
+        }
         $(function() {
-
             Morris.Area({
                 element: 'morris-area-chart',
                 data: [{
