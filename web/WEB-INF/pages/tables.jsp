@@ -32,12 +32,13 @@
     <link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <link href="/css/server.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.bootcss.com/toastr.js/latest/toastr.min.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
 </head>
@@ -114,110 +115,53 @@
                                 }
                             }
                             for (User levelOneAgent : levelOneAgents) {
-                                boolean levelOneHasChild = false;
-                                for (User agent : levelTwoAgents) {
-                                    if (agent.getSuperiorUserId() == levelOneAgent.getUserId()) {
-                                        levelOneHasChild = true;
-                                    }
-                                }
-                                if (levelOneHasChild) {
-                                    %>
-                                    <li>
-                                        <a href="#"><i class="fa fa-user fa-fw"></i><%=levelOneAgent.getUserPhoneNumber()%><span class="fa arrow"></span></a>
-                                        <ul class="nav nav-second-level">
-                                            <li>
-                                                <a href="javascript:void(0)" onclick="get_agent_info(<%=levelOneAgent.getUserPhoneNumber()%>)"><i class="fa fa-info-circle fa-fw"></i>代理商信息</a>
-                                            </li>
-                                            <%
-                                                for (User levelTwoAgent : levelTwoAgents) {
-                                                    if (levelTwoAgent.getSuperiorUserId() == levelOneAgent.getUserId()) {
-                                                        boolean levelTwoHasChild = false;
-                                                        for (User agent : levelThreeAgents) {
-                                                            if (agent.getSuperiorUserId() == levelTwoAgent.getUserId()) {
-                                                                levelTwoHasChild = true;
-                                                            }
-                                                        }
-                                                        if (levelTwoHasChild) {
-                                                            %>
+                                %>
+                                <li>
+                                    <a href="#"><i class="fa fa-user fa-fw"></i><%=levelOneAgent.getUserPhoneNumber()%><span class="fa arrow"></span></a>
+                                    <ul class="nav nav-second-level">
+                                        <li>
+                                            <a href="javascript:void(0)" onclick="add_new_agent(<%=levelOneAgent.getUserPhoneNumber()%>,2)"><i class="fa fa-plus fa-fw"></i>添加二级代理商</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0)" onclick="get_agent_info(<%=levelOneAgent.getUserPhoneNumber()%>)"><i class="fa fa-info-circle fa-fw"></i>代理商信息</a>
+                                        </li>
+                                        <%
+                                            for (User levelTwoAgent : levelTwoAgents) {
+                                                if (levelTwoAgent.getSuperiorUserId() == levelOneAgent.getUserId()) {
+                                                    %>
+                                                    <li>
+                                                        <a href="#"><i class="fa fa-user fa-fw"></i><%=levelTwoAgent.getUserPhoneNumber()%><span class="fa arrow"></span></a>
+                                                        <ul class="nav nav-third-level">
                                                             <li>
-                                                                <a href="#"><i class="fa fa-user fa-fw"></i><%=levelTwoAgent.getUserPhoneNumber()%><span class="fa arrow"></span></a>
-                                                                <ul class="nav nav-third-level">
-                                                                    <li>
-                                                                        <a href="javascript:void(0)" onclick="get_agent_info(<%=levelTwoAgent.getUserPhoneNumber()%>)"><i class="fa fa-info-circle fa-fw"></i>代理商信息</a>
-                                                                    </li>
-                                                                    <%
-                                                                        for (User levelThreeAgent : levelThreeAgents) {
-                                                                            if (levelThreeAgent.getSuperiorUserId() == levelTwoAgent.getUserId()) {
-                                                                                %>
-                                                                                <li>
-                                                                                    <a href="javascript:void(0)" onclick="get_agent_info(<%=levelThreeAgent.getUserPhoneNumber()%>)"><i class="fa fa-user fa-fw"></i><%=levelThreeAgent.getUserPhoneNumber()%></a>
-                                                                                </li>
-                                                                                <%
-                                                                            }
-                                                                        }
-                                                                    %>
-                                                                </ul>
+                                                                <a href="javascript:void(0)" onclick="add_new_agent(<%=levelTwoAgent.getUserPhoneNumber()%>,3)"><i class="fa fa-plus fa-fw"></i>添加三级代理商</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="javascript:void(0)" onclick="get_agent_info(<%=levelTwoAgent.getUserPhoneNumber()%>)"><i class="fa fa-info-circle fa-fw"></i>代理商信息</a>
                                                             </li>
                                                             <%
-                                                        }
-                                                        else {
+                                                                for (User levelThreeAgent : levelThreeAgents) {
+                                                                    if (levelThreeAgent.getSuperiorUserId() == levelTwoAgent.getUserId()) {
+                                                                        %>
+                                                                        <li>
+                                                                            <a href="javascript:void(0)" onclick="get_agent_info(<%=levelThreeAgent.getUserPhoneNumber()%>)"><i class="fa fa-user fa-fw"></i><%=levelThreeAgent.getUserPhoneNumber()%></a>
+                                                                        </li>
+                                                                        <%
+                                                                    }
+                                                                }
                                                             %>
-                                                            <li>
-                                                                <a href="javascript:void(0)" onclick="get_agent_info(<%=levelTwoAgent.getUserPhoneNumber()%>)"><i class="fa fa-user fa-fw"></i><%=levelTwoAgent.getUserPhoneNumber()%></a>
-                                                            </li>
-                                                            <%
-                                                        }
-                                                    }
+                                                        </ul>
+                                                    </li>
+                                                    <%
                                                 }
-                                            %>
-                                        </ul>
-                                    </li>
-                                    <%
-                                }
-                                else {
-                                    %>
-                                    <li>
-                                        <a href="javascript:void(0)" onclick="get_agent_info(<%=levelOneAgent.getUserPhoneNumber()%>)"><i class="fa fa-user fa-fw"></i><%=levelOneAgent.getUserPhoneNumber()%></a>
-                                    </li>
-                                    <%
-                                }
+                                            }
+                                        %>
+                                    </ul>
+                                </li>
+                                <%
                             }
                         %>
                         <li>
-                            <a href="#"><i class="fa fa-user fa-fw"></i>18511838501<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                 <li>
-                                    <a href="#"><i class="fa fa-info-circle fa-fw"></i>代理商信息</a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-user fa-fw"></i>18511838501</a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-user fa-fw"></i>18511838501</a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-user fa-fw"></i>18511838501<span class="fa arrow"></span></a>
-                                    <ul class="nav nav-third-level">
-                                        <li>
-                                            <a href="#"><i class="fa fa-info-circle fa-fw"></i>代理商信息</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"><i class="fa fa-user fa-fw"></i>18511838501</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"><i class="fa fa-user fa-fw"></i>18511838501</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"><i class="fa fa-user fa-fw"></i>18511838501</a>
-                                        </li>
-                                    </ul>
-                                    <!-- /.nav-third-level -->
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" onclick="add_new_agent()"><i class="fa fa-plus fa-fw"></i>添加一级代理商</a>
+                            <a href="javascript:void(0)" onclick="add_new_agent(0,1)"><i class="fa fa-plus fa-fw"></i>添加一级代理商</a>
                         </li>
                     </ul>
                 </div>
@@ -407,23 +351,23 @@
                 </div>
                 <div class="modal-body">
                     <form role="form">
-                        <div class="form-group">
+                        <div class="form-group" id="inputPhoneNumberGroup">
                             <label>手机号</label>
-                            <input class="form-control">
+                            <input class="form-control" id="inputPhoneNumber">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" id="inputPasswordGroup">
                             <label>密码</label>
-                            <input class="form-control">
+                            <input type="password" class="form-control" id="inputPassword">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" id="inputConfirmPasswordGroup">
                             <label>确认密码</label>
-                            <input class="form-control">
+                            <input type="password" class="form-control" id="inputConfirmPassword">
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                    <button type="button" class="btn btn-primary">提交</button>
+                    <button type="button" class="btn btn-primary" id="add-agent">提交</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -453,14 +397,80 @@
     <!-- Custom Theme JavaScript -->
     <script src="/vendor/sb-admin/js/sb-admin-2.js"></script>
 
+    <script src="https://cdn.bootcss.com/toastr.js/latest/toastr.min.js"></script>
+
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>
+        var currentAgentPhoneNumber;
+        var currentType;
+        toastr.options = {
+            closeButton: true,
+            positionClass: "toast-top-center",
+            showDuration: "500",
+            hideDuration: "500",
+            timeOut: "1000",
+            extendedTimeOut: "1000",
+            showEasing: "swing",
+            hideEasing: "linear",
+            showMethod: "fadeIn",
+            hideMethod: "fadeOut"
+        };
         function get_agent_info(phone_number) {
             $('#page-wrapper').load("/agent_info.html?phoneNumber=" + phone_number);
         }
-        function add_new_agent() {
+        function add_new_agent(phone_number, type) {
+            currentAgentPhoneNumber = phone_number;
+            currentType = type;
+            if (type == 1) {
+                $('#newAgentModal .modal-title').text('添加一级代理商');
+            }
+            if (type == 2) {
+                $('#newAgentModal .modal-title').text('添加二级代理商');
+            }
+            else {
+                $('#newAgentModal .modal-title').text('添加三级代理商');
+            }
             $('#newAgentModal').modal(0);
         }
+        $('#add-agent').click(function () {
+            if($('#inputPhoneNumber').val().length != 11){
+                toastr.info('请输入正确的手机号');
+                $('#inputPhoneNumberGroup').addClass('has-danger');
+                return;
+            }
+            else {
+                $('#inputPhoneNumberGroup').removeClass('has-danger');
+            }
+
+            if($('#inputPassword').val().length<6){
+                $('#inputPasswordGroup').addClass('has-danger');
+                return;
+            }
+            else{
+                $('#inputPasswordGroup').removeClass('has-danger');
+            }
+
+            if($('#inputPassword').val()!=$('#inputConfirmPassword').val()){
+                $('#inputConfirmPasswordGroup').addClass('has-danger');
+                return;
+            }
+            else{
+                $('#inputConfirmPasswordGroup').removeClass('has-danger');
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "/UserManager/AddAgent",
+                data: {superiorPhoneNumber:currentAgentPhoneNumber,phoneNumber:$("#inputPhoneNumber").val(),password:$("#inputPassword").val(),type:currentType},
+                dataType: "json",
+                success: function (data) {
+                    toastr.info(data.Info);
+                    if (data.Status == 'true') {
+                        window.location.reload();
+                    }
+                }
+            });
+        });
         $(function() {
             Morris.Area({
                 element: 'morris-area-chart',

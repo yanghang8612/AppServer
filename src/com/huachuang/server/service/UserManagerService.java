@@ -200,6 +200,39 @@ public class UserManagerService {
         return result;
     }
 
+    public Map<String, String> addAgent(
+            String superiorPhoneNumber,
+            String phoneNumber,
+            String password,
+            byte type) {
+
+        Map<String, String> result = new HashMap<>();
+        if (!userManagerDao.verifyPhoneNumber(phoneNumber)) {
+            result.put("Status", "false");
+            result.put("Info", "该手机号已被注册");
+        }
+        else {
+            String generatedInvitationCode;
+            while (true) {
+                generatedInvitationCode = CommonUtils.generateInvitationCode();
+                if (!userManagerDao.verifyInvitationCode(generatedInvitationCode)) {
+                    break;
+                }
+            }
+            User superiorAgent = userManagerDao.findUserByPhoneNumber(superiorPhoneNumber);
+            User agent = new User();
+            agent.setUserPhoneNumber(phoneNumber);
+            agent.setUserPassword(password);
+            agent.setUserType(type);
+            agent.setInvitationCode(generatedInvitationCode);
+            agent.setSuperiorUserId((type == 1) ? 0 : superiorAgent.getUserId());
+            userManagerDao.create(agent);
+            result.put("Status", "true");
+            result.put("Info", "添加代理商成功");
+        }
+        return result;
+    }
+
     public void setUserHeaderState(long userID) {
         User user = userManagerDao.findUserByUserID(userID);
         if (user != null) {

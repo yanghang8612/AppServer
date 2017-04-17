@@ -75,6 +75,17 @@ public class UserManagerController {
     }
 
     @ResponseBody
+    @RequestMapping(value = "/AddAgent", method = RequestMethod.POST)
+    public Map<String, String> addAgent(
+            @RequestParam String superiorPhoneNumber,
+            @RequestParam String phoneNumber,
+            @RequestParam String password,
+            @RequestParam byte type) {
+
+        return userManagerService.addAgent(superiorPhoneNumber, phoneNumber, password, type);
+    }
+
+    @ResponseBody
     @RequestMapping(value = "/GetSubUser", method = RequestMethod.POST)
     public Map<String, Object> getSubUser(
             @RequestParam long userID) {
