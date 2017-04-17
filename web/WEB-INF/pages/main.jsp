@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,6 +31,7 @@
     <link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <link href="/css/server.css" rel="stylesheet" type="text/css">
+
     <link href="https://cdn.bootcss.com/toastr.js/latest/toastr.min.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -404,16 +404,18 @@
         var currentAgentPhoneNumber;
         var currentType;
         toastr.options = {
-            closeButton: true,
-            positionClass: "toast-top-center",
-            showDuration: "500",
-            hideDuration: "500",
-            timeOut: "1000",
-            extendedTimeOut: "1000",
-            showEasing: "swing",
-            hideEasing: "linear",
-            showMethod: "fadeIn",
-            hideMethod: "fadeOut"
+            "closeButton": false,
+            "debug": false,
+            "positionClass": "toast-bottom-center",
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "300",
+            "timeOut": "1500",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
         };
         function get_agent_info(phone_number) {
             $('#page-wrapper').load("/agent_info.html?phoneNumber=" + phone_number);
@@ -434,28 +436,18 @@
         }
         $('#add-agent').click(function () {
             if($('#inputPhoneNumber').val().length != 11){
-                toastr.info('请输入正确的手机号');
-                $('#inputPhoneNumberGroup').addClass('has-danger');
+                toastr.error('请输入正确的手机号');
                 return;
-            }
-            else {
-                $('#inputPhoneNumberGroup').removeClass('has-danger');
             }
 
             if($('#inputPassword').val().length<6){
-                $('#inputPasswordGroup').addClass('has-danger');
+                toastr.error('密码最少包含6个字符');
                 return;
-            }
-            else{
-                $('#inputPasswordGroup').removeClass('has-danger');
             }
 
             if($('#inputPassword').val()!=$('#inputConfirmPassword').val()){
-                $('#inputConfirmPasswordGroup').addClass('has-danger');
+                toastr.error('两次输入密码不一致');
                 return;
-            }
-            else{
-                $('#inputConfirmPasswordGroup').removeClass('has-danger');
             }
 
             $.ajax({
@@ -464,9 +456,11 @@
                 data: {superiorPhoneNumber:currentAgentPhoneNumber,phoneNumber:$("#inputPhoneNumber").val(),password:$("#inputPassword").val(),type:currentType},
                 dataType: "json",
                 success: function (data) {
-                    toastr.info(data.Info);
                     if (data.Status == 'true') {
                         window.location.reload();
+                    }
+                    else {
+                        toastr.info(data.Info);
                     }
                 }
             });

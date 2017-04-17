@@ -4,16 +4,18 @@ import com.huachuang.server.dao.UserCertificationInfoDao;
 import com.huachuang.server.dao.UserManagerDao;
 import com.huachuang.server.entity.User;
 import com.huachuang.server.entity.UserCertificationInfo;
-import com.huachuang.server.service.UserManagerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Asuka on 2017/4/6.
@@ -31,10 +33,28 @@ public class RootController {
     @Resource
     private UserCertificationInfoDao userCertificationInfoDao;
 
-    @RequestMapping(value = {"index.html", "index", "/"}, method = RequestMethod.GET)
-    public ModelAndView renderIndexPage() {
-        ModelAndView mv = new ModelAndView("index");
+    @RequestMapping(value = {"index.html", "index", "/", "login.html"}, method = RequestMethod.GET)
+    public ModelAndView renderIndexPage(HttpServletRequest request) {
+        ModelAndView mv = new ModelAndView("login");
         return mv;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "login", method = RequestMethod.POST)
+    public Map<String, String> login(HttpServletRequest request,
+                     @RequestParam String username,
+                     @RequestParam String password) {
+
+        Map<String, String> result = new HashMap<>();
+        if (username.equals("admin") && password.equals("admin")) {
+            result.put("Status", "true");
+            result.put("Info", "登录成功");
+        }
+        else {
+            result.put("Status", "false");
+            result.put("Info", "用户名或密码错误");
+        }
+        return result;
     }
 
     @RequestMapping(value = "register_step_one.html", method = RequestMethod.GET)
@@ -55,9 +75,9 @@ public class RootController {
         return mv;
     }
 
-    @RequestMapping(value = "tables.html", method = RequestMethod.GET)
+    @RequestMapping(value = "main.html", method = RequestMethod.GET)
     public ModelAndView renderTablesPage(HttpServletRequest request) {
-        ModelAndView mv = new ModelAndView("tables");
+        ModelAndView mv = new ModelAndView("main");
         List<User> agents = userManagerDao.findAllAgents();
         request.setAttribute("agents", agents);
         return mv;
