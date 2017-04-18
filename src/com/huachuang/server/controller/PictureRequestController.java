@@ -33,7 +33,7 @@ public class PictureRequestController {
 
     @ResponseBody
     @RequestMapping(value = "/UploadHeader", method = RequestMethod.POST)
-    public Map<String, String> EditHPic(
+    public Map<String, String> uploadHeader(
             HttpServletRequest request,
             @RequestParam long userID,
             @RequestParam("header") CommonsMultipartFile header){
@@ -53,6 +53,55 @@ public class PictureRequestController {
         }
         result.put("Status", "true");
         result.put("Info", "头像设置成功");
+        return result;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/UploadIdentifyCard", method = RequestMethod.POST)
+    public Map<String, String> uploadIdentifyCard(
+            @RequestParam long userID,
+            @RequestParam("front") CommonsMultipartFile front,
+            @RequestParam("back") CommonsMultipartFile back,
+            @RequestParam("handing_card") CommonsMultipartFile handingCard){
+
+        Map<String, String> result = new HashMap<>();
+        String savePath = "D:/PalmTouchServer/identify_card/" + userID + "/";
+        File saveFolder = new File(savePath);
+        if (!saveFolder.exists() && !saveFolder.isDirectory()) {
+            saveFolder.mkdirs();
+        }
+        if (!front.isEmpty()) {
+            try {
+                front.transferTo(new File(savePath + "front.jpg"));
+            } catch (IOException e) {
+                e.printStackTrace();
+                result.put("Status", "false");
+                result.put("Info", "上传身份证正面失败");
+                return result;
+            }
+        }
+        if (!back.isEmpty()) {
+            try {
+                back.transferTo(new File(savePath + "back.jpg"));
+            } catch (IOException e) {
+                e.printStackTrace();
+                result.put("Status", "false");
+                result.put("Info", "上传身份证反面失败");
+                return result;
+            }
+        }
+        if (!handingCard.isEmpty()) {
+            try {
+                handingCard.transferTo(new File(savePath + "handing_card.jpg"));
+            } catch (IOException e) {
+                e.printStackTrace();
+                result.put("Status", "false");
+                result.put("Info", "上传手持证件照失败");
+                return result;
+            }
+        }
+        result.put("Status", "true");
+        result.put("Info", "上传身份证正反面及手持证件照成功");
         return result;
     }
 
