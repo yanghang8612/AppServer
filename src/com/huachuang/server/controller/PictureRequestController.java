@@ -36,7 +36,7 @@ public class PictureRequestController {
     public Map<String, String> uploadHeader(
             HttpServletRequest request,
             @RequestParam long userID,
-            @RequestParam("header") CommonsMultipartFile header){
+            @RequestParam CommonsMultipartFile header){
 
         Map<String, String> result = new HashMap<>();
         String path = request.getSession().getServletContext().getRealPath("/resources/header/");
@@ -59,13 +59,13 @@ public class PictureRequestController {
     @ResponseBody
     @RequestMapping(value = "/UploadIdentifyCard", method = RequestMethod.POST)
     public Map<String, String> uploadIdentifyCard(
-            @RequestParam long userID,
-            @RequestParam("front") CommonsMultipartFile front,
-            @RequestParam("back") CommonsMultipartFile back,
-            @RequestParam("handing_card") CommonsMultipartFile handingCard){
+            @RequestParam String phoneNumber,
+            @RequestParam CommonsMultipartFile front,
+            @RequestParam CommonsMultipartFile back,
+            @RequestParam CommonsMultipartFile handing){
 
         Map<String, String> result = new HashMap<>();
-        String savePath = "D:/PalmTouchServer/identify_card/" + userID + "/";
+        String savePath = "D:/PalmTouchServer/" + phoneNumber + "/identify_card/";
         File saveFolder = new File(savePath);
         if (!saveFolder.exists() && !saveFolder.isDirectory()) {
             saveFolder.mkdirs();
@@ -90,9 +90,9 @@ public class PictureRequestController {
                 return result;
             }
         }
-        if (!handingCard.isEmpty()) {
+        if (!handing.isEmpty()) {
             try {
-                handingCard.transferTo(new File(savePath + "handing_card.jpg"));
+                handing.transferTo(new File(savePath + "handing.jpg"));
             } catch (IOException e) {
                 e.printStackTrace();
                 result.put("Status", "false");
@@ -102,6 +102,44 @@ public class PictureRequestController {
         }
         result.put("Status", "true");
         result.put("Info", "上传身份证正反面及手持证件照成功");
+        return result;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/UploadDebitCard", method = RequestMethod.POST)
+    public Map<String, String> uploadDebitCard(
+            @RequestParam String phoneNumber,
+            @RequestParam CommonsMultipartFile front,
+            @RequestParam CommonsMultipartFile back){
+
+        Map<String, String> result = new HashMap<>();
+        String savePath = "D:/PalmTouchServer/" + phoneNumber + "/debit_card/";
+        File saveFolder = new File(savePath);
+        if (!saveFolder.exists() && !saveFolder.isDirectory()) {
+            saveFolder.mkdirs();
+        }
+        if (!front.isEmpty()) {
+            try {
+                front.transferTo(new File(savePath + "front.jpg"));
+            } catch (IOException e) {
+                e.printStackTrace();
+                result.put("Status", "false");
+                result.put("Info", "上传结算卡正面失败");
+                return result;
+            }
+        }
+        if (!back.isEmpty()) {
+            try {
+                back.transferTo(new File(savePath + "back.jpg"));
+            } catch (IOException e) {
+                e.printStackTrace();
+                result.put("Status", "false");
+                result.put("Info", "上传结算卡反面失败");
+                return result;
+            }
+        }
+        result.put("Status", "true");
+        result.put("Info", "上传结算卡正反面成功");
         return result;
     }
 
