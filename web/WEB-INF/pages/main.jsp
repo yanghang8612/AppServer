@@ -13,24 +13,24 @@
     <title>掌触金控后台管理系统</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/AppServer/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
-    <link href="/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <link href="/AppServer/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
 
     <!-- DataTables CSS -->
-    <link href="/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="/AppServer/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
 
     <!-- DataTables Responsive CSS -->
-    <link href="/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
+    <link href="/AppServer/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="/vendor/sb-admin/css/sb-admin-2.css" rel="stylesheet">
+    <link href="/AppServer/vendor/sb-admin/css/sb-admin-2.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="/AppServer/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-    <link href="/css/server.css" rel="stylesheet" type="text/css">
+    <link href="/AppServer/css/server.css" rel="stylesheet" type="text/css">
 
     <link href="https://cdn.bootcss.com/toastr.js/latest/toastr.min.css" rel="stylesheet">
 
@@ -377,25 +377,25 @@
     <!-- /.modal -->
 
     <!-- jQuery -->
-    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/AppServer/vendor/jquery/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/AppServer/vendor/bootstrap/js/bootstrap.min.js"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
-    <script src="/vendor/metisMenu/metisMenu.min.js"></script>
+    <script src="/AppServer/vendor/metisMenu/metisMenu.min.js"></script>
 
     <!-- DataTables JavaScript -->
-    <script src="/vendor/datatables/js/jquery.dataTables.min.js"></script>
-    <script src="/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
-    <script src="/vendor/datatables-responsive/dataTables.responsive.js"></script>
+    <script src="/AppServer/vendor/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="/AppServer/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+    <script src="/AppServer/vendor/datatables-responsive/dataTables.responsive.js"></script>
 
     <!-- Morris Charts JavaScript -->
-    <script src="/vendor/raphael/raphael.min.js"></script>
-    <script src="/vendor/morrisjs/morris.min.js"></script>
+    <script src="/AppServer/vendor/raphael/raphael.min.js"></script>
+    <script src="/AppServer/vendor/morrisjs/morris.min.js"></script>
 
     <!-- Custom Theme JavaScript -->
-    <script src="/vendor/sb-admin/js/sb-admin-2.js"></script>
+    <script src="/AppServer/vendor/sb-admin/js/sb-admin-2.js"></script>
 
     <script src="https://cdn.bootcss.com/toastr.js/latest/toastr.min.js"></script>
 
@@ -418,7 +418,7 @@
             "hideMethod": "fadeOut"
         };
         function get_agent_info(phone_number) {
-            $('#page-wrapper').load("/agent_info.html?phoneNumber=" + phone_number);
+            $('#page-wrapper').load("/AppServer/agent_info.html?phoneNumber=" + phone_number);
         }
         function add_new_agent(phone_number, type) {
             currentAgentPhoneNumber = phone_number;
@@ -452,7 +452,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "/UserManager/AddAgent",
+                url: "/AppServer/UserManager/AddAgent",
                 data: {superiorPhoneNumber:currentAgentPhoneNumber,phoneNumber:$("#inputPhoneNumber").val(),password:$("#inputPassword").val(),type:currentType},
                 dataType: "json",
                 success: function (data) {

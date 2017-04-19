@@ -111,7 +111,7 @@
             responsive: true
         });
     });
-    function get_user_info(phone_number) {
-        $('#userInfoModal').modal();
-    }
+//    function get_user_info(phone_number) {
+//        $('#userInfoModal').modal();
+//    }
 </script>

@@ -71,6 +71,9 @@ public class UserManagerDaoImpl implements UserManagerDao {
         Transaction tx = session.beginTransaction();
         long id = (long) session.save(user);
         tx.commit();
+        if (id < 1) {
+            LogFactory.getLog("Yang").error("Create new User error");
+        }
         return id;
     }
 

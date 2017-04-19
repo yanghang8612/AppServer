@@ -73,8 +73,8 @@ public class UserManagerService {
             String phoneNumber,
             String invitationCode,
             String recommenderID,
-            String password){
-
+            String password
+    ){
         String generatedInvitationCode;
         while (true) {
             generatedInvitationCode = CommonUtils.generateInvitationCode();
@@ -93,10 +93,7 @@ public class UserManagerService {
         return result;
     }
 
-    public Map<String, Object> login(
-            String phoneNumber,
-            String password){
-
+    public Map<String, Object> login(String phoneNumber, String password){
         Map<String, Object> result = new HashMap<String, Object>();
 
         User user = userManagerDao.findUserByPhoneNumber(phoneNumber);
@@ -124,10 +121,7 @@ public class UserManagerService {
         return result;
     }
 
-    public Map<String, String> changePassword(
-            long userID,
-            String newPassword) {
-
+    public Map<String, String> changePassword(long userID, String newPassword) {
         Map<String, String> result = new HashMap<>();
         User user = userManagerDao.findUserByUserID(userID);
         if (user != null) {
@@ -204,8 +198,8 @@ public class UserManagerService {
             String superiorPhoneNumber,
             String phoneNumber,
             String password,
-            byte type) {
-
+            byte type
+    ) {
         Map<String, String> result = new HashMap<>();
         if (!userManagerDao.verifyPhoneNumber(phoneNumber)) {
             result.put("Status", "false");
