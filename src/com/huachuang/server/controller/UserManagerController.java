@@ -25,11 +25,10 @@ public class UserManagerController {
     @RequestMapping(value = "/Register", method = RequestMethod.POST)
     public Map<String, String> register(
             @RequestParam String phoneNumber,
-            @RequestParam String invitationCode,
-            @RequestParam String recommenderID,
+            @RequestParam String identifyCode,
             @RequestParam String password) {
 
-        return userManagerService.register(phoneNumber, invitationCode, recommenderID, password);
+        return userManagerService.register(phoneNumber, identifyCode, password);
     }
 
     @ResponseBody

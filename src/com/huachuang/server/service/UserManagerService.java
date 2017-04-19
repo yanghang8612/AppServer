@@ -71,8 +71,7 @@ public class UserManagerService {
 
     public Map<String, String> register(
             String phoneNumber,
-            String invitationCode,
-            String recommenderID,
+            String identifyCode,
             String password
     ){
         String generatedInvitationCode;
@@ -82,10 +81,17 @@ public class UserManagerService {
                 break;
             }
         }
-        User user = new User(phoneNumber, password, generatedInvitationCode, userManagerDao.findUserByInvitationCode(invitationCode).getUserId());
+        long superiorID;
+        if (identifyCode.length() == 6) {
+            superiorID = userManagerDao.findUserByInvitationCode(identifyCode).getUserId();
+        }
+        else {
+            superiorID = userManagerDao.findUserByPhoneNumber(identifyCode).getSuperiorUserId();
+        }
+        User user = new User(phoneNumber, password, generatedInvitationCode, superiorID);
         long userID = userManagerDao.create(user);
-        if (recommenderID != null && !recommenderID.equals("")) {
-            recommendListDao.create(new RecommendList(userManagerDao.findUserByPhoneNumber(recommenderID).getUserId(), userID));
+        if (identifyCode.length() == 11) {
+            recommendListDao.create(new RecommendList(userManagerDao.findUserByPhoneNumber(identifyCode).getUserId(), userID));
         }
         Map<String, String> result = new HashMap<>();
         result.put("Status", "true");

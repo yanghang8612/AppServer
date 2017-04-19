@@ -27,7 +27,7 @@ CREATE TABLE `user_wallet` (
 	`id` bigint(20) NOT NULL AUTO_INCREMENT,
 	`user_id` bigint(20) NOT NULL UNIQUE,
 	`wallet_balance` decimal(10,2) DEFAULT 0,
-	`wallet_coins` int(10) DEFAULT 0,
+	`wallet_points` int(10) DEFAULT 0,
 	PRIMARY KEY (`id`),
 	FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`)
 );
@@ -140,6 +140,7 @@ CREATE TABLE `payment_order` (
 
 CREATE TABLE `recommend_list` (
 	`id` bigint(20) NOT NULL AUTO_INCREMENT,
+	`type` tinyint(1) NOT NULL,
 	`recommender_id` bigint(20) NOT NULL,
 	`recommended_id` bigint(20) NOT NULL,
 	`recommend_time` datetime DEFAULT CURRENT_TIMESTAMP,
