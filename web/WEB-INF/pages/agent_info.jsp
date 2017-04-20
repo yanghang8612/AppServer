@@ -10,7 +10,7 @@
             List<User> users = (List<User>) request.getAttribute("users");
         %>
         <div class="col-lg-2 col-md-2">
-            <img src="<%=(agent.isHeaderState()?"/header/"+agent.getUserId()+".jpg":"/imgs/default_header_image.jpg")%>" class="img-circle img-responsive center-block">
+            <img src="<%=(agent.isHeaderState()?"/AppServer/header/"+agent.getUserId()+".jpg":"/AppServer/imgs/default_header_image.jpg")%>" class="img-circle img-responsive center-block">
         </div>
         <div class="col-lg-2">
             <h3><%=agent.getUserPhoneNumber()%></h3>
