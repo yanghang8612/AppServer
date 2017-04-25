@@ -18,19 +18,19 @@ public class UserDebitCard {
     @GenericGenerator(name="increment", strategy = "increment")
     private long id;
 
-    @Column(name = "user_id")
+    @Column(name = "user_id", nullable = false, unique = true)
     private long userId;
 
-    @Column(name = "owner_name")
+    @Column(name = "owner_name", nullable = false)
     private String ownerName;
 
-    @Column(name = "card_number")
+    @Column(name = "card_number", nullable = false)
     private String cardNumber;
 
-    @Column(name = "card_type")
+    @Column(name = "card_type", nullable = false)
     private String cardType;
 
-    @Column(name = "head_office")
+    @Column(name = "head_office", nullable = false)
     private String headOffice;
 
     @Column(name = "branch")

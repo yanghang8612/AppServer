@@ -1,6 +1,7 @@
 package com.huachuang.server.dao.impl;
 
 import com.huachuang.server.dao.UserManagerDao;
+import com.huachuang.server.entity.RecommendList;
 import com.huachuang.server.entity.User;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Session;
@@ -8,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Comparator;
@@ -197,6 +199,17 @@ public class UserManagerDaoImpl implements UserManagerDao {
         Transaction tx = session.beginTransaction();
         Query<User> query = session.createQuery("from User where userType > 0", User.class);
         List<User> result = query.getResultList();
+        tx.commit();
+        return result;
+    }
+
+    @Override
+    public List<RecommendList> findRecommendRecordByUserID(long userID) {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        Query<RecommendList> query = session.createQuery("from RecommendList where recommenderId = ?", RecommendList.class);
+        query.setParameter(0, userID);
+        List<RecommendList> result = query.getResultList();
         tx.commit();
         return result;
     }

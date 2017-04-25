@@ -20,25 +20,25 @@ public class ApplyLoan {
     @GenericGenerator(name="increment", strategy = "increment")
     private long id;
 
-    @Column(name = "user_id")
+    @Column(name = "user_id", nullable = false)
     private long userId;
 
-    @Column(name = "house_address")
+    @Column(name = "house_address", nullable = false)
     private String houseAddress;
 
-    @Column(name = "house_property_card")
+    @Column(name = "house_property_card", nullable = false)
     private String housePropertyCard;
 
-    @Column(name = "house_land_sources")
+    @Column(name = "house_land_sources", nullable = false)
     private String houseLandSources;
 
-    @Column(name = "house_type")
+    @Column(name = "house_type", nullable = false)
     private String houseType;
 
-    @Column(name = "house_build_year")
+    @Column(name = "house_build_year", nullable = false)
     private String houseBuildYear;
 
-    @Column(name = "house_build_area")
+    @Column(name = "house_build_area", nullable = false)
     private String houseBuildArea;
 
     @Column(name = "house_owned_by_others")
@@ -50,25 +50,25 @@ public class ApplyLoan {
     @Column(name = "house_borrower_is_owner")
     private boolean houseBorrowerIsOwner;
 
-    @Column(name = "house_handing_time")
+    @Column(name = "house_handing_time", nullable = false)
     private String houseHandingTime;
 
-    @Column(name = "borrower_name")
+    @Column(name = "borrower_name", nullable = false)
     private String borrowerName;
 
-    @Column(name = "borrower_phone_number")
+    @Column(name = "borrower_phone_number", nullable = false)
     private String borrowerPhoneNumber;
 
-    @Column(name = "borrower_amount")
+    @Column(name = "borrower_amount", nullable = false)
     private String borrowerAmount;
 
-    @Column(name = "borrower_marriage")
+    @Column(name = "borrower_marriage", nullable = false)
     private String borrowerMarriage;
 
-    @Column(name = "borrower_address")
+    @Column(name = "borrower_address", nullable = false)
     private String borrowerAddress;
 
-    @Column(name = "borrower_detailed_address")
+    @Column(name = "borrower_detailed_address", nullable = false)
     private String borrowerDetailedAddress;
 
     @Column(name = "apply_time")

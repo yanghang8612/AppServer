@@ -18,22 +18,22 @@ public class UserBankCard {
     @GenericGenerator(name="increment", strategy = "increment")
     private long id;
 
-    @Column(name = "user_id")
+    @Column(name = "user_id", nullable = false)
     private long userId;
 
-    @Column(name = "owner_name")
+    @Column(name = "owner_name", nullable = false)
     private String ownerName;
 
-    @Column(name = "card_number")
+    @Column(name = "card_number", nullable = false)
     private String cardNumber;
 
-    @Column(name = "card_type")
+    @Column(name = "card_type", nullable = false)
     private String cardType;
 
-    @Column(name = "bank_name")
+    @Column(name = "bank_name", nullable = false)
     private String bankName;
 
-    @Column(name = "phone_number")
+    @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
 
     public long getId() {

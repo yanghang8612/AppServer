@@ -18,22 +18,22 @@ public class UserCertificationInfo {
     @GenericGenerator(name="increment", strategy = "increment")
     private long id;
 
-    @Column(name = "user_id")
+    @Column(name = "user_id", nullable = false, unique = true)
     private long userId;
 
-    @Column(name = "user_name")
+    @Column(name = "user_name", nullable = false)
     private String userName;
 
-    @Column(name = "user_spell")
+    @Column(name = "user_spell", nullable = false)
     private String userSpell;
 
-    @Column(name = "user_identity_card")
+    @Column(name = "user_identity_card", nullable = false, unique = true)
     private String userIdentityCard;
 
-    @Column(name = "user_address")
+    @Column(name = "user_address", nullable = false)
     private String userAddress;
 
-    @Column(name = "user_sex")
+    @Column(name = "user_sex", nullable = false)
     private char userSex;
 
     public long getId() {

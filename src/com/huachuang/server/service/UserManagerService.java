@@ -4,6 +4,7 @@ import com.huachuang.server.CommonUtils;
 import com.huachuang.server.dao.RecommendListDao;
 import com.huachuang.server.dao.UserManagerDao;
 import com.huachuang.server.dao.UserTokenDao;
+import com.huachuang.server.dao.UserWalletDao;
 import com.huachuang.server.entity.RecommendList;
 import com.huachuang.server.entity.User;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,9 @@ public class UserManagerService {
 
     @Resource
     private UserTokenDao userTokenDao;
+
+    @Resource
+    private UserWalletDao userWalletDao;
 
     @Resource
     private UserInfoService userInfoService;
@@ -93,6 +97,7 @@ public class UserManagerService {
         if (identifyCode.length() == 11) {
             recommendListDao.create(new RecommendList(userManagerDao.findUserByPhoneNumber(identifyCode).getUserId(), userID));
         }
+        userWalletDao.create(userID);
         Map<String, String> result = new HashMap<>();
         result.put("Status", "true");
         result.put("Info", "注册成功");
@@ -239,6 +244,25 @@ public class UserManagerService {
             user.setHeaderState(true);
             userManagerDao.update(user);
         }
+    }
+
+    public Map<String, String> getRecommendCount(long userID) {
+        Map<String, String> result = new HashMap<>();
+        List<RecommendList> baseList = userManagerDao.findRecommendRecordByUserID(userID);
+        List<RecommendList> deriveList = new ArrayList<>();
+        List<RecommendList> thirdList = new ArrayList<>();
+        for (RecommendList record : baseList) {
+            deriveList.addAll(userManagerDao.findRecommendRecordByUserID(record.getRecommendedId()));
+        }
+        for (RecommendList record : deriveList) {
+            thirdList.addAll(userManagerDao.findRecommendRecordByUserID(record.getRecommendedId()));
+        }
+        result.put("Status", "true");
+        result.put("Info", "查询成功");
+        result.put("BaseCount", String.valueOf(baseList.size()));
+        result.put("DeriveCount", String.valueOf(deriveList.size()));
+        result.put("ThirdCount", String.valueOf(thirdList.size()));
+        return result;
     }
 
 //

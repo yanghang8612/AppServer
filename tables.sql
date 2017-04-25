@@ -35,6 +35,7 @@ CREATE TABLE `user_wallet` (
 CREATE TABLE `user_wallet_balance_record` (
 	`id` bigint(20) NOT NULL AUTO_INCREMENT,
 	`user_id` bigint(20) NOT NULL,
+	`type` tinyint(1) NOT NULL,
 	`amount` decimal(10,2) NOT NULL,
 	`time` datetime DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (`id`),
@@ -44,6 +45,7 @@ CREATE TABLE `user_wallet_balance_record` (
 CREATE TABLE `user_wallet_points_record` (
 	`id` bigint(20) NOT NULL AUTO_INCREMENT,
 	`user_id` bigint(20) NOT NULL,
+	`type` tinyint(1) NOT NULL,
 	`amount` int(10) NOT NULL,
 	`time` datetime DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (`id`),
@@ -64,7 +66,7 @@ CREATE TABLE `user_certification_info` (
 
 CREATE TABLE `user_debit_card` (
 	`id` bigint(20) NOT NULL AUTO_INCREMENT,
-	`user_id` bigint(20) NOT NULL,
+	`user_id` bigint(20) NOT NULL UNIQUE,
 	`owner_name` varchar(32) NOT NULL,
 	`card_number` varchar(20) NOT NULL,
 	`card_type` varchar(32) NOT NULL,
@@ -77,7 +79,7 @@ CREATE TABLE `user_debit_card` (
 
 CREATE TABLE `user_bank_card` (
 	`id` bigint(20) NOT NULL AUTO_INCREMENT,
-	`user_id` bigint(20) NOT NULL UNIQUE,
+	`user_id` bigint(20) NOT NULL,
 	`owner_name` varchar(32) NOT NULL,
 	`card_number` varchar(20) NOT NULL,
 	`card_type` varchar(32) NOT NULL,
@@ -92,9 +94,7 @@ CREATE TABLE `apply_credit_card` (
 	`user_id` bigint(20) NOT NULL,
 	`apply_bank` tinyint(1) NOT NULL,
 	`apply_user_name` varchar(32) NOT NULL,
-	`apply_user_identify_card` char(18) NOT NULL,
-	`apply_user_sex` char(1) NOT NULL,
-	`apply_user_contact_way` varchar(128) NOT NULL,
+	`apply_user_phone_number` char(11) NOT NULL,
 	`apply_time` datetime DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (`id`),
 	FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`)

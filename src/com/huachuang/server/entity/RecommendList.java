@@ -21,6 +21,9 @@ public class RecommendList {
     @GenericGenerator(name="increment", strategy = "increment")
     private long id;
 
+    @Column(name = "type", nullable = false)
+    private byte type;
+
     @Column(name = "recommender_id", nullable = false)
     private long recommenderId;
 
@@ -43,6 +46,14 @@ public class RecommendList {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public byte getType() {
+        return type;
+    }
+
+    public void setType(byte type) {
+        this.type = type;
     }
 
     public long getRecommenderId() {

@@ -18,13 +18,13 @@ public class UserToken {
     @GenericGenerator(name="increment", strategy = "increment")
     private int id;
 
-    @Column(name = "user_id")
+    @Column(name = "user_id", nullable = false)
     private int userID;
 
-    @Column(name = "token")
+    @Column(name = "token", length = 10, nullable = false)
     private String token;
 
-    @Column(name = "token_expiration_time")
+    @Column(name = "token_expiration_time", length = 13, nullable = false)
     private String tokenExpirationTime;
 
     public int getId() {

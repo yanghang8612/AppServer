@@ -1,5 +1,6 @@
 package com.huachuang.server.dao;
 
+import com.huachuang.server.entity.RecommendList;
 import com.huachuang.server.entity.User;
 
 import java.util.List;
@@ -35,4 +36,6 @@ public interface UserManagerDao {
     List<User> findSubCommonUsers(long userID);
 
     List<User> findAllAgents();
+
+    List<RecommendList> findRecommendRecordByUserID(long userID);
 }

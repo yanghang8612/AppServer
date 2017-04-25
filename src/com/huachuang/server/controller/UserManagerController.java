@@ -91,4 +91,12 @@ public class UserManagerController {
 
         return userManagerService.getSubUser(userID);
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/GetRecommendCount", method = RequestMethod.POST)
+    public Map<String, String> getRecommendCount(
+            @RequestParam long userID) {
+
+        return userManagerService.getRecommendCount(userID);
+    }
 }
