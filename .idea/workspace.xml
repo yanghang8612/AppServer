@@ -7,29 +7,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aa4642b6-733a-47cf-8f92-682a043288f6" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/huachuang/server/dao/UserWalletDao.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/huachuang/server/dao/impl/UserWalletDaoImpl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/huachuang/server/entity/WalletBalanceRecord.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/huachuang/server/entity/WalletPointsRecord.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/huachuang/server/controller/WalletManager.java" afterPath="$PROJECT_DIR$/src/com/huachuang/server/controller/WalletManagerController.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/huachuang/server/service/WalletService.java" afterPath="$PROJECT_DIR$/src/com/huachuang/server/service/WalletManagerService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources/88ca9641-1727-42ab-bf73-d2cc4b552063.xml" afterPath="$PROJECT_DIR$/.idea/dataSources/88ca9641-1727-42ab-bf73-d2cc4b552063.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_fasterxml_jackson_core_jackson_databind_Latest.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_fasterxml_jackson_core_jackson_databind_Latest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/commons_fileupload_commons_fileupload_Latest.xml" afterPath="$PROJECT_DIR$/.idea/libraries/commons_fileupload_commons_fileupload_Latest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/huachuang/server/controller/UserManagerController.java" afterPath="$PROJECT_DIR$/src/com/huachuang/server/controller/UserManagerController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/huachuang/server/dao/RecommendListDao.java" afterPath="$PROJECT_DIR$/src/com/huachuang/server/dao/RecommendListDao.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/huachuang/server/dao/UserManagerDao.java" afterPath="$PROJECT_DIR$/src/com/huachuang/server/dao/UserManagerDao.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/huachuang/server/dao/impl/RecommendListDaoImpl.java" afterPath="$PROJECT_DIR$/src/com/huachuang/server/dao/impl/RecommendListDaoImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/huachuang/server/dao/impl/UserManagerDaoImpl.java" afterPath="$PROJECT_DIR$/src/com/huachuang/server/dao/impl/UserManagerDaoImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/huachuang/server/entity/ApplyLoan.java" afterPath="$PROJECT_DIR$/src/com/huachuang/server/entity/ApplyLoan.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/huachuang/server/entity/RecommendList.java" afterPath="$PROJECT_DIR$/src/com/huachuang/server/entity/RecommendList.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/huachuang/server/entity/UserBankCard.java" afterPath="$PROJECT_DIR$/src/com/huachuang/server/entity/UserBankCard.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/huachuang/server/entity/UserCertificationInfo.java" afterPath="$PROJECT_DIR$/src/com/huachuang/server/entity/UserCertificationInfo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/huachuang/server/entity/UserDebitCard.java" afterPath="$PROJECT_DIR$/src/com/huachuang/server/entity/UserDebitCard.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/huachuang/server/entity/UserShareProfit.java" afterPath="$PROJECT_DIR$/src/com/huachuang/server/entity/UserShareProfit.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/huachuang/server/entity/UserToken.java" afterPath="$PROJECT_DIR$/src/com/huachuang/server/entity/UserToken.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/huachuang/server/entity/UserWallet.java" afterPath="$PROJECT_DIR$/src/com/huachuang/server/entity/UserWallet.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/huachuang/server/service/UserManagerService.java" afterPath="$PROJECT_DIR$/src/com/huachuang/server/service/UserManagerService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tables.sql" afterPath="$PROJECT_DIR$/tables.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/pages/register_step_two.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/pages/register_step_two.jsp" />
     </list>
     <list id="77603ad9-0141-4cc3-9951-41618914dd4c" name="Revert: " comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -75,58 +61,67 @@
         <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
       </PATH_ELEMENT>
     </PATH>
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="appserver@localhost" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="appserver" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="user" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+    </PATH>
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="WalletManagerController.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/huachuang/server/controller/WalletManagerController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WalletManagerService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/huachuang/server/service/WalletManagerService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="27" column="31" lean-forward="false" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
-              <folding>
-                <element signature="e#414#415#0" expanded="false" />
-                <element signature="e#469#470#0" expanded="false" />
-                <element signature="e#520#521#0" expanded="false" />
-                <element signature="e#574#575#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="appserver.user_wallet" pinned="false" current-in-tab="false">
-        <entry file="dbDummy://dbtable:/ec81c380/88ca9641-1727-42ab-bf73-d2cc4b552063/appserver.user_wallet">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-          <provider editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="UserManagerController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/huachuang/server/controller/UserManagerController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1720">
-              <caret line="94" column="4" lean-forward="false" selection-start-line="94" selection-start-column="4" selection-end-line="94" selection-end-column="17" />
+            <state relative-caret-position="438">
+              <caret line="40" column="38" lean-forward="true" selection-start-line="40" selection-start-column="38" selection-end-line="40" selection-end-column="38" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserManagerService.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/huachuang/server/service/UserManagerService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="412">
+              <caret line="280" column="31" lean-forward="true" selection-start-line="280" selection-start-column="31" selection-end-line="280" selection-end-column="31" />
               <folding>
-                <element signature="imports" expanded="false" />
+                <element signature="e#10487#10488#0" expanded="true" />
+                <element signature="e#10529#10530#0" expanded="true" />
+                <element signature="e#10587#10588#0" expanded="true" />
+                <element signature="e#10641#10642#0" expanded="true" />
+                <element signature="e#10674#10675#0" expanded="true" />
+                <element signature="e#10709#10710#0" expanded="true" />
+                <element signature="e#10751#10752#0" expanded="true" />
+                <element signature="e#10791#10792#0" expanded="true" />
+                <element signature="e#10833#10834#0" expanded="true" />
+                <element signature="e#10877#10878#0" expanded="true" />
+                <element signature="e#10937#10938#0" expanded="true" />
+                <element signature="e#10995#10996#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/huachuang/server/entity/User.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="220">
+              <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -183,8 +178,6 @@
         <option value="$PROJECT_DIR$/lib/hibernate-core-5.2.9.Final.jar!/org/hibernate/SessionFactory.class" />
         <option value="$PROJECT_DIR$/web/WEB-INF/applicationPersitence.xml" />
         <option value="$PROJECT_DIR$/src/com/huachuang/server/CommonUtils.java" />
-        <option value="$PROJECT_DIR$/src/com/huachuang/server/dao/RecommendListDao.java" />
-        <option value="$PROJECT_DIR$/src/com/huachuang/server/dao/impl/RecommendListDaoImpl.java" />
         <option value="$PROJECT_DIR$/src/com/huachuang/server/dao/impl/UserCertificationInfoDao.java" />
         <option value="$PROJECT_DIR$/src/com/huachuang/server/dao/UserDebitCardDao.java" />
         <option value="$PROJECT_DIR$/src/com/huachuang/server/dao/UserCertificationInfoDao.java" />
@@ -195,7 +188,6 @@
         <option value="$PROJECT_DIR$/web/WEB-INF/web.xml" />
         <option value="$PROJECT_DIR$/web/resources/css/server.css" />
         <option value="$PROJECT_DIR$/web/WEB-INF/dispatcher-servlet.xml" />
-        <option value="$PROJECT_DIR$/web/WEB-INF/pages/register_step_two.jsp" />
         <option value="$PROJECT_DIR$/web/WEB-INF/pages/tables.jsp" />
         <option value="$PROJECT_DIR$/web/WEB-INF/pages/main.jsp" />
         <option value="$PROJECT_DIR$/web/WEB-INF/pages/login.jsp" />
@@ -203,7 +195,6 @@
         <option value="$PROJECT_DIR$/src/com/huachuang/server/controller/PictureRequestController.java" />
         <option value="$PROJECT_DIR$/web/WEB-INF/pages/agent_info.jsp" />
         <option value="$PROJECT_DIR$/tables.sql" />
-        <option value="$PROJECT_DIR$/src/com/huachuang/server/entity/RecommendList.java" />
         <option value="$PROJECT_DIR$/src/com/huachuang/server/entity/User.java" />
         <option value="$PROJECT_DIR$/src/com/huachuang/server/entity/ApplyLoan.java" />
         <option value="$PROJECT_DIR$/src/com/huachuang/server/entity/UserBankCard.java" />
@@ -217,11 +208,15 @@
         <option value="$PROJECT_DIR$/src/com/huachuang/server/entity/UserWallet.java" />
         <option value="$PROJECT_DIR$/src/com/huachuang/server/dao/impl/UserWalletDaoImpl.java" />
         <option value="$PROJECT_DIR$/src/com/huachuang/server/service/WalletManagerService.java" />
-        <option value="$PROJECT_DIR$/src/com/huachuang/server/dao/UserManagerDao.java" />
-        <option value="$PROJECT_DIR$/src/com/huachuang/server/service/UserManagerService.java" />
-        <option value="$PROJECT_DIR$/src/com/huachuang/server/controller/UserManagerController.java" />
-        <option value="$PROJECT_DIR$/src/com/huachuang/server/dao/impl/UserManagerDaoImpl.java" />
         <option value="$PROJECT_DIR$/src/com/huachuang/server/controller/WalletManagerController.java" />
+        <option value="$PROJECT_DIR$/src/com/huachuang/server/entity/RecommendList.java" />
+        <option value="$PROJECT_DIR$/src/com/huachuang/server/dao/UserManagerDao.java" />
+        <option value="$PROJECT_DIR$/src/com/huachuang/server/dao/RecommendListDao.java" />
+        <option value="$PROJECT_DIR$/src/com/huachuang/server/dao/impl/UserManagerDaoImpl.java" />
+        <option value="$PROJECT_DIR$/src/com/huachuang/server/dao/impl/RecommendListDaoImpl.java" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/pages/register_step_two.jsp" />
+        <option value="$PROJECT_DIR$/src/com/huachuang/server/controller/UserManagerController.java" />
+        <option value="$PROJECT_DIR$/src/com/huachuang/server/service/UserManagerService.java" />
       </list>
     </option>
   </component>
@@ -287,6 +282,42 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="AppServer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AppServer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AppServer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WEB-INF" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AppServer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AppServer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -385,32 +416,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="dao" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppServer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppServer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="server" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dao" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="impl" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1096,7 +1101,7 @@
       <workItem from="1492648120888" duration="1344000" />
       <workItem from="1492765405284" duration="2000" />
       <workItem from="1492765415823" duration="16711000" />
-      <workItem from="1493111813323" duration="610000" />
+      <workItem from="1493111813323" duration="10941000" />
     </task>
     <task id="LOCAL-00001" summary="Connect with Hibernate.">
       <created>1490001100147</created>
@@ -1175,11 +1180,18 @@
       <option name="project" value="LOCAL" />
       <updated>1492535000781</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Add wallet controller.">
+      <created>1493115501966</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1493115501966</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="213596000" />
+    <option name="totallyTimeSpent" value="223927000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -1199,12 +1211,13 @@
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960895" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960895" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.7578125" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4921875" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.328125" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26385927" sideWeight="0.5039106" order="7" side_tool="true" content_ui="tabs" />
@@ -1217,7 +1230,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960895" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32849163" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1278,25 +1290,12 @@
     <MESSAGE value="Update tables.jsp." />
     <MESSAGE value="Add login page." />
     <MESSAGE value="Update image upload controller." />
-    <option name="LAST_COMMIT_MESSAGE" value="Update image upload controller." />
+    <MESSAGE value="Add wallet controller." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add wallet controller." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/huachuang/server/service/UserManagerService.java</url>
-          <line>158</line>
-          <properties />
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/huachuang/server/service/UserManagerService.java</url>
-          <line>184</line>
-          <properties />
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="10" />
+      <option name="time" value="11" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1305,31 +1304,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/web/WEB-INF/pages/index.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="66" column="26" lean-forward="true" selection-start-line="66" selection-start-column="26" selection-end-line="66" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/WEB-INF/pages/main.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="86" lean-forward="false" selection-start-line="0" selection-start-column="86" selection-end-line="0" selection-end-column="86" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/WEB-INF/pages/login.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1100">
-          <caret line="55" column="43" lean-forward="false" selection-start-line="55" selection-start-column="43" selection-end-line="55" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/53b8397f/ae0e570a-3dab-4e28-9abf-8f0159f9d768/appserver.user_wallet" />
-    <entry file="dbDummy://dbtable:/53b8397f/ae0e570a-3dab-4e28-9abf-8f0159f9d768/appserver.user_share_profit" />
-    <entry file="dbDummy://dbtable:/53b8397f/ae0e570a-3dab-4e28-9abf-8f0159f9d768/appserver.user_debit_card" />
-    <entry file="dbDummy://dbtable:/53b8397f/ae0e570a-3dab-4e28-9abf-8f0159f9d768/appserver.user_certification_info" />
     <entry file="dbDummy://dbtable:/53b8397f/ae0e570a-3dab-4e28-9abf-8f0159f9d768/appserver.apply_loan" />
     <entry file="dbDummy://dbtable:/53b8397f/ae0e570a-3dab-4e28-9abf-8f0159f9d768/appserver.user" />
     <entry file="file://$PROJECT_DIR$/src/com/huachuang/server/controller/PictureRequestController.java">
@@ -1348,6 +1322,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="508">
           <caret line="149" column="2" lean-forward="true" selection-start-line="149" selection-start-column="2" selection-end-line="149" selection-end-column="2" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1365,6 +1340,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="320">
           <caret line="16" column="53" lean-forward="false" selection-start-line="16" selection-start-column="53" selection-end-line="16" selection-end-column="53" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1388,122 +1364,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/huachuang/server/entity/RecommendList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="811">
-          <caret line="56" column="5" lean-forward="false" selection-start-line="56" selection-start-column="5" selection-end-line="56" selection-end-column="5" />
-          <folding>
-            <element signature="e#1193#1194#0" expanded="false" />
-            <element signature="e#1225#1226#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/huachuang/server/entity/UserBankCard.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="660">
-          <caret line="35" column="40" lean-forward="false" selection-start-line="35" selection-start-column="40" selection-end-line="35" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/huachuang/server/entity/UserCertificationInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="35" column="47" lean-forward="false" selection-start-line="35" selection-start-column="47" selection-end-line="35" selection-end-column="47" />
-          <folding>
-            <element signature="e#1739#1740#0" expanded="false" />
-            <element signature="e#1773#1774#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/huachuang/server/entity/UserDebitCard.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="537">
-          <caret line="32" column="50" lean-forward="false" selection-start-line="32" selection-start-column="50" selection-end-line="32" selection-end-column="50" />
-          <folding>
-            <element signature="e#956#957#0" expanded="false" />
-            <element signature="e#981#982#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/huachuang/server/entity/UserShareProfit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-440">
-          <caret line="31" column="0" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-          <folding>
-            <element signature="e#868#869#0" expanded="false" />
-            <element signature="e#893#894#0" expanded="false" />
-            <element signature="e#927#928#0" expanded="false" />
-            <element signature="e#955#956#0" expanded="false" />
-            <element signature="e#986#987#0" expanded="false" />
-            <element signature="e#1015#1016#0" expanded="false" />
-            <element signature="e#1057#1058#0" expanded="false" />
-            <element signature="e#1093#1094#0" expanded="false" />
-            <element signature="e#1130#1131#0" expanded="false" />
-            <element signature="e#1163#1164#0" expanded="false" />
-            <element signature="e#1215#1216#0" expanded="false" />
-            <element signature="e#1259#1260#0" expanded="false" />
-            <element signature="e#1301#1302#0" expanded="false" />
-            <element signature="e#1339#1340#0" expanded="false" />
-            <element signature="e#1401#1402#0" expanded="false" />
-            <element signature="e#1455#1456#0" expanded="false" />
-            <element signature="e#1498#1499#0" expanded="false" />
-            <element signature="e#1537#1538#0" expanded="false" />
-            <element signature="e#1601#1602#0" expanded="false" />
-            <element signature="e#1657#1658#0" expanded="false" />
-            <element signature="e#1694#1695#0" expanded="false" />
-            <element signature="e#1727#1728#0" expanded="false" />
-            <element signature="e#1779#1780#0" expanded="false" />
-            <element signature="e#1823#1824#0" expanded="false" />
-            <element signature="e#1860#1861#0" expanded="false" />
-            <element signature="e#1893#1894#0" expanded="false" />
-            <element signature="e#1945#1946#0" expanded="false" />
-            <element signature="e#1989#1990#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/huachuang/server/entity/UserToken.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="31" column="5" lean-forward="true" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/huachuang/server/entity/WalletBalanceRecord.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="688">
-          <caret line="35" column="23" lean-forward="false" selection-start-line="35" selection-start-column="23" selection-end-line="35" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#792#793#0" expanded="false" />
-            <element signature="e#817#818#0" expanded="false" />
-            <element signature="e#851#852#0" expanded="false" />
-            <element signature="e#879#880#0" expanded="false" />
-            <element signature="e#910#911#0" expanded="false" />
-            <element signature="e#939#940#0" expanded="false" />
-            <element signature="e#981#982#0" expanded="false" />
-            <element signature="e#1017#1018#0" expanded="false" />
-            <element signature="e#1047#1048#0" expanded="false" />
-            <element signature="e#1074#1075#0" expanded="false" />
-            <element signature="e#1113#1114#0" expanded="false" />
-            <element signature="e#1145#1146#0" expanded="false" />
-            <element signature="e#1178#1179#0" expanded="false" />
-            <element signature="e#1207#1208#0" expanded="false" />
-            <element signature="e#1251#1252#0" expanded="false" />
-            <element signature="e#1287#1288#0" expanded="false" />
-            <element signature="e#1316#1317#0" expanded="false" />
-            <element signature="e#1343#1344#0" expanded="false" />
-            <element signature="e#1381#1382#0" expanded="false" />
-            <element signature="e#1413#1414#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="dbDummy://dbtable:/ec81c380/88ca9641-1727-42ab-bf73-d2cc4b552063/appserver.apply_credit_card">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
@@ -1513,14 +1373,6 @@
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/huachuang/server/entity/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="38" column="30" lean-forward="true" selection-start-line="38" selection-start-column="30" selection-end-line="38" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1537,18 +1389,6 @@
       </provider>
     </entry>
     <entry file="dbDummy://dbtable:/ec81c380/88ca9641-1727-42ab-bf73-d2cc4b552063/appserver.payment_order">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/ec81c380/88ca9641-1727-42ab-bf73-d2cc4b552063/appserver.user_bank_card">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
@@ -1632,29 +1472,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/huachuang/server/entity/WalletPointsRecord.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="278">
-          <caret line="33" column="22" lean-forward="true" selection-start-line="33" selection-start-column="22" selection-end-line="33" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/lib/hibernate-core-5.2.9.Final.jar!/org/hibernate/Session.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="183" column="17" lean-forward="false" selection-start-line="183" selection-start-column="17" selection-end-line="183" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/huachuang/server/entity/UserWallet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="747">
-          <caret line="59" column="36" lean-forward="false" selection-start-line="59" selection-start-column="36" selection-end-line="59" selection-end-column="36" />
-          <folding>
-            <element signature="e#1062#1063#0" expanded="false" />
-            <element signature="e#1112#1113#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1672,6 +1493,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="400">
           <caret line="21" column="11" lean-forward="false" selection-start-line="21" selection-start-column="11" selection-end-line="21" selection-end-column="11" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1684,30 +1508,20 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/huachuang/server/dao/RecommedListDao.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/huachuang/server/dao/UserManagerDao.java">
+    <entry file="file://$PROJECT_DIR$/src/com/huachuang/server/service/WalletManagerService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="39" column="4" lean-forward="false" selection-start-line="39" selection-start-column="4" selection-end-line="39" selection-end-column="64" />
-          <folding />
+        <state relative-caret-position="360">
+          <caret line="27" column="31" lean-forward="false" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
+          <folding>
+            <element signature="e#414#415#0" expanded="false" />
+            <element signature="e#469#470#0" expanded="false" />
+            <element signature="e#520#521#0" expanded="false" />
+            <element signature="e#574#575#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/huachuang/server/service/UserManagerService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="242" column="27" lean-forward="true" selection-start-line="242" selection-start-column="27" selection-end-line="242" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/huachuang/server/dao/impl/UserManagerDaoImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="567">
-          <caret line="206" column="68" lean-forward="true" selection-start-line="206" selection-start-column="68" selection-end-line="206" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/ec81c380/88ca9641-1727-42ab-bf73-d2cc4b552063/appserver.recommend_list">
+    <entry file="dbDummy://dbtable:/ec81c380/88ca9641-1727-42ab-bf73-d2cc4b552063/appserver.user_bank_card">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
@@ -1716,18 +1530,7 @@
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/ec81c380/88ca9641-1727-42ab-bf73-d2cc4b552063/appserver.user">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1744,34 +1547,229 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/huachuang/server/service/WalletManagerService.java">
+    <entry file="file://$PROJECT_DIR$/src/com/huachuang/server/controller/WalletManagerController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="28" column="0" lean-forward="true" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/huachuang/server/entity/UserBankCard.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
-          <caret line="27" column="31" lean-forward="false" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
+          <caret line="35" column="40" lean-forward="false" selection-start-line="35" selection-start-column="40" selection-end-line="35" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/huachuang/server/entity/UserCertificationInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="98">
+          <caret line="35" column="47" lean-forward="false" selection-start-line="35" selection-start-column="47" selection-end-line="35" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/huachuang/server/entity/UserDebitCard.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="237">
+          <caret line="32" column="50" lean-forward="false" selection-start-line="32" selection-start-column="50" selection-end-line="32" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/huachuang/server/entity/UserShareProfit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="558">
+          <caret line="31" column="0" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/huachuang/server/entity/UserToken.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="580">
+          <caret line="31" column="5" lean-forward="true" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
           <folding>
-            <element signature="e#414#415#0" expanded="false" />
-            <element signature="e#469#470#0" expanded="false" />
-            <element signature="e#520#521#0" expanded="false" />
-            <element signature="e#574#575#0" expanded="false" />
+            <element signature="e#683#684#0" expanded="true" />
+            <element signature="e#708#709#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/huachuang/server/entity/UserWallet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="638">
+          <caret line="59" column="36" lean-forward="false" selection-start-line="59" selection-start-column="36" selection-end-line="59" selection-end-column="36" />
+          <folding>
+            <element signature="e#1236#1237#0" expanded="true" />
+            <element signature="e#1284#1285#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/huachuang/server/entity/WalletBalanceRecord.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="35" column="23" lean-forward="false" selection-start-line="35" selection-start-column="23" selection-end-line="35" selection-end-column="23" />
+          <folding>
+            <element signature="e#792#793#0" expanded="true" />
+            <element signature="e#817#818#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/huachuang/server/entity/WalletPointsRecord.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="307">
+          <caret line="33" column="22" lean-forward="true" selection-start-line="33" selection-start-column="22" selection-end-line="33" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/huachuang/server/dao/UserManagerDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="37" column="31" lean-forward="false" selection-start-line="37" selection-start-column="31" selection-end-line="37" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/huachuang/server/dao/impl/RecommendListDaoImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="560">
+          <caret line="37" column="49" lean-forward="true" selection-start-line="37" selection-start-column="49" selection-end-line="37" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/huachuang/server/dao/impl/UserManagerDaoImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="678">
+          <caret line="203" column="5" lean-forward="false" selection-start-line="203" selection-start-column="5" selection-end-line="203" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/huachuang/server/dao/RecommendListDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="13" column="65" lean-forward="true" selection-start-line="13" selection-start-column="65" selection-end-line="13" selection-end-column="65" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/pages/register_step_two.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="518">
+          <caret line="158" column="37" lean-forward="true" selection-start-line="158" selection-start-column="37" selection-end-line="158" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/ec81c380/88ca9641-1727-42ab-bf73-d2cc4b552063/appserver.recommend_list">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/huachuang/server/controller/UserManagerController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1720">
-          <caret line="94" column="4" lean-forward="false" selection-start-line="94" selection-start-column="4" selection-end-line="94" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+        <state relative-caret-position="438">
+          <caret line="40" column="38" lean-forward="true" selection-start-line="40" selection-start-column="38" selection-end-line="40" selection-end-column="38" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/huachuang/server/controller/WalletManagerController.java">
+    <entry file="file://$PROJECT_DIR$/src/com/huachuang/server/entity/RecommendList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="580">
+          <caret line="33" column="31" lean-forward="false" selection-start-line="33" selection-start-column="31" selection-end-line="33" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/applicationContext.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/applicationPersitence.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-50">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/dispatcher-servlet.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-540">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/huachuang/server/entity/User.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
-          <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/ec81c380/88ca9641-1727-42ab-bf73-d2cc4b552063/appserver.user">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/huachuang/server/service/UserManagerService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="412">
+          <caret line="280" column="31" lean-forward="true" selection-start-line="280" selection-start-column="31" selection-end-line="280" selection-end-column="31" />
+          <folding>
+            <element signature="e#10487#10488#0" expanded="true" />
+            <element signature="e#10529#10530#0" expanded="true" />
+            <element signature="e#10587#10588#0" expanded="true" />
+            <element signature="e#10641#10642#0" expanded="true" />
+            <element signature="e#10674#10675#0" expanded="true" />
+            <element signature="e#10709#10710#0" expanded="true" />
+            <element signature="e#10751#10752#0" expanded="true" />
+            <element signature="e#10791#10792#0" expanded="true" />
+            <element signature="e#10833#10834#0" expanded="true" />
+            <element signature="e#10877#10878#0" expanded="true" />
+            <element signature="e#10937#10938#0" expanded="true" />
+            <element signature="e#10995#10996#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -202,15 +202,4 @@ public class UserManagerDaoImpl implements UserManagerDao {
         tx.commit();
         return result;
     }
-
-    @Override
-    public List<RecommendList> findRecommendRecordByUserID(long userID) {
-        Session session = sessionFactory.getCurrentSession();
-        Transaction tx = session.beginTransaction();
-        Query<RecommendList> query = session.createQuery("from RecommendList where recommenderId = ?", RecommendList.class);
-        query.setParameter(0, userID);
-        List<RecommendList> result = query.getResultList();
-        tx.commit();
-        return result;
-    }
 }

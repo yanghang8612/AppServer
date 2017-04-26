@@ -33,13 +33,6 @@ public class RecommendList {
     @Column(name = "recommend_time")
     private Date recommendTime;
 
-    public RecommendList() {}
-
-    public RecommendList(long recommenderId, long recommendedId) {
-        this.recommenderId = recommenderId;
-        this.recommendedId = recommendedId;
-    }
-
     public long getId() {
         return id;
     }

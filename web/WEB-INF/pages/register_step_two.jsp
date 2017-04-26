@@ -158,7 +158,7 @@
     		        $.ajax({
 						type: "POST",
 						url: "/AppServer/UserManager/Register",
-						data: {phoneNumber:$("#inputPhoneNumber").val(),invitationCode:$("#invitationCode").val(),recommenderID:$("#recommenderID").val(),password:$("#inputPassword").val()},
+						data: {phoneNumber:$("#inputPhoneNumber").val(),password:$("#inputPassword").val(),invitationCode:$("#invitationCode").val(),recommenderID:$("#recommenderID").val()},
 						dataType: "json",
 						success: function(data){
 						    if(data.Status=='true'){

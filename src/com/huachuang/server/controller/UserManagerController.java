@@ -25,10 +25,11 @@ public class UserManagerController {
     @RequestMapping(value = "/Register", method = RequestMethod.POST)
     public Map<String, String> register(
             @RequestParam String phoneNumber,
+            @RequestParam String password,
             @RequestParam String identifyCode,
-            @RequestParam String password) {
+            @RequestParam byte shareType) {
 
-        return userManagerService.register(phoneNumber, identifyCode, password);
+        return userManagerService.register(phoneNumber, password, identifyCode, shareType);
     }
 
     @ResponseBody
@@ -98,5 +99,13 @@ public class UserManagerController {
             @RequestParam long userID) {
 
         return userManagerService.getRecommendCount(userID);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/GetRecommendRecord", method = RequestMethod.POST)
+    public Map<String, Object> getRecommendRecord(
+            @RequestParam long userID) {
+
+        return userManagerService.getRecommendRecord(userID);
     }
 }

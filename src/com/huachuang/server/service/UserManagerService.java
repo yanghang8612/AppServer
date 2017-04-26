@@ -10,6 +10,7 @@ import com.huachuang.server.entity.User;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -75,8 +76,9 @@ public class UserManagerService {
 
     public Map<String, String> register(
             String phoneNumber,
+            String password,
             String identifyCode,
-            String password
+            byte shareType
     ){
         String generatedInvitationCode;
         while (true) {
@@ -95,7 +97,11 @@ public class UserManagerService {
         User user = new User(phoneNumber, password, generatedInvitationCode, superiorID);
         long userID = userManagerDao.create(user);
         if (identifyCode.length() == 11) {
-            recommendListDao.create(new RecommendList(userManagerDao.findUserByPhoneNumber(identifyCode).getUserId(), userID));
+            RecommendList record = new RecommendList();
+            record.setType(shareType);
+            record.setRecommenderId(userManagerDao.findUserByPhoneNumber(identifyCode).getUserId());
+            record.setRecommendedId(userID);
+            recommendListDao.create(record);
         }
         userWalletDao.create(userID);
         Map<String, String> result = new HashMap<>();
@@ -248,20 +254,68 @@ public class UserManagerService {
 
     public Map<String, String> getRecommendCount(long userID) {
         Map<String, String> result = new HashMap<>();
-        List<RecommendList> baseList = userManagerDao.findRecommendRecordByUserID(userID);
+        List<RecommendList> baseList = recommendListDao.findRecommendRecordByUserID(userID);
         List<RecommendList> deriveList = new ArrayList<>();
         List<RecommendList> thirdList = new ArrayList<>();
         for (RecommendList record : baseList) {
-            deriveList.addAll(userManagerDao.findRecommendRecordByUserID(record.getRecommendedId()));
+            deriveList.addAll(recommendListDao.findRecommendRecordByUserID(record.getRecommendedId()));
         }
         for (RecommendList record : deriveList) {
-            thirdList.addAll(userManagerDao.findRecommendRecordByUserID(record.getRecommendedId()));
+            thirdList.addAll(recommendListDao.findRecommendRecordByUserID(record.getRecommendedId()));
         }
         result.put("Status", "true");
         result.put("Info", "查询成功");
         result.put("BaseCount", String.valueOf(baseList.size()));
         result.put("DeriveCount", String.valueOf(deriveList.size()));
         result.put("ThirdCount", String.valueOf(thirdList.size()));
+        return result;
+    }
+
+    private class RecommendRecord implements Serializable {
+
+        private String phoneNumber;
+        private byte type;
+        private Date recommendTime;
+
+        public String getPhoneNumber() {
+            return phoneNumber;
+        }
+
+        public void setPhoneNumber(String phoneNumber) {
+            this.phoneNumber = phoneNumber;
+        }
+
+        public byte getType() {
+            return type;
+        }
+
+        public void setType(byte type) {
+            this.type = type;
+        }
+
+        public Date getRecommendTime() {
+            return recommendTime;
+        }
+
+        public void setRecommendTime(Date recommendTime) {
+            this.recommendTime = recommendTime;
+        }
+    }
+
+    public Map<String, Object> getRecommendRecord(long userID) {
+        Map<String, Object> result = new HashMap<>();
+        List<RecommendList> list = recommendListDao.findRecommendRecordByUserID(userID);
+        List<RecommendRecord> records = new ArrayList<>();
+        for (RecommendList item : list) {
+            RecommendRecord record = new RecommendRecord();
+            record.setPhoneNumber(userManagerDao.findUserByUserID(item.getRecommendedId()).getUserPhoneNumber());
+            record.setType(item.getType());
+            record.setRecommendTime(item.getRecommendTime());
+            records.add(record);
+        }
+        result.put("Status", "true");
+        result.put("Info", "查询成功");
+        result.put("Records", records);
         return result;
     }
 

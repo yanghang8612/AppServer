@@ -5,9 +5,11 @@ import com.huachuang.server.entity.RecommendList;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by Asuka on 2017/3/31.
@@ -25,5 +27,16 @@ public class RecommendListDaoImpl implements RecommendListDao {
         Transaction tx = session.beginTransaction();
         session.save(recommendList);
         tx.commit();
+    }
+
+    @Override
+    public List<RecommendList> findRecommendRecordByUserID(long userID) {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        Query<RecommendList> query = session.createQuery("from RecommendList where recommenderId = ?", RecommendList.class);
+        query.setParameter(0, userID);
+        List<RecommendList> result = query.getResultList();
+        tx.commit();
+        return result;
     }
 }
