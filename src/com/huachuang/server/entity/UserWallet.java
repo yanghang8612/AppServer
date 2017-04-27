@@ -1,6 +1,5 @@
 package com.huachuang.server.entity;
 
-import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -10,7 +9,6 @@ import javax.persistence.*;
  */
 
 @Entity
-@DynamicInsert
 @Table(name = "user_wallet")
 public class UserWallet {
 

@@ -22,7 +22,7 @@ public class FinancialService {
         Map<String, String> result = new HashMap<>();
         applyLoanDao.create(applyLoan);
         result.put("Status", "true");
-        result.put("Info", "申请提成功");
+        result.put("Info", "申请提交成功");
         return result;
     }
 

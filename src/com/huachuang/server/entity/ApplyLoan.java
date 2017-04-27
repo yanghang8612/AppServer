@@ -1,5 +1,6 @@
 package com.huachuang.server.entity;
 
+import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import java.util.Date;
  */
 
 @Entity
+@DynamicInsert
 @Table(name = "apply_loan")
 public class ApplyLoan {
 
