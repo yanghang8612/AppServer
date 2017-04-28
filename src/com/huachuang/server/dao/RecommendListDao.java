@@ -12,4 +12,6 @@ public interface RecommendListDao {
     void create(RecommendList recommendList);
 
     List<RecommendList> findRecommendRecordByUserID(long userID);
+
+    long findRecommenderIDByUserID(long userID);
 }

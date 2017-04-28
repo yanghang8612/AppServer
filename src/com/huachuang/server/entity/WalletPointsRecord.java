@@ -25,7 +25,7 @@ public class WalletPointsRecord {
     private long userId;
 
     @Column(name = "type", nullable = false)
-    private short type;
+    private byte type;
 
     @Column(name = "amount", nullable = false)
     private int amount;
@@ -49,11 +49,11 @@ public class WalletPointsRecord {
         this.userId = userId;
     }
 
-    public short getType() {
+    public byte getType() {
         return type;
     }
 
-    public void setType(short type) {
+    public void setType(byte type) {
         this.type = type;
     }
 

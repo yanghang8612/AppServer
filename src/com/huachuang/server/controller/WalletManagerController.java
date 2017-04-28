@@ -23,8 +23,25 @@ public class WalletManagerController {
 
     @ResponseBody
     @RequestMapping(value = "/GetWallet", method = RequestMethod.POST)
-    private Map<String, String> getWallet(@RequestParam long userID) {
+    private Map<String, String> getWallet(
+            @RequestParam long userID) {
+
         return walletManagerService.getUserWallet(userID);
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/GetWalletBalanceRecords", method = RequestMethod.POST)
+    private Map<String, Object> getWalletBalanceRecords(
+            @RequestParam long userID) {
+
+        return walletManagerService.getWalletBalanceRecords(userID);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/GetWalletPointsRecords", method = RequestMethod.POST)
+    private Map<String, Object> getWalletPointsRecords(
+            @RequestParam long userID) {
+
+        return walletManagerService.getWalletPointsRecords(userID);
+    }
 }

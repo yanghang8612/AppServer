@@ -33,4 +33,20 @@ public class WalletManagerService {
         result.put("Points", String.valueOf(userWalletDao.getPoints(userID)));
         return result;
     }
+
+    public Map<String, Object> getWalletBalanceRecords(long userID) {
+        Map<String, Object> result = new HashMap<>();
+        result.put("Status", "true");
+        result.put("Info", "查询成功");
+        result.put("Records", userWalletDao.getBalanceRecords(userID));
+        return result;
+    }
+
+    public Map<String, Object> getWalletPointsRecords(long userID) {
+        Map<String, Object> result = new HashMap<>();
+        result.put("Status", "true");
+        result.put("Info", "查询成功");
+        result.put("Records", userWalletDao.getPointsRecords(userID));
+        return result;
+    }
 }

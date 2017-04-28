@@ -39,4 +39,18 @@ public class RecommendListDaoImpl implements RecommendListDao {
         tx.commit();
         return result;
     }
+
+    @Override
+    public long findRecommenderIDByUserID(long userID) {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        Query<RecommendList> query = session.createQuery("from RecommendList where recommendedId = ?", RecommendList.class);
+        query.setParameter(0, userID);
+        List<RecommendList> result = query.getResultList();
+        tx.commit();
+        if (result == null || result.size() == 0) {
+            return -1;
+        }
+        return result.get(0).getRecommenderId();
+    }
 }

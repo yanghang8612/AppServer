@@ -7,6 +7,7 @@ import com.huachuang.server.dao.UserTokenDao;
 import com.huachuang.server.dao.UserWalletDao;
 import com.huachuang.server.entity.RecommendList;
 import com.huachuang.server.entity.User;
+import com.huachuang.server.entity.WalletBalanceRecord;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -97,11 +98,42 @@ public class UserManagerService {
         User user = new User(phoneNumber, password, generatedInvitationCode, superiorID);
         long userID = userManagerDao.create(user);
         if (identifyCode.length() == 11) {
+            long directUserID = userManagerDao.findUserByPhoneNumber(identifyCode).getUserId();
             RecommendList record = new RecommendList();
             record.setType(shareType);
-            record.setRecommenderId(userManagerDao.findUserByPhoneNumber(identifyCode).getUserId());
+            record.setRecommenderId(directUserID);
             record.setRecommendedId(userID);
             recommendListDao.create(record);
+
+            //update direct recommender wallet and insert wallet balance record
+            userWalletDao.updateBalance(directUserID, 20);
+            WalletBalanceRecord directRecord = new WalletBalanceRecord();
+            directRecord.setUserId(directUserID);
+            directRecord.setType((byte) 1);
+            directRecord.setAmount(20);
+            userWalletDao.insertBalanceRecord(directRecord);
+
+            //update derived recommender wallet
+            long derivedUserID = recommendListDao.findRecommenderIDByUserID(directUserID);
+            if (derivedUserID != -1) {
+                userWalletDao.updateBalance(derivedUserID, 12.5);
+                WalletBalanceRecord derivedRecord = new WalletBalanceRecord();
+                derivedRecord.setUserId(derivedUserID);
+                derivedRecord.setType((byte) 2);
+                derivedRecord.setAmount(12.5);
+                userWalletDao.insertBalanceRecord(derivedRecord);
+            }
+
+            //update derived recommender wallet
+            long thirdUserID = recommendListDao.findRecommenderIDByUserID(derivedUserID);
+            if (thirdUserID != -1) {
+                userWalletDao.updateBalance(thirdUserID, 5);
+                WalletBalanceRecord thirdRecord = new WalletBalanceRecord();
+                thirdRecord.setUserId(thirdUserID);
+                thirdRecord.setType((byte) 3);
+                thirdRecord.setAmount(5);
+                userWalletDao.insertBalanceRecord(thirdRecord);
+            }
         }
         userWalletDao.create(userID);
         Map<String, String> result = new HashMap<>();

@@ -48,7 +48,7 @@ public class UserWalletDaoImpl implements UserWalletDao {
         query.setParameter(0, userID);
         List<UserWallet> result = query.getResultList();
         UserWallet wallet = result.get(0);
-        wallet.setWalletBalance(amount);
+        wallet.setWalletBalance(wallet.getWalletBalance() + amount);
         session.update(wallet);
         tx.commit();
     }
@@ -61,7 +61,7 @@ public class UserWalletDaoImpl implements UserWalletDao {
         query.setParameter(0, userID);
         List<UserWallet> result = query.getResultList();
         UserWallet wallet = result.get(0);
-        wallet.setWalletPoints(amount);
+        wallet.setWalletPoints(wallet.getWalletPoints() + amount);
         session.update(wallet);
         tx.commit();
     }
@@ -89,24 +89,40 @@ public class UserWalletDaoImpl implements UserWalletDao {
     }
 
     @Override
-    public List<WalletBalanceRecord> getBalanceRecord(long userID) {
-        return null;
+    public List<WalletBalanceRecord> getBalanceRecords(long userID) {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        Query<WalletBalanceRecord> query = session.createQuery("from WalletBalanceRecord where userId = ?", WalletBalanceRecord.class);
+        query.setParameter(0, userID);
+        List<WalletBalanceRecord> result = query.getResultList();
+        tx.commit();
+        return result;
     }
 
     @Override
-    public List<WalletPointsRecord> getPointsRecord(long userID) {
-        return null;
+    public List<WalletPointsRecord> getPointsRecords(long userID) {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        Query<WalletPointsRecord> query = session.createQuery("from WalletPointsRecord where userId = ?", WalletPointsRecord.class);
+        query.setParameter(0, userID);
+        List<WalletPointsRecord> result = query.getResultList();
+        tx.commit();
+        return result;
     }
 
     @Override
     public void insertBalanceRecord(WalletBalanceRecord record) {
-
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        session.save(record);
+        tx.commit();
     }
 
     @Override
     public void insertPointsRecord(WalletPointsRecord record) {
-
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        session.save(record);
+        tx.commit();
     }
-
-
 }

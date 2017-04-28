@@ -23,9 +23,9 @@ public interface UserWalletDao {
 
     int getPoints(long userID);
 
-    List<WalletBalanceRecord> getBalanceRecord(long userID);
+    List<WalletBalanceRecord> getBalanceRecords(long userID);
 
-    List<WalletPointsRecord> getPointsRecord(long userID);
+    List<WalletPointsRecord> getPointsRecords(long userID);
 
     void insertBalanceRecord(WalletBalanceRecord record);
 
