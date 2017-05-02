@@ -1,5 +1,6 @@
 package com.huachuang.server.controller;
 
+import com.huachuang.server.dao.ApplyLoanDao;
 import com.huachuang.server.dao.UserCertificationInfoDao;
 import com.huachuang.server.dao.UserManagerDao;
 import com.huachuang.server.entity.User;
@@ -31,7 +32,7 @@ public class RootController {
     private UserCertificationInfoDao certificationInfoDao;
 
     @Resource
-    private UserCertificationInfoDao userCertificationInfoDao;
+    private ApplyLoanDao applyLoanDao;
 
     @RequestMapping(value = {"index.html", "index", "/", "login.html"}, method = RequestMethod.GET)
     public ModelAndView renderIndexPage(HttpServletRequest request) {
@@ -76,10 +77,16 @@ public class RootController {
     }
 
     @RequestMapping(value = "main.html", method = RequestMethod.GET)
-    public ModelAndView renderTablesPage(HttpServletRequest request) {
+    public ModelAndView renderMainPage(HttpServletRequest request) {
         ModelAndView mv = new ModelAndView("main");
         List<User> agents = userManagerDao.findAllAgents();
         request.setAttribute("agents", agents);
+        return mv;
+    }
+
+    @RequestMapping(value = "loan.html", method = RequestMethod.GET)
+    public ModelAndView renderLoanPage() {
+        ModelAndView mv = new ModelAndView("loan");
         return mv;
     }
 

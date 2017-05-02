@@ -16,5 +16,5 @@ public interface ApplyLoanDao {
 
     void update(ApplyLoan applyLoan);
 
-    List<ApplyLoan> retrieve(ApplyLoan applyLoan);
+    List<ApplyLoan> findAllApplyRecords();
 }

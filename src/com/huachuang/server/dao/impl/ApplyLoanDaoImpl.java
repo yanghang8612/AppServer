@@ -5,6 +5,7 @@ import com.huachuang.server.entity.ApplyLoan;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
@@ -43,7 +44,12 @@ public class ApplyLoanDaoImpl implements ApplyLoanDao{
     }
 
     @Override
-    public List<ApplyLoan> retrieve(ApplyLoan applyLoan) {
-        return null;
+    public List<ApplyLoan> findAllApplyRecords() {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        Query<ApplyLoan> query = session.createQuery("from ApplyLoan", ApplyLoan.class);
+        List<ApplyLoan> result = query.getResultList();
+        tx.commit();
+        return result;
     }
 }

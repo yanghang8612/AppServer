@@ -7,8 +7,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
 
     <title>掌触金控后台管理系统</title>
 
@@ -57,8 +55,8 @@
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">代理商管理</a></li>
-                <li><a href="#">贷款管理</a></li>
+                <li class="active"><a href="main.html">代理商管理</a></li>
+                <li><a href="loan.html">贷款管理</a></li>
             </ul>
             <ul class="nav navbar-top-links navbar-right">
                 <!-- /.dropdown -->
