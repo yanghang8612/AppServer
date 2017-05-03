@@ -77,7 +77,7 @@ public class ApplyLoan {
     private Date applyTime;
 
     @Column(name = "apply_state")
-    private short applyState;
+    private byte applyState;
 
     public long getId() {
         return id;
@@ -231,11 +231,11 @@ public class ApplyLoan {
         this.applyTime = applyTime;
     }
 
-    public short getApplyState() {
+    public byte getApplyState() {
         return applyState;
     }
 
-    public void setApplyState(short applyState) {
+    public void setApplyState(byte applyState) {
         this.applyState = applyState;
     }
 }

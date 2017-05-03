@@ -3,6 +3,7 @@ package com.huachuang.server.controller;
 import com.huachuang.server.dao.ApplyLoanDao;
 import com.huachuang.server.dao.UserCertificationInfoDao;
 import com.huachuang.server.dao.UserManagerDao;
+import com.huachuang.server.entity.ApplyLoan;
 import com.huachuang.server.entity.User;
 import com.huachuang.server.entity.UserCertificationInfo;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -101,6 +103,38 @@ public class RootController {
             UserCertificationInfo certificationInfo = certificationInfoDao.findCertificationInfoByUserID(agent.getUserId());
             request.setAttribute("CertificationInfo", certificationInfo);
         }
+        return mv;
+    }
+
+    @RequestMapping(value = "loan_records.html", method = RequestMethod.GET)
+    public ModelAndView renderAgLoanRecordsPage(HttpServletRequest request, @RequestParam byte state) {
+        ModelAndView mv = new ModelAndView("loan_records");
+        List<ApplyLoan> records = new ArrayList<>();
+        switch (state) {
+            case -1:
+                records.addAll(applyLoanDao.findAllApplyRecords());
+                break;
+            case 0:
+                records.addAll(applyLoanDao.findApplyRecordsByState((byte) 0));
+                break;
+            case 1:
+                records.addAll(applyLoanDao.findApplyRecordsByState((byte) 1));
+                records.addAll(applyLoanDao.findApplyRecordsByState((byte) 2));
+                break;
+            case 2:
+                records.addAll(applyLoanDao.findApplyRecordsByState((byte) 3));
+                records.addAll(applyLoanDao.findApplyRecordsByState((byte) 4));
+                break;
+        }
+        request.setAttribute("records", records);
+        return mv;
+    }
+
+    @RequestMapping(value = "loan_record_info.html", method = RequestMethod.GET)
+    public ModelAndView renderAgLoanRecordInfoPage(HttpServletRequest request, @RequestParam long id) {
+        ModelAndView mv = new ModelAndView("loan_record_info");
+        ApplyLoan record = applyLoanDao.findApplyRecordByID(id);
+        request.setAttribute("record", record);
         return mv;
     }
 }

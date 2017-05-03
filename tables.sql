@@ -121,6 +121,7 @@ CREATE TABLE `apply_loan` (
 	`borrower_detailed_address` varchar(128) NOT NULL,
 	`apply_time` datetime DEFAULT CURRENT_TIMESTAMP,
 	`apply_state` tinyint(1) DEFAULT 0,
+	`apply_detail` varchar(256),
 	PRIMARY KEY (`id`),
 	FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`)
 );

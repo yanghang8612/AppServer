@@ -17,4 +17,8 @@ public interface ApplyLoanDao {
     void update(ApplyLoan applyLoan);
 
     List<ApplyLoan> findAllApplyRecords();
+
+    List<ApplyLoan> findApplyRecordsByState(byte state);
+
+    ApplyLoan findApplyRecordByID(long id);
 }

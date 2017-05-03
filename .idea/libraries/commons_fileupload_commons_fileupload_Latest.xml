@@ -90,6 +90,10 @@
       <root url="jar://$PROJECT_DIR$/lib/servlet-api-2.4.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/portlet-api-1.0.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/commons-io-2.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-fileupload-1.3.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/servlet-api-2.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/portlet-api-1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-io-2.2.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

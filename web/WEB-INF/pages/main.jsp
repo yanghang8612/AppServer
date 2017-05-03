@@ -121,7 +121,7 @@
                                             <a href="javascript:void(0)" onclick="add_new_agent(<%=levelOneAgent.getUserPhoneNumber()%>,2)"><i class="fa fa-plus fa-fw"></i>添加二级代理商</a>
                                         </li>
                                         <li>
-                                            <a href="javascript:void(0)" onclick="get_agent_info(<%=levelOneAgent.getUserPhoneNumber()%>)"><i class="fa fa-info-circle fa-fw"></i>代理商信息</a>
+                                            <a href="javascript:void(0)" onclick="get_agent_info(this, <%=levelOneAgent.getUserPhoneNumber()%>)"><i class="fa fa-info-circle fa-fw"></i>代理商信息</a>
                                         </li>
                                         <%
                                             for (User levelTwoAgent : levelTwoAgents) {
@@ -134,14 +134,14 @@
                                                                 <a href="javascript:void(0)" onclick="add_new_agent(<%=levelTwoAgent.getUserPhoneNumber()%>,3)"><i class="fa fa-plus fa-fw"></i>添加三级代理商</a>
                                                             </li>
                                                             <li>
-                                                                <a href="javascript:void(0)" onclick="get_agent_info(<%=levelTwoAgent.getUserPhoneNumber()%>)"><i class="fa fa-info-circle fa-fw"></i>代理商信息</a>
+                                                                <a href="javascript:void(0)" onclick="get_agent_info(this, <%=levelTwoAgent.getUserPhoneNumber()%>)"><i class="fa fa-info-circle fa-fw"></i>代理商信息</a>
                                                             </li>
                                                             <%
                                                                 for (User levelThreeAgent : levelThreeAgents) {
                                                                     if (levelThreeAgent.getSuperiorUserId() == levelTwoAgent.getUserId()) {
                                                                         %>
                                                                         <li>
-                                                                            <a href="javascript:void(0)" onclick="get_agent_info(<%=levelThreeAgent.getUserPhoneNumber()%>)"><i class="fa fa-user fa-fw"></i><%=levelThreeAgent.getUserPhoneNumber()%></a>
+                                                                            <a href="javascript:void(0)" onclick="get_agent_info(this, <%=levelThreeAgent.getUserPhoneNumber()%>)"><i class="fa fa-user fa-fw"></i><%=levelThreeAgent.getUserPhoneNumber()%></a>
                                                                         </li>
                                                                         <%
                                                                     }
@@ -415,7 +415,7 @@
             "showMethod": "fadeIn",
             "hideMethod": "fadeOut"
         };
-        function get_agent_info(phone_number) {
+        function get_agent_info(obj, phone_number) {
             $('#page-wrapper').load("/AppServer/agent_info.html?phoneNumber=" + phone_number);
         }
         function add_new_agent(phone_number, type) {

@@ -64,7 +64,7 @@
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                        <i class="fa fa-user fa-fw"></i><i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
@@ -80,47 +80,42 @@
                 <!-- /.dropdown -->
             </ul>
             <!-- /.navbar-top-links -->
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li>
+                            <a href="javascript:void(0)" class="active" onclick="get_apply_loan_records(this, -1)"> 全部申请</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" onclick="get_apply_loan_records(this, 0)"> 未处理申请</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" onclick="get_apply_loan_records(this, 1)"> 处理中申请</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" onclick="get_apply_loan_records(this, 2)"> 已处理申请</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
         </nav>
 
         <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">全部申请</h1>
+                </div>
+            </div>
+            <div id="records-container">
+            </div>
         </div>
 
     </div>
     <!-- /#wrapper -->
-    <!-- Modal -->
-    <div class="modal fade" id="newAgentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">添加一级代理商</h4>
-                </div>
-                <div class="modal-body">
-                    <form role="form">
-                        <div class="form-group" id="inputPhoneNumberGroup">
-                            <label>手机号</label>
-                            <input class="form-control" id="inputPhoneNumber">
-                        </div>
-                        <div class="form-group" id="inputPasswordGroup">
-                            <label>密码</label>
-                            <input type="password" class="form-control" id="inputPassword">
-                        </div>
-                        <div class="form-group" id="inputConfirmPasswordGroup">
-                            <label>确认密码</label>
-                            <input type="password" class="form-control" id="inputConfirmPassword">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                    <button type="button" class="btn btn-primary" id="add-agent">提交</button>
-                </div>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
+    <div class="modal fade" id="recordInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     </div>
-    <!-- /.modal -->
 
     <!-- jQuery -->
     <script src="/AppServer/vendor/jquery/jquery.min.js"></script>
@@ -161,7 +156,26 @@
             "showMethod": "fadeIn",
             "hideMethod": "fadeOut"
         };
-
+        $('#records-container').load("/AppServer/loan_records.html?state=-1");
+        function get_apply_loan_records(obj, state) {
+            switch (state) {
+                case -1:
+                    $('.page-header').text('全部申请');
+                    break;
+                case 0:
+                    $('.page-header').text('未处理申请');
+                    break;
+                case 1:
+                    $('.page-header').text('处理中申请');
+                    break;
+                case 2:
+                    $('.page-header').text('已处理申请');
+                    break;
+            }
+            $('#records-container').load("/AppServer/loan_records.html?state=" + state);
+            $('ul.nav a').removeClass('active');
+            $(obj).addClass('active');
+        }
     </script>
 
 </body>

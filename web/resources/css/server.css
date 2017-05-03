@@ -63,3 +63,8 @@
     top:50%;
     transform:translateY(-50%);
 }
+
+.nav>li>a:focus, .nav>li>a:hover {
+	text-decoration: none;
+	background-color: #f8f8f8;
+}

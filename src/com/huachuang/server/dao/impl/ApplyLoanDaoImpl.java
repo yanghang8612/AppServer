@@ -52,4 +52,26 @@ public class ApplyLoanDaoImpl implements ApplyLoanDao{
         tx.commit();
         return result;
     }
+
+    @Override
+    public List<ApplyLoan> findApplyRecordsByState(byte state) {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        Query<ApplyLoan> query = session.createQuery("from ApplyLoan where applyState = ?", ApplyLoan.class);
+        query.setParameter(0, state);
+        List<ApplyLoan> result = query.getResultList();
+        tx.commit();
+        return result;
+    }
+
+    @Override
+    public ApplyLoan findApplyRecordByID(long id) {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        Query<ApplyLoan> query = session.createQuery("from ApplyLoan where id = ?", ApplyLoan.class);
+        query.setParameter(0, id);
+        List<ApplyLoan> result = query.getResultList();
+        tx.commit();
+        return (result == null || result.size() == 0) ? null : result.get(0);
+    }
 }
