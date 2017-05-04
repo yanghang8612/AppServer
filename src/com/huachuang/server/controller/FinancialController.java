@@ -1,5 +1,6 @@
 package com.huachuang.server.controller;
 
+import com.huachuang.server.entity.ApplyCreditCard;
 import com.huachuang.server.entity.ApplyLoan;
 import com.huachuang.server.service.FinancialService;
 import org.springframework.stereotype.Controller;
@@ -24,7 +25,7 @@ public class FinancialController {
 
     @ResponseBody
     @RequestMapping(value = "/ApplyLoan", method = RequestMethod.POST)
-    private Map<String, String> createApplyLoan(
+    private Map<String, String> applyLoan(
             @RequestParam long userId,
             @RequestParam String houseAddress,
             @RequestParam String housePropertyCard,
@@ -62,5 +63,32 @@ public class FinancialController {
         applyLoan.setBorrowerAddress(borrowerAddress);
         applyLoan.setBorrowerDetailedAddress(borrowerDetailedAddress);
         return financialService.createApplyLoan(applyLoan);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/UpdateLoanState", method = RequestMethod.POST)
+    private Map<String, String> updateLoanState(
+            @RequestParam long id,
+            @RequestParam byte state) {
+
+        return financialService.updateApplyLoan(id, state);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/ApplyCreditCard", method = RequestMethod.POST)
+    private Map<String, String> applyCreditCard(
+            @RequestParam long userId,
+            @RequestParam byte bankId,
+            @RequestParam String userName,
+            @RequestParam String userPhoneNumber,
+            @RequestParam String userCompany) {
+
+        ApplyCreditCard applyCreditCard = new ApplyCreditCard();
+        applyCreditCard.setUserId(userId);
+        applyCreditCard.setApplyBank(bankId);
+        applyCreditCard.setApplyUserName(userName);
+        applyCreditCard.setApplyUserPhoneNumber(userPhoneNumber);
+        applyCreditCard.setApplyUserCompany(userCompany);
+        return financialService.createApplyCreditCard(applyCreditCard);
     }
 }

@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface ApplyLoanDao {
 
-    long create(ApplyLoan applyLoan);
+    void create(ApplyLoan applyLoan);
 
     void delete(ApplyLoan applyLoan);
 

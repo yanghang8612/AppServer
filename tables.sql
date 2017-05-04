@@ -95,6 +95,7 @@ CREATE TABLE `apply_credit_card` (
 	`apply_bank` tinyint(1) NOT NULL,
 	`apply_user_name` varchar(32) NOT NULL,
 	`apply_user_phone_number` char(11) NOT NULL,
+	`apply_user_company` varchar(128) NOT NULL,
 	`apply_time` datetime DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (`id`),
 	FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`)

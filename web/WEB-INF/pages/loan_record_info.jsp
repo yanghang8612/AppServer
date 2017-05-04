@@ -61,7 +61,26 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" id="modify-state-button">修改状态</button>
         </div>
     </div>
 </div>
+<script>
+    $('#modify-state-button').click(function () {
+        $.ajax({
+            type: "POST",
+            url: "/AppServer/Financial/UpdateLoanState",
+            data: {id:<%=record.getId()%>,state:$("#apply-state-select").val()},
+            dataType: "json",
+            success: function (data) {
+                if (data.Status == 'true') {
+                    $('ul.nav a').filter('.active').click();
+                }
+                else {
+                    toastr.info(data.Info);
+                }
+            }
+        });
+    })
+</script>

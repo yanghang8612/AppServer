@@ -22,12 +22,11 @@ public class ApplyLoanDaoImpl implements ApplyLoanDao{
     private SessionFactory sessionFactory;
 
     @Override
-    public long create(ApplyLoan applyLoan) {
+    public void create(ApplyLoan applyLoan) {
         Session session = sessionFactory.getCurrentSession();
         Transaction tx = session.beginTransaction();
-        long id = (long) session.save(applyLoan);
+        session.save(applyLoan);
         tx.commit();
-        return id;
     }
 
     @Override
