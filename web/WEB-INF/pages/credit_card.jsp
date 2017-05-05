@@ -58,8 +58,8 @@
 
             <ul class="nav navbar-nav">
                 <li><a href="main.html">代理商管理</a></li>
-                <li><a href="credit_card.html">信用卡管理</a></li>
-                <li class="active"><a href="loan.html">贷款管理</a></li>
+                <li class="active"><a href="credit_card.html">信用卡管理</a></li>
+                <li><a href="loan.html">贷款管理</a></li>
             </ul>
             <ul class="nav navbar-top-links navbar-right">
                 <!-- /.dropdown -->
@@ -86,16 +86,16 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="javascript:void(0)" class="active" onclick="get_apply_loan_records(this, -1)"> 全部申请</a>
+                            <a href="javascript:void(0)" class="active" onclick="get_apply_credit_card_records(this, 0)"> 全部申请</a>
                         </li>
                         <li>
-                            <a href="javascript:void(0)" onclick="get_apply_loan_records(this, 0)"> 未处理申请</a>
+                            <a href="javascript:void(0)" onclick="get_apply_credit_card_records(this, 7)"> 近七天申请</a>
                         </li>
                         <li>
-                            <a href="javascript:void(0)" onclick="get_apply_loan_records(this, 1)"> 处理中申请</a>
+                            <a href="javascript:void(0)" onclick="get_apply_credit_card_records(this, 30)"> 近一个月申请</a>
                         </li>
                         <li>
-                            <a href="javascript:void(0)" onclick="get_apply_loan_records(this, 2)"> 已处理申请</a>
+                            <a href="javascript:void(0)" onclick="get_apply_credit_card_records(this, 90)"> 近三个月申请</a>
                         </li>
                     </ul>
                 </div>
@@ -157,23 +157,23 @@
             "showMethod": "fadeIn",
             "hideMethod": "fadeOut"
         };
-        $('#records-container').load("/AppServer/loan_records.html?state=-1");
-        function get_apply_loan_records(obj, state) {
-            switch (state) {
-                case -1:
+        $('#records-container').load("/AppServer/credit_card_records.html?interval=0");
+        function get_apply_credit_card_records(obj, interval) {
+            switch (interval) {
+                case 0:
                     $('.page-header').text('全部申请');
                     break;
-                case 0:
-                    $('.page-header').text('未处理申请');
+                case 7:
+                    $('.page-header').text('近七天申请');
                     break;
-                case 1:
-                    $('.page-header').text('处理中申请');
+                case 30:
+                    $('.page-header').text('近一个月申请');
                     break;
-                case 2:
-                    $('.page-header').text('已处理申请');
+                case 90:
+                    $('.page-header').text('近三个月申请');
                     break;
             }
-            $('#records-container').load("/AppServer/loan_records.html?state=" + state);
+            $('#records-container').load("/AppServer/credit_card_records.html?interval=" + interval);
             $('ul.nav a').removeClass('active');
             $(obj).addClass('active');
         }

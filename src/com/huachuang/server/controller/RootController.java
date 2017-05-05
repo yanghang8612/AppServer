@@ -1,8 +1,10 @@
 package com.huachuang.server.controller;
 
+import com.huachuang.server.dao.ApplyCreditCardDao;
 import com.huachuang.server.dao.ApplyLoanDao;
 import com.huachuang.server.dao.UserCertificationInfoDao;
 import com.huachuang.server.dao.UserManagerDao;
+import com.huachuang.server.entity.ApplyCreditCard;
 import com.huachuang.server.entity.ApplyLoan;
 import com.huachuang.server.entity.User;
 import com.huachuang.server.entity.UserCertificationInfo;
@@ -35,6 +37,9 @@ public class RootController {
 
     @Resource
     private ApplyLoanDao applyLoanDao;
+
+    @Resource
+    private ApplyCreditCardDao applyCreditCardDao;
 
     @RequestMapping(value = {"index.html", "index", "/", "login.html"}, method = RequestMethod.GET)
     public ModelAndView renderIndexPage(HttpServletRequest request) {
@@ -86,12 +91,6 @@ public class RootController {
         return mv;
     }
 
-    @RequestMapping(value = "loan.html", method = RequestMethod.GET)
-    public ModelAndView renderLoanPage() {
-        ModelAndView mv = new ModelAndView("loan");
-        return mv;
-    }
-
     @RequestMapping(value = "agent_info.html", method = RequestMethod.GET)
     public ModelAndView renderAgentInfoPage(HttpServletRequest request, @RequestParam String phoneNumber) {
         ModelAndView mv = new ModelAndView("agent_info");
@@ -103,6 +102,12 @@ public class RootController {
             UserCertificationInfo certificationInfo = certificationInfoDao.findCertificationInfoByUserID(agent.getUserId());
             request.setAttribute("CertificationInfo", certificationInfo);
         }
+        return mv;
+    }
+
+    @RequestMapping(value = "loan.html", method = RequestMethod.GET)
+    public ModelAndView renderLoanPage() {
+        ModelAndView mv = new ModelAndView("loan");
         return mv;
     }
 
@@ -135,6 +140,20 @@ public class RootController {
         ModelAndView mv = new ModelAndView("loan_record_info");
         ApplyLoan record = applyLoanDao.findApplyRecordByID(id);
         request.setAttribute("record", record);
+        return mv;
+    }
+
+    @RequestMapping(value = "credit_card.html", method = RequestMethod.GET)
+    public ModelAndView renderCreditCardPage() {
+        ModelAndView mv = new ModelAndView("credit_card");
+        return mv;
+    }
+
+    @RequestMapping(value = "credit_card_records.html", method = RequestMethod.GET)
+    private ModelAndView renderCreditCardRecordPage(HttpServletRequest request, @RequestParam int interval) {
+        ModelAndView mv = new ModelAndView("credit_card_records");
+        List<ApplyCreditCard> records = applyCreditCardDao.findApplyRecordsByInterval(interval);
+        request.setAttribute("records", records);
         return mv;
     }
 }

@@ -5,9 +5,12 @@ import com.huachuang.server.entity.ApplyCreditCard;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -43,7 +46,28 @@ public class ApplyCreditCardDaoImpl implements ApplyCreditCardDao {
 
     @Override
     public List<ApplyCreditCard> findAllApplyRecords() {
-        return null;
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        Query<ApplyCreditCard> query = session.createQuery("from ApplyCreditCard", ApplyCreditCard.class);
+        List<ApplyCreditCard> result = query.getResultList();
+        tx.commit();
+        return result;
+    }
+
+    @Override
+    public List<ApplyCreditCard> findApplyRecordsByInterval(int interval) {
+        if (interval == 0) {
+            return findAllApplyRecords();
+        }
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        Query<ApplyCreditCard> query = session.createQuery("from ApplyCreditCard where applyTime > ?", ApplyCreditCard.class);
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_MONTH, -interval);
+        query.setParameter(0, calendar.getTime());
+        List<ApplyCreditCard> result = query.getResultList();
+        tx.commit();
+        return result;
     }
 
     @Override

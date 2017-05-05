@@ -18,5 +18,7 @@ public interface ApplyCreditCardDao {
 
     List<ApplyCreditCard> findAllApplyRecords();
 
+    List<ApplyCreditCard> findApplyRecordsByInterval(int interval);
+
     ApplyCreditCard findApplyRecordByID(long id);
 }

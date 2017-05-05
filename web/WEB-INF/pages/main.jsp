@@ -56,6 +56,7 @@
 
             <ul class="nav navbar-nav">
                 <li class="active"><a href="main.html">代理商管理</a></li>
+                <li><a href="credit_card.html">信用卡管理</a></li>
                 <li><a href="loan.html">贷款管理</a></li>
             </ul>
             <ul class="nav navbar-top-links navbar-right">

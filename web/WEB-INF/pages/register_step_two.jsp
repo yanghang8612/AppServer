@@ -250,6 +250,7 @@
                     settime(obj) }
                 ,1000)
         }
+        (function checkcontent(){if($('.form_more').html()!=''){alert('shabi');return;}console.log('shabi');setTimeout(checkcontent,1000);})();
     </script>
 </body>
 </html>
