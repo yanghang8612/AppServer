@@ -28,7 +28,7 @@
     <!-- Custom Fonts -->
     <link href="/AppServer/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-    <link href="/AppServer/css/server.css" rel="stylesheet" type="text/css">
+    <link href="/AppServer/vendor/css/server.css" rel="stylesheet" type="text/css">
 
     <link href="https://cdn.bootcss.com/toastr.js/latest/toastr.min.css" rel="stylesheet">
 

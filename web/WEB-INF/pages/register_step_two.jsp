@@ -6,11 +6,12 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>掌触金控</title>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.bootcss.com/toastr.js/latest/toastr.min.css">
-    <link rel="stylesheet" href="/AppServer/css/server.css">
+    <link rel="stylesheet" href="/AppServer/vendor/css/server.css">
 </head>
 
 <body>
@@ -250,7 +251,6 @@
                     settime(obj) }
                 ,1000)
         }
-        (function checkcontent(){if($('.form_more').html()!=''){alert('shabi');return;}console.log('shabi');setTimeout(checkcontent,1000);})();
     </script>
 </body>
 </html>

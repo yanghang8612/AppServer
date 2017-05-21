@@ -52,12 +52,11 @@
     </bean>
 
     <mvc:resources mapping="/apk/**" location="/resources/apk/"/>
-    <mvc:resources mapping="/css/**" location="/resources/css/"/>
     <mvc:resources mapping="/header/**" location="/resources/header/"/>
-    <mvc:resources mapping="/imgs/**" location="/resources/imgs/"/>
     <mvc:resources mapping="/preview/**" location="/resources/preview/"/>
-    <mvc:resources mapping="/js/**" location="/resources/js/"/>
-    <mvc:resources mapping="/vendor/**" location="/resources/vendor/"/>
+
+    <mvc:resources mapping="/imgs/**" location="/resources/static/imgs/"/>
+    <mvc:resources mapping="/vendor/**" location="/resources/static/vendor/"/>
 
     <mvc:default-servlet-handler/>
 
