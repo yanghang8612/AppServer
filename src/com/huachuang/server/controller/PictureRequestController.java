@@ -75,7 +75,7 @@ public class PictureRequestController {
             saveFolder.mkdirs();
         }
 
-        String previewPath = request.getSession().getServletContext().getRealPath("/resources/preview/") + phoneNumber + "/identify/";
+        String previewPath = request.getSession().getServletContext().getRealPath("/resources/preview/") + phoneNumber + "/identify_card/";
         File previewFolder = new File(previewPath);
         if (!previewFolder.exists() && !previewFolder.isDirectory()) {
             previewFolder.mkdirs();
@@ -138,7 +138,7 @@ public class PictureRequestController {
             saveFolder.mkdirs();
         }
 
-        String previewPath = request.getSession().getServletContext().getRealPath("/resources/preview/") + phoneNumber + "/debit/";
+        String previewPath = request.getSession().getServletContext().getRealPath("/resources/preview/") + phoneNumber + "/debit_card/";
         File previewFolder = new File(previewPath);
         if (!previewFolder.exists() && !previewFolder.isDirectory()) {
             previewFolder.mkdirs();
@@ -168,6 +168,46 @@ public class PictureRequestController {
         }
         result.put("Status", "true");
         result.put("Info", "上传结算卡正反面成功");
+        return result;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/UploadLicense", method = RequestMethod.POST)
+    public Map<String, String> uploadLicense(
+            @RequestParam String phoneNumber,
+            @RequestParam(required = false) CommonsMultipartFile front,
+            @RequestParam(required = false) CommonsMultipartFile back){
+
+        Map<String, String> result = new HashMap<>();
+
+        String savePath = "D:/PalmTouchServer/" + phoneNumber + "/license/";
+        File saveFolder = new File(savePath);
+        if (!saveFolder.exists() && !saveFolder.isDirectory()) {
+            saveFolder.mkdirs();
+        }
+
+        if (front != null && !front.isEmpty()) {
+            try {
+                front.transferTo(new File(savePath + "front.jpg"));
+            } catch (IOException e) {
+                e.printStackTrace();
+                result.put("Status", "false");
+                result.put("Info", "上传营业执照正面失败");
+                return result;
+            }
+        }
+        if (back != null && !back.isEmpty()) {
+            try {
+                back.transferTo(new File(savePath + "back.jpg"));
+            } catch (IOException e) {
+                e.printStackTrace();
+                result.put("Status", "false");
+                result.put("Info", "上传营业执照反面失败");
+                return result;
+            }
+        }
+        result.put("Status", "true");
+        result.put("Info", "上传营业执照正反面成功");
         return result;
     }
 
