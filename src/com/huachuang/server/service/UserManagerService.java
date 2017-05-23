@@ -98,7 +98,8 @@ public class UserManagerService {
         User user = new User(phoneNumber, password, generatedInvitationCode, superiorID);
         long userID = userManagerDao.create(user);
         if (identifyCode.length() == 11) {
-            long directUserID = userManagerDao.findUserByPhoneNumber(identifyCode).getUserId();
+            User directUser = userManagerDao.findUserByPhoneNumber(identifyCode);
+            long directUserID = directUser.getUserId();
             RecommendList record = new RecommendList();
             record.setType(shareType);
             record.setRecommenderId(directUserID);
@@ -106,16 +107,19 @@ public class UserManagerService {
             recommendListDao.create(record);
 
             //update direct recommender wallet and insert wallet balance record
-            userWalletDao.updateBalance(directUserID, 20);
-            WalletBalanceRecord directRecord = new WalletBalanceRecord();
-            directRecord.setUserId(directUserID);
-            directRecord.setType((byte) 1);
-            directRecord.setAmount(20);
-            userWalletDao.insertBalanceRecord(directRecord);
+            if (directUser.isVip()) {
+                userWalletDao.updateBalance(directUserID, 20);
+                WalletBalanceRecord directRecord = new WalletBalanceRecord();
+                directRecord.setUserId(directUserID);
+                directRecord.setType((byte) 1);
+                directRecord.setAmount(20);
+                userWalletDao.insertBalanceRecord(directRecord);
+            }
 
             //update derived recommender wallet
             long derivedUserID = recommendListDao.findRecommenderIDByUserID(directUserID);
-            if (derivedUserID != -1) {
+            User derivedUser = userManagerDao.findUserByUserID(derivedUserID);
+            if (derivedUserID != -1 && derivedUser.isVip()) {
                 userWalletDao.updateBalance(derivedUserID, 12.5);
                 WalletBalanceRecord derivedRecord = new WalletBalanceRecord();
                 derivedRecord.setUserId(derivedUserID);
@@ -126,7 +130,8 @@ public class UserManagerService {
 
             //update derived recommender wallet
             long thirdUserID = recommendListDao.findRecommenderIDByUserID(derivedUserID);
-            if (thirdUserID != -1) {
+            User thirdUser = userManagerDao.findUserByUserID(thirdUserID);
+            if (thirdUserID != -1 && thirdUser.isVip()) {
                 userWalletDao.updateBalance(thirdUserID, 5);
                 WalletBalanceRecord thirdRecord = new WalletBalanceRecord();
                 thirdRecord.setUserId(thirdUserID);
@@ -273,6 +278,46 @@ public class UserManagerService {
             result.put("Status", "true");
             result.put("Info", "添加代理商成功");
         }
+        return result;
+    }
+
+    public Map<String, String> deleteUser(long userID) {
+        Map<String, String> result = new HashMap<>();
+        User user = userManagerDao.findUserByUserID(userID);
+        if (user.getUserType() == 0) {
+            result.put("Status", "true");
+            result.put("Info", "删除用户成功");
+        }
+        else if (user.getUserType() == 1) {
+            List<User> subUsers = userManagerDao.findSubUsers(userID);
+            User root = userManagerDao.findUserByPhoneNumber("13306351089");
+            for (User subUser : subUsers) {
+                subUser.setSuperiorUserId(root.getUserId());
+                userManagerDao.update(subUser);
+            }
+            result.put("Status", "true");
+            result.put("Info", "删除一级代理商成功");
+        }
+        else if (user.getUserType() == 2) {
+            List<User> subUsers = userManagerDao.findSubUsers(userID);
+            for (User subUser : subUsers) {
+                subUser.setSuperiorUserId(user.getSuperiorUserId());
+                userManagerDao.update(subUser);
+            }
+            result.put("Status", "true");
+            result.put("Info", "删除二级代理商成功");
+        }
+        else if (user.getUserType() == 3) {
+            List<User> subUsers = userManagerDao.findSubUsers(userID);
+            for (User subUser : subUsers) {
+                subUser.setSuperiorUserId(user.getSuperiorUserId());
+                userManagerDao.update(subUser);
+            }
+            result.put("Status", "true");
+            result.put("Info", "删除三级代理商成功");
+        }
+        userWalletDao.delete(user.getUserId());
+        userManagerDao.delete(user);
         return result;
     }
 

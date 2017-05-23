@@ -13,7 +13,7 @@ public interface UserWalletDao {
 
     void create(long userID);
 
-    void delete(UserWallet wallet);
+    void delete(long userID);
 
     void updateBalance(long userID, double amount);
 

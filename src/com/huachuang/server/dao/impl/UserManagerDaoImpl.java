@@ -81,6 +81,10 @@ public class UserManagerDaoImpl implements UserManagerDao {
 
     @Override
     public void delete(User user) {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        session.delete(user);
+        tx.commit();
     }
 
     @Override

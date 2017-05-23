@@ -2,6 +2,7 @@ package com.huachuang.server.controller;
 
 import com.huachuang.server.entity.ApplyCreditCard;
 import com.huachuang.server.entity.ApplyLoan;
+import com.huachuang.server.entity.PaymentOrder;
 import com.huachuang.server.service.FinancialService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -90,5 +92,25 @@ public class FinancialController {
         applyCreditCard.setApplyUserPhoneNumber(userPhoneNumber);
         applyCreditCard.setApplyUserCompany(userCompany);
         return financialService.createApplyCreditCard(applyCreditCard);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/UploadPaymentOrder", method = RequestMethod.POST)
+    private Map<String, String> uploadPaymentOrder(
+            @RequestParam long userId,
+            @RequestParam String orderTransaction,
+            @RequestParam byte orderType,
+            @RequestParam double orderAmount,
+            @RequestParam byte orderState,
+            @RequestParam String paymentID) {
+
+        PaymentOrder paymentOrder = new PaymentOrder();
+        paymentOrder.setUserId(userId);
+        paymentOrder.setOrderTransaction(orderTransaction);
+        paymentOrder.setOrderType(orderType);
+        paymentOrder.setOrderAmount(orderAmount);
+        paymentOrder.setOrderState(orderState);
+        paymentOrder.setPaymentID(paymentID);
+        return financialService.createPaymentOrder(paymentOrder);
     }
 }

@@ -425,7 +425,7 @@
             if (type == 1) {
                 $('#newAgentModal .modal-title').text('添加一级代理商');
             }
-            if (type == 2) {
+            else if (type == 2) {
                 $('#newAgentModal .modal-title').text('添加二级代理商');
             }
             else {

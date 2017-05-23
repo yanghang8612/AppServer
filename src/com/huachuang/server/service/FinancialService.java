@@ -2,8 +2,12 @@ package com.huachuang.server.service;
 
 import com.huachuang.server.dao.ApplyCreditCardDao;
 import com.huachuang.server.dao.ApplyLoanDao;
+import com.huachuang.server.dao.PaymentOrderDao;
+import com.huachuang.server.dao.UserManagerDao;
 import com.huachuang.server.entity.ApplyCreditCard;
 import com.huachuang.server.entity.ApplyLoan;
+import com.huachuang.server.entity.PaymentOrder;
+import com.huachuang.server.entity.User;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -22,6 +26,12 @@ public class FinancialService {
 
     @Resource
     private ApplyCreditCardDao applyCreditCardDao;
+
+    @Resource
+    private PaymentOrderDao paymentOrderDao;
+
+    @Resource
+    private UserManagerDao userManagerDao;
 
     public Map<String, String> createApplyLoan(ApplyLoan applyLoan) {
         Map<String, String> result = new HashMap<>();
@@ -46,6 +56,19 @@ public class FinancialService {
         applyCreditCardDao.create(applyCreditCard);
         result.put("Status", "true");
         result.put("Info", "信用卡申请信息保存成功");
+        return result;
+    }
+
+    public Map<String, String> createPaymentOrder(PaymentOrder paymentOrder) {
+        if (paymentOrder.getOrderType() == 0 && paymentOrder.getOrderState() == 1) {
+            User user = userManagerDao.findUserByUserID(paymentOrder.getUserId());
+            user.setVip(true);
+            userManagerDao.update(user);
+        }
+        Map<String, String> result = new HashMap<>();
+        paymentOrderDao.create(paymentOrder);
+        result.put("Status", "true");
+        result.put("Info", "支付订单信息保存成功");
         return result;
     }
 }

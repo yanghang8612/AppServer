@@ -130,12 +130,12 @@ CREATE TABLE `apply_loan` (
 CREATE TABLE `payment_order` (
 	`id` bigint(20) NOT NULL AUTO_INCREMENT,
 	`user_id` bigint(20) NOT NULL,
-	`order_transaction` char(16) NOT NULL,
+	`order_transaction` varchar(32) NOT NULL,
 	`order_type` tinyint(1) NOT NULL,
 	`order_create_time` datetime DEFAULT CURRENT_TIMESTAMP,
 	`order_amount` decimal(10,2) NOT NULL,
 	`order_state` tinyint(1) DEFAULT 0,
-	`payment_id` char(10) NOT NULL,
+	`payment_id` varchar(32) NOT NULL,
 	PRIMARY KEY (`id`),
 	FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`)
 );

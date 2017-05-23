@@ -36,8 +36,13 @@ public class UserWalletDaoImpl implements UserWalletDao {
     }
 
     @Override
-    public void delete(UserWallet wallet) {
-
+    public void delete(long userID) {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        Query query = session.createQuery("delete UserWallet where userId = ?");
+        query.setParameter(0, userID);
+        query.executeUpdate();
+        tx.commit();
     }
 
     @Override

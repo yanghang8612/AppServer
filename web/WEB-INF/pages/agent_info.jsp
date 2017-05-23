@@ -18,6 +18,10 @@
             <p>级别:<%=(agent.getUserType()==1)?"一":(agent.getUserType()==2)?"二":"三"%>级代理商</p>
             <p>邀请码:<%=agent.getInvitationCode()%></p>
         </div>
+        <div class="col-lg-offset-6 col-lg-2">
+            <br/>
+            <a href="javascript:void(0)" onclick="delete_agent(<%=agent.getUserId()%>)"><i class="fa fa-times-circle-o"></i>删除代理商</a>
+        </div>
         <!-- /.col-lg-12 -->
     </div>
     <!-- /.row -->
@@ -111,6 +115,24 @@
             responsive: true
         });
     });
+    function delete_agent(user_id) {
+        if (confirm('确认删除该代理商吗？')) {
+            $.ajax({
+                type: "POST",
+                url: "/AppServer/UserManager/DeleteUser",
+                data: {userID:user_id},
+                dataType: "json",
+                success: function (data) {
+                    if (data.Status == 'true') {
+                        window.location.reload();
+                    }
+                    else {
+                        toastr.info(data.Info);
+                    }
+                }
+            });
+        }
+    }
 //    function get_user_info(phone_number) {
 //        $('#userInfoModal').modal();
 //    }

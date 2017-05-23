@@ -86,6 +86,14 @@ public class UserManagerController {
     }
 
     @ResponseBody
+    @RequestMapping(value = "/DeleteUser", method = RequestMethod.POST)
+    public Map<String, String> deleteUser(
+            @RequestParam long userID) {
+
+        return userManagerService.deleteUser(userID);
+    }
+
+    @ResponseBody
     @RequestMapping(value = "/GetSubUser", method = RequestMethod.POST)
     public Map<String, Object> getSubUser(
             @RequestParam long userID) {
