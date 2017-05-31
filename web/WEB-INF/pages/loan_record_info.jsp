@@ -1,7 +1,9 @@
 <%@ page import="com.huachuang.server.entity.ApplyLoan" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
     ApplyLoan record = (ApplyLoan) request.getAttribute("record");
+    SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 %>
 <div class="modal-dialog">
     <div class="modal-content">

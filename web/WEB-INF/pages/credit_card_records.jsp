@@ -1,5 +1,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.huachuang.server.entity.ApplyCreditCard" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="com.huachuang.server.entity.User" %>
+<%@ page import="java.util.Map" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <div class="container">
     <!-- /.row -->
@@ -18,13 +21,17 @@
                                 <th>申请人姓名</th>
                                 <th>申请人手机号</th>
                                 <th>申请人单位</th>
+                                <th>申请人账户类型</th>
+                                <th>申请人上级</th>
                                 <th>申请时间</th>
                             </tr>
                         </thead>
                         <tbody>
                             <%
                                 List<ApplyCreditCard> records = (List<ApplyCreditCard>) request.getAttribute("records");
+                                Map<Long, User> users = (Map<Long, User>) request.getAttribute("users");
                                 for (ApplyCreditCard record : records) {
+                                    SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                                     %>
                                         <tr onclick="get_record_info(<%=record.getId()%>)">
                                             <%
@@ -53,12 +60,39 @@
                                                     case 7:
                                                         %><td>平安银行</td><%
                                                         break;
+                                                    case 8:
+                                                        %><td>中国民生银行</td><%
+                                                        break;
                                                 }
                                             %>
                                             <td><%=record.getApplyUserName()%></td>
                                             <td><%=record.getApplyUserPhoneNumber()%></td>
                                             <td><%=record.getApplyUserCompany()%></td>
-                                            <td><%=record.getApplyTime()%></td>
+                                            <%
+                                                User user = users.get(record.getUserId());
+                                                User superUser = users.get(user.getSuperiorUserId());
+                                                switch (user.getUserType()) {
+                                                    case 0:
+                                                        if (user.isVip()) {
+                                                            %><td>VIP用户</td><%
+                                                        }
+                                                        else {
+                                                            %><td>普通用户</td><%
+                                                        }
+                                                        break;
+                                                    case 1:
+                                                        %><td>一级代理商</td><%
+                                                        break;
+                                                    case 2:
+                                                        %><td>二级代理商</td><%
+                                                        break;
+                                                    case 3:
+                                                        %><td>三级代理商</td><%
+                                                        break;
+                                                }
+                                            %>
+                                            <td><%=(superUser == null) ? "无" : superUser.getUserPhoneNumber()%></td>
+                                            <td><%=fmt.format(record.getApplyTime())%></td>
                                         </tr>
                                     <%
                                 }
@@ -76,7 +110,31 @@
 <script>
     $(document).ready(function() {
         $('#dataTables-example').DataTable({
-            responsive: true
+            responsive: true,
+            "language": {
+                "sProcessing":   "处理中...",
+                "sLengthMenu":   "显示 _MENU_ 项结果",
+                "sZeroRecords":  "没有匹配结果",
+                "sInfo":         "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                "sInfoEmpty":    "显示第 0 至 0 项结果，共 0 项",
+                "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+                "sInfoPostFix":  "",
+                "sSearch":       "搜索:",
+                "sUrl":          "",
+                "sEmptyTable":     "表中数据为空",
+                "sLoadingRecords": "载入中...",
+                "sInfoThousands":  ",",
+                "oPaginate": {
+                    "sFirst":    "首页",
+                    "sPrevious": "上页",
+                    "sNext":     "下页",
+                    "sLast":     "末页"
+                },
+                "oAria": {
+                    "sSortAscending":  ": 以升序排列此列",
+                    "sSortDescending": ": 以降序排列此列"
+                }
+            }
         });
     });
     function get_record_info(id) {

@@ -131,7 +131,23 @@ public class RootController {
                 records.addAll(applyLoanDao.findApplyRecordsByState((byte) 4));
                 break;
         }
+        Map<Long, User> users = new HashMap<>();
+        for (ApplyLoan record : records) {
+            long userID = record.getUserId();
+            if (!users.containsKey(userID)) {
+                users.put(userID, userManagerDao.findUserByUserID(userID));
+            }
+        }
+        Map<Long, User> superUsers = new HashMap<>();
+        for (Map.Entry<Long, User> entry : users.entrySet()) {
+            long superUserID = entry.getValue().getSuperiorUserId();
+            if (!superUsers.containsKey(superUserID)) {
+                superUsers.put(superUserID, userManagerDao.findUserByUserID(superUserID));
+            }
+        }
+        users.putAll(superUsers);
         request.setAttribute("records", records);
+        request.setAttribute("users", users);
         return mv;
     }
 
@@ -153,7 +169,23 @@ public class RootController {
     private ModelAndView renderCreditCardRecordPage(HttpServletRequest request, @RequestParam int interval) {
         ModelAndView mv = new ModelAndView("credit_card_records");
         List<ApplyCreditCard> records = applyCreditCardDao.findApplyRecordsByInterval(interval);
+        Map<Long, User> users = new HashMap<>();
+        for (ApplyCreditCard record : records) {
+            long userID = record.getUserId();
+            if (!users.containsKey(userID)) {
+                users.put(userID, userManagerDao.findUserByUserID(userID));
+            }
+        }
+        Map<Long, User> superUsers = new HashMap<>();
+        for (Map.Entry<Long, User> entry : users.entrySet()) {
+            long superUserID = entry.getValue().getSuperiorUserId();
+            if (!superUsers.containsKey(superUserID)) {
+                superUsers.put(superUserID, userManagerDao.findUserByUserID(superUserID));
+            }
+        }
+        users.putAll(superUsers);
         request.setAttribute("records", records);
+        request.setAttribute("users", users);
         return mv;
     }
 }

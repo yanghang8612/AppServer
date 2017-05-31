@@ -107,7 +107,7 @@ public class UserManagerService {
             recommendListDao.create(record);
 
             //update direct recommender wallet and insert wallet balance record
-            if (directUser.isVip()) {
+            if (directUser.getUserType() != 0 || directUser.isVip()) {
                 userWalletDao.updateBalance(directUserID, 20);
                 WalletBalanceRecord directRecord = new WalletBalanceRecord();
                 directRecord.setUserId(directUserID);
@@ -119,7 +119,7 @@ public class UserManagerService {
             //update derived recommender wallet
             long derivedUserID = recommendListDao.findRecommenderIDByUserID(directUserID);
             User derivedUser = userManagerDao.findUserByUserID(derivedUserID);
-            if (derivedUserID != -1 && derivedUser.isVip()) {
+            if (derivedUserID != -1 && (derivedUser.getUserType() != 0 || derivedUser.isVip())) {
                 userWalletDao.updateBalance(derivedUserID, 12.5);
                 WalletBalanceRecord derivedRecord = new WalletBalanceRecord();
                 derivedRecord.setUserId(derivedUserID);
@@ -131,7 +131,7 @@ public class UserManagerService {
             //update derived recommender wallet
             long thirdUserID = recommendListDao.findRecommenderIDByUserID(derivedUserID);
             User thirdUser = userManagerDao.findUserByUserID(thirdUserID);
-            if (thirdUserID != -1 && thirdUser.isVip()) {
+            if (thirdUserID != -1 && (thirdUser.getUserType() != 0 || thirdUser.isVip())) {
                 userWalletDao.updateBalance(thirdUserID, 5);
                 WalletBalanceRecord thirdRecord = new WalletBalanceRecord();
                 thirdRecord.setUserId(thirdUserID);

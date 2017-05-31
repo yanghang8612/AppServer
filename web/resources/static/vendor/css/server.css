@@ -68,3 +68,15 @@
 	text-decoration: none;
 	background-color: #f8f8f8;
 }
+
+.nav-second-level li {
+	border-bottom: 1px solid #e7e7e7;
+}
+
+.nav-third-level li {
+	border-bottom: 1px solid #e7e7e7;
+}
+
+#page-wrapper {
+	height: 100vw;
+}

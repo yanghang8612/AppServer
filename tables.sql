@@ -1,6 +1,6 @@
 CREATE TABLE `user` (
   `user_id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `user_phone_number` char(11) NOT NULL UNIQUE,
+  `user_phone_number` char(11) NOT NULL,
   `user_password` varchar(16) NOT NULL,
   `user_type` tinyint(1) DEFAULT 0,
   `is_vip` boolean DEFAULT FALSE,
@@ -14,13 +14,28 @@ CREATE TABLE `user` (
   PRIMARY KEY (`user_id`)
 );
 
+CREATE TABLE `user_abandoned` (
+	`user_id` bigint(20) NOT NULL,
+	`user_phone_number` char(11) NOT NULL,
+	`user_password` varchar(16) NOT NULL,
+	`user_type` tinyint(1) DEFAULT 0,
+	`is_vip` boolean DEFAULT FALSE,
+	`invitation_code` char(6) DEFAULT NULL,
+	`superior_user_id` bigint(20) DEFAULT 0,
+	`register_time` datetime DEFAULT CURRENT_TIMESTAMP,
+	`last_login_time` datetime DEFAULT NULL,
+	`certification_state` boolean DEFAULT FALSE,
+	`debit_card_state` boolean DEFAULT FALSE,
+	`header_state` boolean DEFAULT FALSE,
+	PRIMARY KEY (`user_id`)
+);
+
 CREATE TABLE `user_token` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) NOT NULL,
   `token` char(10) NOT NULL,
   `token_expiration_time` char(13) NOT NULL,
-  PRIMARY KEY (`id`),
-  FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`)
+  PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `user_wallet` (
@@ -28,8 +43,7 @@ CREATE TABLE `user_wallet` (
 	`user_id` bigint(20) NOT NULL UNIQUE,
 	`wallet_balance` decimal(10,2) DEFAULT 0,
 	`wallet_points` int(10) DEFAULT 0,
-	PRIMARY KEY (`id`),
-	FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`)
+	PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `user_wallet_balance_record` (
@@ -38,8 +52,7 @@ CREATE TABLE `user_wallet_balance_record` (
 	`type` tinyint(1) NOT NULL,
 	`amount` decimal(10,2) NOT NULL,
 	`time` datetime DEFAULT CURRENT_TIMESTAMP,
-	PRIMARY KEY (`id`),
-	FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`)
+	PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `user_wallet_points_record` (
@@ -48,8 +61,7 @@ CREATE TABLE `user_wallet_points_record` (
 	`type` tinyint(1) NOT NULL,
 	`amount` int(10) NOT NULL,
 	`time` datetime DEFAULT CURRENT_TIMESTAMP,
-	PRIMARY KEY (`id`),
-	FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`)
+	PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `user_certification_info` (
@@ -60,8 +72,7 @@ CREATE TABLE `user_certification_info` (
 	`user_identity_card` char(18) NOT NULL UNIQUE,
 	`user_address` varchar(128) NOT NULL,
 	`user_sex` char(1) NOT NULL,
-	PRIMARY KEY (`id`),
-	FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`)
+	PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `user_debit_card` (
@@ -73,8 +84,7 @@ CREATE TABLE `user_debit_card` (
 	`head_office` varchar(64) NOT NULL,
 	`branch` varchar(64) DEFAULT NULL,
 	`province` varchar(64) DEFAULT NULL,
-	PRIMARY KEY (`id`),
-	FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`)
+	PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `user_bank_card` (
@@ -85,8 +95,7 @@ CREATE TABLE `user_bank_card` (
 	`card_type` varchar(32) NOT NULL,
 	`bank_name` varchar(64) NOT NULL,
 	`phone_number` char(11) NOT NULL,
-	PRIMARY KEY (`id`),
-	FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`)
+	PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `apply_credit_card` (
@@ -97,8 +106,7 @@ CREATE TABLE `apply_credit_card` (
 	`apply_user_phone_number` char(11) NOT NULL,
 	`apply_user_company` varchar(128) NOT NULL,
 	`apply_time` datetime DEFAULT CURRENT_TIMESTAMP,
-	PRIMARY KEY (`id`),
-	FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`)
+	PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `apply_loan` (
@@ -123,8 +131,7 @@ CREATE TABLE `apply_loan` (
 	`apply_time` datetime DEFAULT CURRENT_TIMESTAMP,
 	`apply_state` tinyint(1) DEFAULT 0,
 	`apply_detail` varchar(256),
-	PRIMARY KEY (`id`),
-	FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`)
+	PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `payment_order` (
@@ -136,8 +143,7 @@ CREATE TABLE `payment_order` (
 	`order_amount` decimal(10,2) NOT NULL,
 	`order_state` tinyint(1) DEFAULT 0,
 	`payment_id` varchar(32) NOT NULL,
-	PRIMARY KEY (`id`),
-	FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`)
+	PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `recommend_list` (
@@ -146,9 +152,7 @@ CREATE TABLE `recommend_list` (
 	`recommender_id` bigint(20) NOT NULL,
 	`recommended_id` bigint(20) NOT NULL,
 	`recommend_time` datetime DEFAULT CURRENT_TIMESTAMP,
-	PRIMARY KEY (`id`),
-	FOREIGN KEY (`recommender_id`) REFERENCES `user`(`user_id`),
-	FOREIGN KEY (`recommended_id`) REFERENCES `user`(`user_id`)
+	PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `user_share_profit` (
@@ -159,6 +163,5 @@ CREATE TABLE `user_share_profit` (
 	`credit_card_profit` decimal(10,2) DEFAULT 0,
 	`loan_profit` decimal(10,2) DEFAULT 0,
 	`mall_profit` decimal(10,2) DEFAULT 0,
-	PRIMARY KEY (`id`),
-	FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`)
+	PRIMARY KEY (`id`)
 );

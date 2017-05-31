@@ -12,13 +12,11 @@ import java.util.Date;
 
 @Entity
 @DynamicInsert
-@Table(name = "user")
-public class User {
+@Table(name = "user_abandoned")
+public class UserAbandoned {
 
     @Id
     @Column(name = "user_id")
-    @GeneratedValue(generator="increment")
-    @GenericGenerator(name="increment", strategy = "increment")
     private long userId;
 
     @Column(name = "user_phone_number", length = 11, nullable = false)
@@ -33,7 +31,7 @@ public class User {
     @Column(name = "is_vip")
     private boolean isVip;
 
-    @Column(name = "invitation_code", length = 6, unique = true)
+    @Column(name = "invitation_code", length = 6)
     private String invitationCode;
 
     @Column(name = "superior_user_id")
@@ -54,13 +52,21 @@ public class User {
     @Column(name = "header_state")
     private boolean headerState;
 
-    public User(){}
+    public UserAbandoned(){}
 
-    public User(String userPhoneNumber, String userPassword, String invitationCode, long superiorUserId) {
-        this.userPhoneNumber = userPhoneNumber;
-        this.userPassword = userPassword;
-        this.invitationCode = invitationCode;
-        this.superiorUserId = superiorUserId;
+    public UserAbandoned(User user){
+        this.userId = user.getUserId();
+        this.userPhoneNumber = user.getUserPhoneNumber();
+        this.userPassword = user.getUserPassword();
+        this.userType = user.getUserType();
+        this.isVip = user.isVip();
+        this.invitationCode = user.getInvitationCode();
+        this.superiorUserId = user.getSuperiorUserId();
+        this.registerTime = user.getRegisterTime();
+        this.lastLoginTime = user.getLastLoginTime();
+        this.certificationState = user.isCertificationState();
+        this.debitCardState = user.isDebitCardState();
+        this.headerState = user.isHeaderState();
     }
 
     public long getUserId() {

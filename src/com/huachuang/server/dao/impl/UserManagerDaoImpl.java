@@ -3,6 +3,7 @@ package com.huachuang.server.dao.impl;
 import com.huachuang.server.dao.UserManagerDao;
 import com.huachuang.server.entity.RecommendList;
 import com.huachuang.server.entity.User;
+import com.huachuang.server.entity.UserAbandoned;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -83,6 +84,7 @@ public class UserManagerDaoImpl implements UserManagerDao {
     public void delete(User user) {
         Session session = sessionFactory.getCurrentSession();
         Transaction tx = session.beginTransaction();
+        session.save(new UserAbandoned(user));
         session.delete(user);
         tx.commit();
     }
