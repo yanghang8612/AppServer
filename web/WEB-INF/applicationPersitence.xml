@@ -25,7 +25,7 @@
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.show_sql">false</prop>
                 <prop key="hibernate.format_sql">true</prop>
                 <prop key="hibernate.current_session_context_class">thread</prop>
             </props>
@@ -42,10 +42,10 @@
         <!--<property name="transactionManager" ref="transactionManager" />-->
         <!--<property name="transactionAttributes">-->
             <!--<props>-->
-                <!--<prop key="add*">PROPAGATION_REQUIRED,-Exception</prop>-->
-                <!--<prop key="modify*">PROPAGATION_REQUIRED,-myException</prop>-->
-                <!--<prop key="del*">PROPAGATION_REQUIRED</prop>-->
-                <!--<prop key="*">PROPAGATION_REQUIRED</prop>-->
+                <!--<pkey key="add*">PROPAGATION_REQUIRED,-Exception</prop>-->
+                <!--<pkey key="modify*">PROPAGATION_REQUIRED,-myException</prop>-->
+                <!--<pkey key="del*">PROPAGATION_REQUIRED</prop>-->
+                <!--<pkey key="*">PROPAGATION_REQUIRED</prop>-->
             <!--</props>-->
         <!--</property>-->
     <!--</bean>-->

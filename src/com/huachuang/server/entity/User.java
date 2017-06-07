@@ -54,6 +54,9 @@ public class User {
     @Column(name = "header_state")
     private boolean headerState;
 
+    @Column(name = "mobile_pay_state")
+    private byte mobilePayState;
+
     public User(){}
 
     public User(String userPhoneNumber, String userPassword, String invitationCode, long superiorUserId) {
@@ -157,5 +160,13 @@ public class User {
 
     public void setHeaderState(boolean headerState) {
         this.headerState = headerState;
+    }
+
+    public byte getMobilePayState() {
+        return mobilePayState;
+    }
+
+    public void setMobilePayState(byte mobilePayState) {
+        this.mobilePayState = mobilePayState;
     }
 }

@@ -171,6 +171,9 @@ public class UserManagerService {
             if (user.isDebitCardState()) {
                 result.put("DebitCard", userInfoService.getUserDebitCard(user.getUserId()).get("DebitCard"));
             }
+            if (user.getMobilePayState() == 1) {
+                result.put("MobilePay", userInfoService.getUserMobilePayInfo(user.getUserId()).get("MobilePay"));
+            }
         }
         return result;
     }

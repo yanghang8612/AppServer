@@ -27,6 +27,7 @@ CREATE TABLE `user_abandoned` (
 	`certification_state` boolean DEFAULT FALSE,
 	`debit_card_state` boolean DEFAULT FALSE,
 	`header_state` boolean DEFAULT FALSE,
+	`mobile_pay_state` tinyint(1) DEFAULT 0,
 	PRIMARY KEY (`user_id`)
 );
 
@@ -84,6 +85,14 @@ CREATE TABLE `user_debit_card` (
 	`head_office` varchar(64) NOT NULL,
 	`branch` varchar(64) DEFAULT NULL,
 	`province` varchar(64) DEFAULT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `user_mobile_pay` (
+	`id` bigint(20) NOT NULL AUTO_INCREMENT,
+	`user_id` bigint(20) NOT NULL UNIQUE,
+	`mid` varchar(32) NOT NULL,
+	`key` varchar(64) NOT NULL,
 	PRIMARY KEY (`id`)
 );
 

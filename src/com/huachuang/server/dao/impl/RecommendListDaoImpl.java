@@ -33,7 +33,7 @@ public class RecommendListDaoImpl implements RecommendListDao {
     public List<RecommendList> findRecommendRecordByUserID(long userID) {
         Session session = sessionFactory.getCurrentSession();
         Transaction tx = session.beginTransaction();
-        Query<RecommendList> query = session.createQuery("from RecommendList where recommenderId = ?", RecommendList.class);
+        Query<RecommendList> query = session.createQuery("from RecommendList where recommenderId = ? order by recommendTime desc", RecommendList.class);
         query.setParameter(0, userID);
         List<RecommendList> result = query.getResultList();
         tx.commit();

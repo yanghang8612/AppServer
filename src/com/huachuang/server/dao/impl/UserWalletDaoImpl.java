@@ -97,7 +97,7 @@ public class UserWalletDaoImpl implements UserWalletDao {
     public List<WalletBalanceRecord> getBalanceRecords(long userID) {
         Session session = sessionFactory.getCurrentSession();
         Transaction tx = session.beginTransaction();
-        Query<WalletBalanceRecord> query = session.createQuery("from WalletBalanceRecord where userId = ?", WalletBalanceRecord.class);
+        Query<WalletBalanceRecord> query = session.createQuery("from WalletBalanceRecord where userId = ? order by time desc", WalletBalanceRecord.class);
         query.setParameter(0, userID);
         List<WalletBalanceRecord> result = query.getResultList();
         tx.commit();

@@ -4,6 +4,7 @@ import com.huachuang.server.dao.ApplyCreditCardDao;
 import com.huachuang.server.dao.ApplyLoanDao;
 import com.huachuang.server.dao.UserCertificationInfoDao;
 import com.huachuang.server.dao.UserManagerDao;
+import com.huachuang.server.dao.impl.TestDaoImpl;
 import com.huachuang.server.entity.ApplyCreditCard;
 import com.huachuang.server.entity.ApplyLoan;
 import com.huachuang.server.entity.User;
@@ -41,9 +42,13 @@ public class RootController {
     @Resource
     private ApplyCreditCardDao applyCreditCardDao;
 
+    @Resource
+    private TestDaoImpl testDao;
+
     @RequestMapping(value = {"index.html", "index", "/", "login.html"}, method = RequestMethod.GET)
     public ModelAndView renderIndexPage(HttpServletRequest request) {
         ModelAndView mv = new ModelAndView("login");
+        //testDao.createRows();
         return mv;
     }
 

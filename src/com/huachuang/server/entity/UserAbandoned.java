@@ -52,6 +52,9 @@ public class UserAbandoned {
     @Column(name = "header_state")
     private boolean headerState;
 
+    @Column(name = "mobile_pay_state")
+    private byte mobilePayState;
+
     public UserAbandoned(){}
 
     public UserAbandoned(User user){
@@ -163,5 +166,13 @@ public class UserAbandoned {
 
     public void setHeaderState(boolean headerState) {
         this.headerState = headerState;
+    }
+
+    public byte getMobilePayState() {
+        return mobilePayState;
+    }
+
+    public void setMobilePayState(byte mobilePayState) {
+        this.mobilePayState = mobilePayState;
     }
 }

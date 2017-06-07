@@ -3,9 +3,11 @@ package com.huachuang.server.service;
 import com.huachuang.server.dao.UserCertificationInfoDao;
 import com.huachuang.server.dao.UserDebitCardDao;
 import com.huachuang.server.dao.UserManagerDao;
+import com.huachuang.server.dao.UserMobilePayDao;
 import com.huachuang.server.entity.User;
 import com.huachuang.server.entity.UserCertificationInfo;
 import com.huachuang.server.entity.UserDebitCard;
+import com.huachuang.server.entity.UserMobilePay;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -27,6 +29,9 @@ public class UserInfoService {
 
     @Resource
     private UserDebitCardDao debitCardDao;
+
+    @Resource
+    private UserMobilePayDao mobilePayDao;
 
     public Map<String, Object> createUserCertificationInfo(UserCertificationInfo certificationInfo) {
         Map<String, Object> result = new HashMap<>();
@@ -96,6 +101,33 @@ public class UserInfoService {
         else {
             result.put("Status", "false");
             result.put("Info", "结算卡信息查询失败");
+        }
+        return result;
+    }
+
+    public Map<String, Object> createUserMobilePayInfo(UserMobilePay mobilePay) {
+        Map<String, Object> result = new HashMap<>();
+        mobilePayDao.create(mobilePay);
+        User user = userManagerDao.findUserByUserID(mobilePay.getUserId());
+        user.setMobilePayState((byte) 1);
+        userManagerDao.update(user);
+        result.put("Status", "true");
+        result.put("Info", "移动支付信息添加成功");
+        result.put("MobilePayInfo", mobilePay);
+        return result;
+    }
+
+    public Map<String, Object> getUserMobilePayInfo(long userID) {
+        Map<String, Object> result = new HashMap<>();
+        UserMobilePay mobilePayInfo = mobilePayDao.findMobilePayByUserID(userID);
+        if (mobilePayInfo != null) {
+            result.put("Status", "true");
+            result.put("Info", "移动支付信息查询成功");
+            result.put("MobilePayInfo", mobilePayInfo);
+        }
+        else {
+            result.put("Status", "false");
+            result.put("Info", "移动支付信息查询失败");
         }
         return result;
     }
