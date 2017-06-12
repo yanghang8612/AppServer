@@ -9,6 +9,7 @@ import java.util.List;
 /**
  * Created by Asuka on 2017/4/4.
  */
+
 public interface UserMobilePayDao {
 
     void create(UserMobilePay mobilePay);

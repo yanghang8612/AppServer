@@ -60,6 +60,7 @@
                 <li><a href="main.html">代理商管理</a></li>
                 <li class="active"><a href="credit_card.html">信用卡管理</a></li>
                 <li><a href="loan.html">贷款管理</a></li>
+                <li><a href="feedback.html">意见反馈</a></li>
             </ul>
             <ul class="nav navbar-top-links navbar-right">
                 <!-- /.dropdown -->
@@ -68,12 +69,7 @@
                         <i class="fa fa-user fa-fw"></i><i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> 注销</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->

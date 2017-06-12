@@ -174,3 +174,11 @@ CREATE TABLE `user_share_profit` (
 	`mall_profit` decimal(10,2) DEFAULT 0,
 	PRIMARY KEY (`id`)
 );
+
+CREATE TABLE `user_feedback` (
+	`id` bigint(20) NOT NULL AUTO_INCREMENT,
+	`user_id` bigint(20) NOT NULL,
+	`message` varchar(256) NOT NULL,
+	`commit_time` datetime DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (`id`)
+);

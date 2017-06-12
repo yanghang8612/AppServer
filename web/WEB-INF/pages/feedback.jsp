@@ -59,8 +59,8 @@
             <ul class="nav navbar-nav">
                 <li><a href="main.html">代理商管理</a></li>
                 <li><a href="credit_card.html">信用卡管理</a></li>
-                <li class="active"><a href="loan.html">贷款管理</a></li>
-                <li><a href="feedback.html">意见反馈</a></li>
+                <li><a href="loan.html">贷款管理</a></li>
+                <li class="active"><a href="feedback.html">意见反馈</a></li>
             </ul>
             <ul class="nav navbar-top-links navbar-right">
                 <!-- /.dropdown -->
@@ -77,32 +77,11 @@
                 <!-- /.dropdown -->
             </ul>
             <!-- /.navbar-top-links -->
-
-            <div class="navbar-default sidebar" role="navigation">
-                <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
-                        <li>
-                            <a href="javascript:void(0)" class="active" onclick="get_apply_loan_records(this, -1)"> 全部申请</a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" onclick="get_apply_loan_records(this, 0)"> 未处理申请</a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" onclick="get_apply_loan_records(this, 1)"> 处理中申请</a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" onclick="get_apply_loan_records(this, 2)"> 已处理申请</a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- /.sidebar-collapse -->
-            </div>
         </nav>
 
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">全部申请</h1>
                 </div>
             </div>
             <div id="records-container">
@@ -153,26 +132,6 @@
             "showMethod": "fadeIn",
             "hideMethod": "fadeOut"
         };
-        $('#records-container').load("/AppServer/loan_records.html?state=-1");
-        function get_apply_loan_records(obj, state) {
-            switch (state) {
-                case -1:
-                    $('.page-header').text('全部申请');
-                    break;
-                case 0:
-                    $('.page-header').text('未处理申请');
-                    break;
-                case 1:
-                    $('.page-header').text('处理中申请');
-                    break;
-                case 2:
-                    $('.page-header').text('已处理申请');
-                    break;
-            }
-            $('#records-container').load("/AppServer/loan_records.html?state=" + state);
-            $('ul.nav a').removeClass('active');
-            $(obj).addClass('active');
-        }
     </script>
 
 </body>

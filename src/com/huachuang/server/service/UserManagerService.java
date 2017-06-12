@@ -1,12 +1,10 @@
 package com.huachuang.server.service;
 
 import com.huachuang.server.CommonUtils;
-import com.huachuang.server.dao.RecommendListDao;
-import com.huachuang.server.dao.UserManagerDao;
-import com.huachuang.server.dao.UserTokenDao;
-import com.huachuang.server.dao.UserWalletDao;
+import com.huachuang.server.dao.*;
 import com.huachuang.server.entity.RecommendList;
 import com.huachuang.server.entity.User;
+import com.huachuang.server.entity.UserFeedback;
 import com.huachuang.server.entity.WalletBalanceRecord;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +30,9 @@ public class UserManagerService {
 
     @Resource
     private UserWalletDao userWalletDao;
+
+    @Resource
+    private UserFeedbackDao userFeedbackDao;
 
     @Resource
     private UserInfoService userInfoService;
@@ -105,40 +106,6 @@ public class UserManagerService {
             record.setRecommenderId(directUserID);
             record.setRecommendedId(userID);
             recommendListDao.create(record);
-
-            //update direct recommender wallet and insert wallet balance record
-            if (directUser.getUserType() != 0 || directUser.isVip()) {
-                userWalletDao.updateBalance(directUserID, 20);
-                WalletBalanceRecord directRecord = new WalletBalanceRecord();
-                directRecord.setUserId(directUserID);
-                directRecord.setType((byte) 1);
-                directRecord.setAmount(20);
-                userWalletDao.insertBalanceRecord(directRecord);
-            }
-
-            //update derived recommender wallet
-            long derivedUserID = recommendListDao.findRecommenderIDByUserID(directUserID);
-            User derivedUser = userManagerDao.findUserByUserID(derivedUserID);
-            if (derivedUserID != -1 && (derivedUser.getUserType() != 0 || derivedUser.isVip())) {
-                userWalletDao.updateBalance(derivedUserID, 12.5);
-                WalletBalanceRecord derivedRecord = new WalletBalanceRecord();
-                derivedRecord.setUserId(derivedUserID);
-                derivedRecord.setType((byte) 2);
-                derivedRecord.setAmount(12.5);
-                userWalletDao.insertBalanceRecord(derivedRecord);
-            }
-
-            //update derived recommender wallet
-            long thirdUserID = recommendListDao.findRecommenderIDByUserID(derivedUserID);
-            User thirdUser = userManagerDao.findUserByUserID(thirdUserID);
-            if (thirdUserID != -1 && (thirdUser.getUserType() != 0 || thirdUser.isVip())) {
-                userWalletDao.updateBalance(thirdUserID, 5);
-                WalletBalanceRecord thirdRecord = new WalletBalanceRecord();
-                thirdRecord.setUserId(thirdUserID);
-                thirdRecord.setType((byte) 3);
-                thirdRecord.setAmount(5);
-                userWalletDao.insertBalanceRecord(thirdRecord);
-            }
         }
         userWalletDao.create(userID);
         Map<String, String> result = new HashMap<>();
@@ -172,7 +139,7 @@ public class UserManagerService {
                 result.put("DebitCard", userInfoService.getUserDebitCard(user.getUserId()).get("DebitCard"));
             }
             if (user.getMobilePayState() == 1) {
-                result.put("MobilePay", userInfoService.getUserMobilePayInfo(user.getUserId()).get("MobilePay"));
+                result.put("MobilePayInfo", userInfoService.getUserMobilePayInfo(user.getUserId()).get("MobilePayInfo"));
             }
         }
         return result;
@@ -185,11 +152,31 @@ public class UserManagerService {
             user.setUserPassword(newPassword);
             userManagerDao.update(user);
             result.put("Status", "true");
-            result.put("Status", "密码修改成功");
+            result.put("Info", "密码修改成功");
         }
         else {
             result.put("Status", "false");
-            result.put("Status", "密码修改失败");
+            result.put("Info", "密码修改失败");
+        }
+        return result;
+    }
+
+    public Map<String, String> changePhoneNumber(long userID, String newPhoneNumber) {
+        Map<String, String> result = new HashMap<>();
+        User user = userManagerDao.findUserByUserID(userID);
+        if (userManagerDao.findUserByPhoneNumber(newPhoneNumber) != null) {
+            result.put("Status", "false");
+            result.put("Info", "手机号码已注册");
+        }
+        else if(user != null) {
+            user.setUserPhoneNumber(newPhoneNumber);
+            userManagerDao.update(user);
+            result.put("Status", "true");
+            result.put("Info", "手机号更换成功");
+        }
+        else {
+            result.put("Status", "false");
+            result.put("Info", "手机号更换失败");
         }
         return result;
     }
@@ -396,6 +383,17 @@ public class UserManagerService {
         result.put("Status", "true");
         result.put("Info", "查询成功");
         result.put("Records", records);
+        return result;
+    }
+
+    public Map<String, String> commitFeedback(long userID, String message) {
+        Map<String, String> result = new HashMap<>();
+        UserFeedback userFeedback = new UserFeedback();
+        userFeedback.setUserId(userID);
+        userFeedback.setMessage(message);
+        userFeedbackDao.create(userFeedback);
+        result.put("Status", "true");
+        result.put("Info", "反馈信息提交成功");
         return result;
     }
 

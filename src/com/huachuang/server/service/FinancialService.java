@@ -1,13 +1,7 @@
 package com.huachuang.server.service;
 
-import com.huachuang.server.dao.ApplyCreditCardDao;
-import com.huachuang.server.dao.ApplyLoanDao;
-import com.huachuang.server.dao.PaymentOrderDao;
-import com.huachuang.server.dao.UserManagerDao;
-import com.huachuang.server.entity.ApplyCreditCard;
-import com.huachuang.server.entity.ApplyLoan;
-import com.huachuang.server.entity.PaymentOrder;
-import com.huachuang.server.entity.User;
+import com.huachuang.server.dao.*;
+import com.huachuang.server.entity.*;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -32,6 +26,12 @@ public class FinancialService {
 
     @Resource
     private UserManagerDao userManagerDao;
+
+    @Resource
+    private RecommendListDao recommendListDao;
+
+    @Resource
+    private UserWalletDao userWalletDao;
 
     public Map<String, String> createApplyLoan(ApplyLoan applyLoan) {
         Map<String, String> result = new HashMap<>();
@@ -64,6 +64,42 @@ public class FinancialService {
             User user = userManagerDao.findUserByUserID(paymentOrder.getUserId());
             user.setVip(true);
             userManagerDao.update(user);
+
+            //update direct recommender wallet and insert wallet balance record
+            long directUserID = recommendListDao.findRecommenderIDByUserID(user.getUserId());
+            User directUser = userManagerDao.findUserByUserID(directUserID);
+            if (directUser.getUserType() != 0 || directUser.isVip()) {
+                userWalletDao.updateBalance(directUserID, 25);
+                WalletBalanceRecord directRecord = new WalletBalanceRecord();
+                directRecord.setUserId(directUserID);
+                directRecord.setType((byte) 1);
+                directRecord.setAmount(25);
+                userWalletDao.insertBalanceRecord(directRecord);
+            }
+
+            //update derived recommender wallet
+            long derivedUserID = recommendListDao.findRecommenderIDByUserID(directUserID);
+            User derivedUser = userManagerDao.findUserByUserID(derivedUserID);
+            if (derivedUserID != -1 && (derivedUser.getUserType() != 0 || derivedUser.isVip())) {
+                userWalletDao.updateBalance(derivedUserID, 12.5);
+                WalletBalanceRecord derivedRecord = new WalletBalanceRecord();
+                derivedRecord.setUserId(derivedUserID);
+                derivedRecord.setType((byte) 2);
+                derivedRecord.setAmount(12.5);
+                userWalletDao.insertBalanceRecord(derivedRecord);
+            }
+
+            //update derived recommender wallet
+            long thirdUserID = recommendListDao.findRecommenderIDByUserID(derivedUserID);
+            User thirdUser = userManagerDao.findUserByUserID(thirdUserID);
+            if (thirdUserID != -1 && (thirdUser.getUserType() != 0 || thirdUser.isVip())) {
+                userWalletDao.updateBalance(thirdUserID, 5);
+                WalletBalanceRecord thirdRecord = new WalletBalanceRecord();
+                thirdRecord.setUserId(thirdUserID);
+                thirdRecord.setType((byte) 3);
+                thirdRecord.setAmount(5);
+                userWalletDao.insertBalanceRecord(thirdRecord);
+            }
         }
         Map<String, String> result = new HashMap<>();
         paymentOrderDao.create(paymentOrder);

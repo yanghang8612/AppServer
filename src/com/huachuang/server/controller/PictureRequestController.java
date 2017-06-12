@@ -84,7 +84,7 @@ public class PictureRequestController {
         if (front != null && !front.isEmpty()) {
             try {
                 front.transferTo(new File(savePath + "front.jpg"));
-                resizeImage(savePath + "front.jpg", previewPath + "front.jpg", 240, 240);
+                resizeImage(savePath + "front.jpg", previewPath + "front.jpg", 240, 144);
             } catch (IOException e) {
                 e.printStackTrace();
                 result.put("Status", "false");
@@ -96,7 +96,7 @@ public class PictureRequestController {
         if (back != null && !back.isEmpty()) {
             try {
                 back.transferTo(new File(savePath + "back.jpg"));
-                resizeImage(savePath + "back.jpg", previewPath + "back.jpg", 240, 240);
+                resizeImage(savePath + "back.jpg", previewPath + "back.jpg", 240, 144);
             } catch (IOException e) {
                 e.printStackTrace();
                 result.put("Status", "false");
@@ -108,7 +108,7 @@ public class PictureRequestController {
         if (handing != null && !handing.isEmpty()) {
             try {
                 handing.transferTo(new File(savePath + "handing.jpg"));
-                resizeImage(savePath + "handing.jpg", previewPath + "handing.jpg", 240, 240);
+                resizeImage(savePath + "handing.jpg", previewPath + "handing.jpg", 240, 144);
             } catch (IOException e) {
                 e.printStackTrace();
                 result.put("Status", "false");
@@ -147,7 +147,7 @@ public class PictureRequestController {
         if (front != null && !front.isEmpty()) {
             try {
                 front.transferTo(new File(savePath + "front.jpg"));
-                resizeImage(savePath + "front.jpg", previewPath + "front.jpg", 240, 240);
+                resizeImage(savePath + "front.jpg", previewPath + "front.jpg", 240, 144);
             } catch (IOException e) {
                 e.printStackTrace();
                 result.put("Status", "false");
@@ -158,7 +158,7 @@ public class PictureRequestController {
         if (back != null && !back.isEmpty()) {
             try {
                 back.transferTo(new File(savePath + "back.jpg"));
-                resizeImage(savePath + "back.jpg", previewPath + "back.jpg", 240, 240);
+                resizeImage(savePath + "back.jpg", previewPath + "back.jpg", 240, 144);
             } catch (IOException e) {
                 e.printStackTrace();
                 result.put("Status", "false");
@@ -174,40 +174,37 @@ public class PictureRequestController {
     @ResponseBody
     @RequestMapping(value = "/UploadLicense", method = RequestMethod.POST)
     public Map<String, String> uploadLicense(
+            HttpServletRequest request,
             @RequestParam String phoneNumber,
-            @RequestParam(required = false) CommonsMultipartFile front,
-            @RequestParam(required = false) CommonsMultipartFile back){
+            @RequestParam CommonsMultipartFile license){
 
         Map<String, String> result = new HashMap<>();
 
-        String savePath = "D:/PalmTouchServer/" + phoneNumber + "/license/";
+        String savePath = "D:/PalmTouchServer/" + phoneNumber + "/";
         File saveFolder = new File(savePath);
         if (!saveFolder.exists() && !saveFolder.isDirectory()) {
             saveFolder.mkdirs();
         }
 
-        if (front != null && !front.isEmpty()) {
-            try {
-                front.transferTo(new File(savePath + "front.jpg"));
-            } catch (IOException e) {
-                e.printStackTrace();
-                result.put("Status", "false");
-                result.put("Info", "上传营业执照正面失败");
-                return result;
-            }
+        String previewPath = request.getSession().getServletContext().getRealPath("/resources/preview/") + phoneNumber + "/";
+        File previewFolder = new File(previewPath);
+        if (!previewFolder.exists() && !previewFolder.isDirectory()) {
+            previewFolder.mkdirs();
         }
-        if (back != null && !back.isEmpty()) {
+
+        if (license != null && !license.isEmpty()) {
             try {
-                back.transferTo(new File(savePath + "back.jpg"));
+                license.transferTo(new File(savePath + "license.jpg"));
+                resizeImage(savePath + "license.jpg", previewPath + "license.jpg", 240, 144);
             } catch (IOException e) {
                 e.printStackTrace();
                 result.put("Status", "false");
-                result.put("Info", "上传营业执照反面失败");
+                result.put("Info", "上传营业执照失败");
                 return result;
             }
         }
         result.put("Status", "true");
-        result.put("Info", "上传营业执照正反面成功");
+        result.put("Info", "上传营业执照成功");
         return result;
     }
 

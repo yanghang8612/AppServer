@@ -110,4 +110,12 @@ public class UserInfoController {
         debitCard.setProvince(province);
         return userInfoService.updateUserDebitCard(debitCard);
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/GetMobilePay", method = RequestMethod.POST)
+    public Map<String, Object> getMobilePay(
+            @RequestParam long userID) {
+
+        return userInfoService.getUserMobilePayInfo(userID);
+    }
 }

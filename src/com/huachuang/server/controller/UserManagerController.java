@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.util.Map;
 
 /**
@@ -67,11 +69,36 @@ public class UserManagerController {
 
     @ResponseBody
     @RequestMapping(value = "/ChangePassword", method = RequestMethod.POST)
-    public Map<String, String> verifyRecommenderID(
+    public Map<String, String> changePassword(
             @RequestParam long userID,
             @RequestParam String newPassword) {
 
         return userManagerService.changePassword(userID, newPassword);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/ChangePhoneNumber", method = RequestMethod.POST)
+    public Map<String, String> changePhoneNumber(
+            HttpServletRequest request,
+            @RequestParam long userID,
+            @RequestParam String oldPhoneNumber,
+            @RequestParam String newPhoneNumber) {
+
+        Map<String, String> result = userManagerService.changePhoneNumber(userID, newPhoneNumber);
+        if (result.get("Status").equals("true")) {
+            File oldSaveFolder = new File("D:/PalmTouchServer/" + oldPhoneNumber + "/");
+            File newSaveFolder = new File("D:/PalmTouchServer/" + newPhoneNumber + "/");
+            if (oldSaveFolder.exists() && oldSaveFolder.isDirectory()) {
+                oldSaveFolder.renameTo(newSaveFolder);
+            }
+
+            File oldPreviewFolder = new File(request.getSession().getServletContext().getRealPath("/resources/preview/") + oldPhoneNumber + "/");
+            File newPreviewFolder = new File(request.getSession().getServletContext().getRealPath("/resources/preview/") + newPhoneNumber + "/");
+            if (oldPreviewFolder.exists() && oldPreviewFolder.isDirectory()) {
+                oldPreviewFolder.renameTo(newPreviewFolder);
+            }
+        }
+        return result;
     }
 
     @ResponseBody
@@ -115,5 +142,14 @@ public class UserManagerController {
             @RequestParam long userID) {
 
         return userManagerService.getRecommendRecord(userID);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/CommitFeedback", method = RequestMethod.POST)
+    public Map<String, String> commitFeedback(
+            @RequestParam long userID,
+            @RequestParam String message) {
+
+        return userManagerService.commitFeedback(userID, message);
     }
 }
