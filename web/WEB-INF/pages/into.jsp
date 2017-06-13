@@ -1,8 +1,3 @@
-<%@ page import="java.util.List" %>
-<%@ page import="com.huachuang.server.entity.UserFeedback" %>
-<%@ page import="java.util.Map" %>
-<%@ page import="com.huachuang.server.entity.User" %>
-<%@ page import="java.text.SimpleDateFormat" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -65,8 +60,8 @@
                 <li><a href="main.html">代理商管理</a></li>
                 <li><a href="credit_card.html">信用卡管理</a></li>
                 <li><a href="loan.html">贷款管理</a></li>
-                <li><a href="into.html">用户进件</a></li>
-                <li class="active"><a href="feedback.html">意见反馈</a></li>
+                <li class="active"><a href="into.html">用户进件</a></li>
+                <li><a href="feedback.html">意见反馈</a></li>
             </ul>
             <ul class="nav navbar-top-links navbar-right">
                 <!-- /.dropdown -->
@@ -83,35 +78,36 @@
                 <!-- /.dropdown -->
             </ul>
             <!-- /.navbar-top-links -->
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li>
+                            <a href="javascript:void(0)" class="active" onclick="get_into_records(this, -1)"> 全部用户</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" onclick="get_into_records(this, 0)"> 未处理用户</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" onclick="get_into_records(this, 1)"> 异常用户</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" onclick="get_into_records(this, 2)"> 已进件用户</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
         </nav>
 
-        <div class="container-fluid" id="feedback-content">
-            <%
-                List<UserFeedback> feedbacks = (List<UserFeedback>) request.getAttribute("feedback");
-                Map<Long, User> users = (Map<Long, User>) request.getAttribute("users");
-                SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                int rows = (int) Math.ceil((double) feedbacks.size() / 4.0);
-                for (int i = 0; i < rows; i++) {
-                    %><div class="row" id="feedback-row"><%
-                    for (int j = 0; j < 4 && i * 4 + j < feedbacks.size(); j++) {
-                        UserFeedback userFeedback = feedbacks.get(i * 4 + j);
-                        %>
-                            <div class="col-lg-3">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <%=users.get(userFeedback.getUserId()).getUserPhoneNumber()%>
-                                    </div>
-                                    <div class="panel-body">
-                                        <%=userFeedback.getMessage()%>
-                                        <h5 class="text-right"><%=fmt.format(userFeedback.getCommitTime())%></h5>
-                                    </div>
-                                </div>
-                            </div>
-                        <%
-                    }
-                    %></div><%
-                }
-            %>
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">全部用户</h1>
+                </div>
+            </div>
+            <div id="records-container">
+            </div>
         </div>
 
     </div>
@@ -158,6 +154,26 @@
             "showMethod": "fadeIn",
             "hideMethod": "fadeOut"
         };
+        $('#records-container').load("/AppServer/loan_records.html?state=-1");
+        function get_into_records(obj, state) {
+            switch (state) {
+                case -1:
+                    $('.page-header').text('全部用户');
+                    break;
+                case 0:
+                    $('.page-header').text('未处理用户');
+                    break;
+                case 1:
+                    $('.page-header').text('异常用户');
+                    break;
+                case 2:
+                    $('.page-header').text('已进件用户');
+                    break;
+            }
+            $('#records-container').load("/AppServer/loan_records.html?state=" + state);
+            $('ul.nav a').removeClass('active');
+            $(obj).addClass('active');
+        }
     </script>
 
 </body>

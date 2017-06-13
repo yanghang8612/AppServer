@@ -80,3 +80,12 @@
 #page-wrapper {
 	height: 100vw;
 }
+
+#feedback-content {
+	height: 100vw;
+	background: white;
+}
+
+#feedback-row {
+	margin-top: 20px;
+}

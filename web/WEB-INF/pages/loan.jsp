@@ -60,6 +60,7 @@
                 <li><a href="main.html">代理商管理</a></li>
                 <li><a href="credit_card.html">信用卡管理</a></li>
                 <li class="active"><a href="loan.html">贷款管理</a></li>
+                <li><a href="into.html">用户进件</a></li>
                 <li><a href="feedback.html">意见反馈</a></li>
             </ul>
             <ul class="nav navbar-top-links navbar-right">

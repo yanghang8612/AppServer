@@ -1,14 +1,8 @@
 package com.huachuang.server.controller;
 
-import com.huachuang.server.dao.ApplyCreditCardDao;
-import com.huachuang.server.dao.ApplyLoanDao;
-import com.huachuang.server.dao.UserCertificationInfoDao;
-import com.huachuang.server.dao.UserManagerDao;
+import com.huachuang.server.dao.*;
 import com.huachuang.server.dao.impl.TestDaoImpl;
-import com.huachuang.server.entity.ApplyCreditCard;
-import com.huachuang.server.entity.ApplyLoan;
-import com.huachuang.server.entity.User;
-import com.huachuang.server.entity.UserCertificationInfo;
+import com.huachuang.server.entity.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -41,6 +35,9 @@ public class RootController {
 
     @Resource
     private ApplyCreditCardDao applyCreditCardDao;
+
+    @Resource
+    private UserFeedbackDao userFeedbackDao;
 
     @Resource
     private TestDaoImpl testDao;
@@ -181,8 +178,12 @@ public class RootController {
                 users.put(userID, userManagerDao.findUserByUserID(userID));
             }
         }
+        Map<Long, UserCertificationInfo> certifications = new HashMap<>();
         Map<Long, User> superUsers = new HashMap<>();
         for (Map.Entry<Long, User> entry : users.entrySet()) {
+            if (!certifications.containsKey(entry.getKey())) {
+                certifications.put(entry.getKey(), certificationInfoDao.findCertificationInfoByUserID(entry.getKey()));
+            }
             long superUserID = entry.getValue().getSuperiorUserId();
             if (!superUsers.containsKey(superUserID)) {
                 superUsers.put(superUserID, userManagerDao.findUserByUserID(superUserID));
@@ -190,6 +191,23 @@ public class RootController {
         }
         users.putAll(superUsers);
         request.setAttribute("records", records);
+        request.setAttribute("users", users);
+        request.setAttribute("certifications", certifications);
+        return mv;
+    }
+
+    @RequestMapping(value = "feedback.html", method = RequestMethod.GET)
+    public ModelAndView renderFeedbackPage(HttpServletRequest request) {
+        ModelAndView mv = new ModelAndView("feedback");
+        List<UserFeedback> feedbacks = userFeedbackDao.findAllFeedback();
+        Map<Long, User> users = new HashMap<>();
+        for (UserFeedback userFeedback : feedbacks) {
+            long userID = userFeedback.getUserId();
+            if (!users.containsKey(userID)) {
+                users.put(userID, userManagerDao.findUserByUserID(userID));
+            }
+        }
+        request.setAttribute("feedback", feedbacks);
         request.setAttribute("users", users);
         return mv;
     }

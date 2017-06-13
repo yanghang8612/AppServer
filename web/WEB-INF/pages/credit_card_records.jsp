@@ -3,6 +3,7 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="com.huachuang.server.entity.User" %>
 <%@ page import="java.util.Map" %>
+<%@ page import="com.huachuang.server.entity.UserCertificationInfo" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <div class="container">
     <!-- /.row -->
@@ -18,7 +19,7 @@
                         <thead>
                             <tr>
                                 <th>申请银行</th>
-                                <th>申请人姓名</th>
+                                <th>申请人/填表人</th>
                                 <th>申请人手机号</th>
                                 <th>申请人单位</th>
                                 <th>申请人账户类型</th>
@@ -30,7 +31,10 @@
                             <%
                                 List<ApplyCreditCard> records = (List<ApplyCreditCard>) request.getAttribute("records");
                                 Map<Long, User> users = (Map<Long, User>) request.getAttribute("users");
+                                Map<Long, UserCertificationInfo> certifications = (Map<Long, UserCertificationInfo>) request.getAttribute("certifications");
                                 for (ApplyCreditCard record : records) {
+                                    User user = users.get(record.getUserId());
+                                    UserCertificationInfo certification = certifications.get(record.getUserId());
                                     SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                                     %>
                                         <tr onclick="get_record_info(<%=record.getId()%>)">
@@ -65,31 +69,34 @@
                                                         break;
                                                 }
                                             %>
-                                            <td><%=record.getApplyUserName()%></td>
+                                            <td><%=(record.getApplyUserName().equals(certification.getUserName()) ? record.getApplyUserName() : record.getApplyUserName() + "/" + certification.getUserName())%></td>
                                             <td><%=record.getApplyUserPhoneNumber()%></td>
                                             <td><%=record.getApplyUserCompany()%></td>
                                             <%
-                                                User user = users.get(record.getUserId());
                                                 User superUser = users.get(user.getSuperiorUserId());
                                                 switch (user.getUserType()) {
                                                     case 0:
                                                         if (user.isVip()) {
-                                                            %><td>VIP用户</td><%
+                                                            %><td>VIP用户<%
                                                         }
                                                         else {
-                                                            %><td>普通用户</td><%
+                                                            %><td>普通用户<%
                                                         }
                                                         break;
                                                     case 1:
-                                                        %><td>一级代理商</td><%
+                                                        %><td>一级代理商<%
                                                         break;
                                                     case 2:
-                                                        %><td>二级代理商</td><%
+                                                        %><td>二级代理商<%
                                                         break;
                                                     case 3:
-                                                        %><td>三级代理商</td><%
+                                                        %><td>三级代理商<%
                                                         break;
                                                 }
+                                                if (!record.getApplyUserName().equals(certification.getUserName())) {
+                                                    %>(代)<%
+                                                }
+                                                %></td><%
                                             %>
                                             <td><%=(superUser == null) ? "无" : superUser.getUserPhoneNumber()%></td>
                                             <td><%=fmt.format(record.getApplyTime())%></td>
