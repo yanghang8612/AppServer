@@ -125,8 +125,8 @@
             }
         });
     });
-    function get_into_record_info(id) {
-        $('#recordInfoModal').load("/AppServer/into_record_info.html?id=" + id);
+    function get_into_record_info(userID) {
+        $('#recordInfoModal').load("/AppServer/into_record_info.html?userID=" + userID);
         $('#recordInfoModal').modal(0);
     }
 </script>

@@ -154,7 +154,7 @@
             "showMethod": "fadeIn",
             "hideMethod": "fadeOut"
         };
-        $('#records-container').load("/AppServer/loan_records.html?state=-1");
+        $('#records-container').load("/AppServer/into_records.html?state=-1");
         function get_into_records(obj, state) {
             switch (state) {
                 case -1:
@@ -164,13 +164,13 @@
                     $('.page-header').text('未处理用户');
                     break;
                 case 1:
-                    $('.page-header').text('异常用户');
-                    break;
-                case 2:
                     $('.page-header').text('已进件用户');
                     break;
+                case 2:
+                    $('.page-header').text('异常用户');
+                    break;
             }
-            $('#records-container').load("/AppServer/loan_records.html?state=" + state);
+            $('#records-container').load("/AppServer/into_records.html?state=" + state);
             $('ul.nav a').removeClass('active');
             $(obj).addClass('active');
         }

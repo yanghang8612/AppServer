@@ -1,7 +1,6 @@
 package com.huachuang.server.controller;
 
 import com.huachuang.server.dao.*;
-import com.huachuang.server.dao.impl.TestDaoImpl;
 import com.huachuang.server.entity.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +30,9 @@ public class RootController {
     private UserCertificationInfoDao certificationInfoDao;
 
     @Resource
+    private UserDebitCardDao debitCardDao;
+
+    @Resource
     private ApplyLoanDao applyLoanDao;
 
     @Resource
@@ -38,9 +40,6 @@ public class RootController {
 
     @Resource
     private UserFeedbackDao userFeedbackDao;
-
-    @Resource
-    private TestDaoImpl testDao;
 
     @RequestMapping(value = {"index.html", "index", "/", "login.html"}, method = RequestMethod.GET)
     public ModelAndView renderIndexPage(HttpServletRequest request) {
@@ -114,7 +113,7 @@ public class RootController {
     }
 
     @RequestMapping(value = "loan_records.html", method = RequestMethod.GET)
-    public ModelAndView renderAgLoanRecordsPage(HttpServletRequest request, @RequestParam byte state) {
+    public ModelAndView renderLoanRecordsPage(HttpServletRequest request, @RequestParam byte state) {
         ModelAndView mv = new ModelAndView("loan_records");
         List<ApplyLoan> records = new ArrayList<>();
         switch (state) {
@@ -154,7 +153,7 @@ public class RootController {
     }
 
     @RequestMapping(value = "loan_record_info.html", method = RequestMethod.GET)
-    public ModelAndView renderAgLoanRecordInfoPage(HttpServletRequest request, @RequestParam long id) {
+    public ModelAndView renderLoanRecordInfoPage(HttpServletRequest request, @RequestParam long id) {
         ModelAndView mv = new ModelAndView("loan_record_info");
         ApplyLoan record = applyLoanDao.findApplyRecordByID(id);
         request.setAttribute("record", record);
@@ -209,6 +208,47 @@ public class RootController {
         }
         request.setAttribute("feedback", feedbacks);
         request.setAttribute("users", users);
+        return mv;
+    }
+
+    @RequestMapping(value = "into.html", method = RequestMethod.GET)
+    public ModelAndView renderIntoPage() {
+        ModelAndView mv = new ModelAndView("into");
+        return mv;
+    }
+
+    @RequestMapping(value = "into_records.html", method = RequestMethod.GET)
+    public ModelAndView renderIntoRecordsPage(HttpServletRequest request, @RequestParam byte state) {
+        ModelAndView mv = new ModelAndView("into_records");
+        List<User> allUsers = userManagerDao.findAllUsers();
+        List<User> users = new ArrayList<>();
+        Map<Long, UserCertificationInfo> certifications = new HashMap<>();
+        Map<Long, UserDebitCard> cards = new HashMap<>();
+        for (User user : allUsers) {
+            if (user.isCertificationState() && user.isDebitCardState()) {
+                if (state == -1 ||
+                        (state == 0 && user.getMobilePayState() == 0) ||
+                        (state == 1 && user.getMobilePayState() == 1) ||
+                        (state == 2 && user.getMobilePayState() >= 2)) {
+                    users.add(user);
+                    long userID = user.getUserId();
+                    certifications.put(userID, certificationInfoDao.findCertificationInfoByUserID(userID));
+                    cards.put(userID, debitCardDao.findDebitCardByUserID(userID));
+                }
+            }
+        }
+        request.setAttribute("users", users);
+        request.setAttribute("certifications", certifications);
+        request.setAttribute("cards", cards);
+        return mv;
+    }
+
+    @RequestMapping(value = "into_record_info.html", method = RequestMethod.GET)
+    public ModelAndView renderIntoRecordInfoPage(HttpServletRequest request, @RequestParam long userID) {
+        ModelAndView mv = new ModelAndView("into_record_info");
+        request.setAttribute("user", userManagerDao.findUserByUserID(userID));
+        request.setAttribute("certification", certificationInfoDao.findCertificationInfoByUserID(userID));
+        request.setAttribute("card", debitCardDao.findDebitCardByUserID(userID));
         return mv;
     }
 }

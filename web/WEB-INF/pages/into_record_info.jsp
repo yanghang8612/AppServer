@@ -1,5 +1,3 @@
-<%@ page import="com.huachuang.server.entity.ApplyLoan" %>
-<%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="com.huachuang.server.entity.User" %>
 <%@ page import="com.huachuang.server.entity.UserCertificationInfo" %>
 <%@ page import="com.huachuang.server.entity.UserDebitCard" %>
@@ -20,10 +18,9 @@
                     <div class="container">
                         <p>用户姓名：<%=certification.getUserName()%></p>
                         <p>身份证号：<%=certification.getUserIdentityCard()%></p>
-                        <img src="/AppServer/preview/<%=user.getUserPhoneNumber()%>/identify_card/front.jpg">
-                        <img src="/AppServer/preview/<%=user.getUserPhoneNumber()%>/identify_card/back.jpg">
-                        <img src="/AppServer/preview/<%=user.getUserPhoneNumber()%>/identify_card/handing.jpg">
-                        <img src="/AppServer/preview/<%=user.getUserPhoneNumber()%>/license.jpg">
+                        <img class="into-image" src="http://47.89.47.200:8080/AppServer/preview/<%=user.getUserPhoneNumber()%>/identify_card/front.jpg">
+                        <img class="into-image" src="http://47.89.47.200:8080/AppServer/preview/<%=user.getUserPhoneNumber()%>/identify_card/back.jpg">
+                        <img class="into-image" src="http://47.89.47.200:8080/AppServer/preview/<%=user.getUserPhoneNumber()%>/identify_card/handing.jpg">
                     </div>
                 </div>
             </div>
@@ -37,8 +34,8 @@
                         <p>结算卡卡号：<%=card.getCardNumber()%></p>
                         <p>结算卡银行：<%=card.getHeadOffice()%></p>
                         <p>结算卡开户行：<%=card.getBranch()%></p>
-                        <img src="/AppServer/preview/<%=user.getUserPhoneNumber()%>/debit_card/front.jpg">
-                        <img src="/AppServer/preview/<%=user.getUserPhoneNumber()%>/debit_card/back.jpg">
+                        <img class="into-image" src="http://47.89.47.200:8080/AppServer/preview/<%=user.getUserPhoneNumber()%>/debit_card/front.jpg">
+                        <img class="into-image" src="http://47.89.47.200:8080/AppServer/preview/<%=user.getUserPhoneNumber()%>/debit_card/back.jpg">
                     </div>
                 </div>
             </div>
@@ -48,14 +45,25 @@
                 </div>
                 <div class="panel-body">
                     <div class="container">
-                        <select class="custom-select" id="into-state-select">
-                            <option value="0">未处理</option>
-                            <option value="1">已进件</option>
-                            <option value="2">身份证照片异常</option>
-                            <option value="3">营业执照异常</option>
-                            <option value="4">结算卡照片异常</option>
-                            <option value="5">未使用民生银行结算卡</option>
-                        </select>
+                        <form class="form-inline">
+                            <select class="form-control input-sm" id="into-state-select">
+                                <option value="0">未处理</option>
+                                <option value="1">已进件</option>
+                                <option value="2">身份证照片异常</option>
+                                <option value="3">营业执照异常</option>
+                                <option value="4">结算卡照片异常</option>
+                                <option value="5">未使用民生银行结算卡</option>
+                            </select>
+                            <br/>
+                            <div class="form-group">
+                                <label for="mid">MID</label>
+                                <input type="text" class="form-control input-sm" id="mid" placeholder="MID">
+                            </div>
+                            <div class="form-group">
+                                <label for="key">KEY</label>
+                                <input type="text" class="form-control input-sm" id="key" placeholder="KEY">
+                            </div>
+                        </form>
                         <script>
                             $('#into-state-select').val(<%=user.getMobilePayState()%>)
                         </script>
