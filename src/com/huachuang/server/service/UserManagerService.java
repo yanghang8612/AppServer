@@ -5,7 +5,7 @@ import com.huachuang.server.dao.*;
 import com.huachuang.server.entity.RecommendList;
 import com.huachuang.server.entity.User;
 import com.huachuang.server.entity.UserFeedback;
-import com.huachuang.server.entity.WalletBalanceRecord;
+import com.huachuang.server.entity.UserWithdraw;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -24,9 +24,6 @@ public class UserManagerService {
 
     @Resource
     private RecommendListDao recommendListDao;
-
-    @Resource
-    private UserTokenDao userTokenDao;
 
     @Resource
     private UserWalletDao userWalletDao;
@@ -89,14 +86,19 @@ public class UserManagerService {
                 break;
             }
         }
-        long superiorID;
+        long superiorID, agentID;
+        int userLevel;
         if (identifyCode.length() == 6) {
             superiorID = userManagerDao.findUserByInvitationCode(identifyCode).getUserId();
+            agentID = superiorID;
+            userLevel = 1;
         }
         else {
-            superiorID = userManagerDao.findUserByPhoneNumber(identifyCode).getSuperiorUserId();
+            superiorID = userManagerDao.findUserByPhoneNumber(identifyCode).getUserId();
+            agentID = userManagerDao.findUserByPhoneNumber(identifyCode).getAgentID();
+            userLevel = userManagerDao.findUserByPhoneNumber(identifyCode).getUserLevel() + 1;
         }
-        User user = new User(phoneNumber, password, generatedInvitationCode, superiorID);
+        User user = new User(phoneNumber, password, generatedInvitationCode, superiorID, agentID, userLevel);
         long userID = userManagerDao.create(user);
         if (identifyCode.length() == 11) {
             User directUser = userManagerDao.findUserByPhoneNumber(identifyCode);
@@ -115,8 +117,7 @@ public class UserManagerService {
     }
 
     public Map<String, Object> login(String phoneNumber, String password){
-        Map<String, Object> result = new HashMap<String, Object>();
-
+        Map<String, Object> result = new HashMap<>();
         User user = userManagerDao.findUserByPhoneNumber(phoneNumber);
         if (user == null) {
             result.put("Status", "false");
@@ -145,6 +146,24 @@ public class UserManagerService {
         return result;
     }
 
+    public Map<String, Object> update(long userID) {
+        Map<String, Object> result = new HashMap<>();
+        User user = userManagerDao.findUserByUserID(userID);
+        result.put("Status", "true");
+        result.put("Info", "更新成功");
+        result.put("User", user);
+        if (user.isCertificationState()) {
+            result.put("CertificationInfo", userInfoService.getUserCertificationInfo(user.getUserId()).get("CertificationInfo"));
+        }
+        if (user.isDebitCardState()) {
+            result.put("DebitCard", userInfoService.getUserDebitCard(user.getUserId()).get("DebitCard"));
+        }
+        if (user.getMobilePayState() == 1) {
+            result.put("MobilePayInfo", userInfoService.getUserMobilePayInfo(user.getUserId()).get("MobilePayInfo"));
+        }
+        return result;
+    }
+
     public Map<String, String> changePassword(long userID, String newPassword) {
         Map<String, String> result = new HashMap<>();
         User user = userManagerDao.findUserByUserID(userID);
@@ -157,6 +176,22 @@ public class UserManagerService {
         else {
             result.put("Status", "false");
             result.put("Info", "密码修改失败");
+        }
+        return result;
+    }
+
+    public Map<String, String> resetPassword(String phoneNumber, String newPassword) {
+        Map<String, String> result = new HashMap<>();
+        User user = userManagerDao.findUserByPhoneNumber(phoneNumber);
+        if (user != null) {
+            user.setUserPassword(newPassword);
+            userManagerDao.update(user);
+            result.put("Status", "true");
+            result.put("Info", "密码重置成功");
+        }
+        else {
+            result.put("Status", "false");
+            result.put("Info", "密码重置失败");
         }
         return result;
     }
@@ -189,46 +224,33 @@ public class UserManagerService {
                 result.put("Status", "true");
                 result.put("Info", "普通及VIP用户没有下属用户");
             }
-            else if (user.getUserType() == 3) {
-                List<User> users = userManagerDao.findSubUsers(userID);
+            else {
+                List<User> subUsers = userManagerDao.findSubUsers(userID);
                 result.put("Status", "true");
-                result.put("Users", users);
+                result.put("Info", "查询下级用户成功");
+                result.put("Users", subUsers);
             }
-            else if (user.getUserType() == 2) {
-                List<User> users = new ArrayList<>();
-                List<User> levelThreeUsers = userManagerDao.findSubUsers(userID);
-                if (levelThreeUsers != null) {
-                    for (User levelThreeUser : levelThreeUsers) {
-                        users.add(levelThreeUser);
-                        if (levelThreeUser.getUserType() != 0) {
-                            users.addAll(userManagerDao.findSubUsers(levelThreeUser.getUserId()));
-                        }
-                    }
-                }
+        }
+        else {
+            result.put("Status", "false");
+            result.put("Info", "查询下级用户出错");
+        }
+        return result;
+    }
+
+    public Map<String, Object> getSubDirectUser(long userID) {
+        Map<String, Object> result = new HashMap<>();
+        User user = userManagerDao.findUserByUserID(userID);
+        if (user != null) {
+            if (user.getUserType() == 0) {
                 result.put("Status", "true");
-                result.put("Users", users);
+                result.put("Info", "普通及VIP用户没有下属用户");
             }
             else {
-                List<User> users = new ArrayList<>();
-                List<User> levelTwoUsers = userManagerDao.findSubUsers(userID);
-                if (levelTwoUsers != null) {
-                    for (User levelTwoUser : levelTwoUsers) {
-                        users.add(levelTwoUser);
-                        if (levelTwoUser.getUserType() != 0) {
-                            List<User> levelThreeUsers = userManagerDao.findSubUsers(levelTwoUser.getUserId());
-                            if (levelThreeUsers != null) {
-                                for (User levelThreeUser : levelThreeUsers) {
-                                    users.add(levelThreeUser);
-                                    if (levelThreeUser.getUserType() != 0) {
-                                        users.addAll(userManagerDao.findSubUsers(levelThreeUser.getUserId()));
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+                List<User> subUsers = userManagerDao.findSubDirectUsers(userID);
                 result.put("Status", "true");
-                result.put("Users", users);
+                result.put("Info", "查询直属下级用户成功");
+                result.put("Users", subUsers);
             }
         }
         else {
@@ -239,7 +261,6 @@ public class UserManagerService {
     }
 
     public Map<String, String> addAgent(
-            String superiorPhoneNumber,
             String phoneNumber,
             String password,
             byte type
@@ -257,13 +278,12 @@ public class UserManagerService {
                     break;
                 }
             }
-            User superiorAgent = userManagerDao.findUserByPhoneNumber(superiorPhoneNumber);
             User agent = new User();
             agent.setUserPhoneNumber(phoneNumber);
             agent.setUserPassword(password);
             agent.setUserType(type);
             agent.setInvitationCode(generatedInvitationCode);
-            agent.setSuperiorUserId((type == 1) ? 0 : superiorAgent.getUserId());
+            agent.setSuperiorUserId(0);
             userManagerDao.create(agent);
             result.put("Status", "true");
             result.put("Info", "添加代理商成功");
@@ -271,40 +291,24 @@ public class UserManagerService {
         return result;
     }
 
-    public Map<String, String> deleteUser(long userID) {
+    public Map<String, String> deleteUser(String phoneNumber) {
         Map<String, String> result = new HashMap<>();
-        User user = userManagerDao.findUserByUserID(userID);
+        User user = userManagerDao.findUserByPhoneNumber(phoneNumber);
         if (user.getUserType() == 0) {
             result.put("Status", "true");
             result.put("Info", "删除用户成功");
         }
-        else if (user.getUserType() == 1) {
-            List<User> subUsers = userManagerDao.findSubUsers(userID);
+        else {
+            List<User> subUsers = userManagerDao.findSubDirectUsers(user.getUserId());
             User root = userManagerDao.findUserByPhoneNumber("13306351089");
-            for (User subUser : subUsers) {
-                subUser.setSuperiorUserId(root.getUserId());
-                userManagerDao.update(subUser);
+            if (subUsers != null && subUsers.size() != 0) {
+                for (User subUser : subUsers) {
+                    subUser.setSuperiorUserId(root.getUserId());
+                    userManagerDao.update(subUser);
+                }
             }
             result.put("Status", "true");
-            result.put("Info", "删除一级代理商成功");
-        }
-        else if (user.getUserType() == 2) {
-            List<User> subUsers = userManagerDao.findSubUsers(userID);
-            for (User subUser : subUsers) {
-                subUser.setSuperiorUserId(user.getSuperiorUserId());
-                userManagerDao.update(subUser);
-            }
-            result.put("Status", "true");
-            result.put("Info", "删除二级代理商成功");
-        }
-        else if (user.getUserType() == 3) {
-            List<User> subUsers = userManagerDao.findSubUsers(userID);
-            for (User subUser : subUsers) {
-                subUser.setSuperiorUserId(user.getSuperiorUserId());
-                userManagerDao.update(subUser);
-            }
-            result.put("Status", "true");
-            result.put("Info", "删除三级代理商成功");
+            result.put("Info", "删除代理商成功");
         }
         userWalletDao.delete(user.getUserId());
         userManagerDao.delete(user);
@@ -394,6 +398,38 @@ public class UserManagerService {
         userFeedbackDao.create(userFeedback);
         result.put("Status", "true");
         result.put("Info", "反馈信息提交成功");
+        return result;
+    }
+
+    public Map<String, String> getUnreadFeedbackCount() {
+        Map<String, String> result = new HashMap<>();
+        int count = 0;
+        List<UserFeedback> feedbacks = userFeedbackDao.findAllFeedback();
+        for (UserFeedback feedback : feedbacks) {
+            if (feedback.getState() == 0) {
+                count += 1;
+            }
+        }
+        result.put("Status", "true");
+        result.put("Count", String.valueOf(count));
+        return result;
+    }
+
+    public Map<String, String> updateFeedbackState(long id) {
+        Map<String, String> result = new HashMap<>();
+        UserFeedback feedback = userFeedbackDao.findFeedbackByID(id);
+        feedback.setState((byte) 1);
+        userFeedbackDao.update(feedback);
+        result.put("Status", "true");
+        result.put("Info", "反馈信息更新成功");
+        return result;
+    }
+
+    public Map<String, String> deleteFeedback(long id) {
+        Map<String, String> result = new HashMap<>();
+        userFeedbackDao.delete(id);
+        result.put("Status", "true");
+        result.put("Info", "反馈信息删除成功");
         return result;
     }
 

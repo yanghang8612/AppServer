@@ -39,6 +39,12 @@ public class User {
     @Column(name = "superior_user_id")
     private long superiorUserId;
 
+    @Column(name = "agent_id")
+    private long agentID;
+
+    @Column(name = "user_level")
+    private int userLevel;
+
     @Column(name = "register_time")
     private Date registerTime;
 
@@ -59,11 +65,13 @@ public class User {
 
     public User(){}
 
-    public User(String userPhoneNumber, String userPassword, String invitationCode, long superiorUserId) {
+    public User(String userPhoneNumber, String userPassword, String invitationCode, long superiorUserId, long agentID, int userLevel) {
         this.userPhoneNumber = userPhoneNumber;
         this.userPassword = userPassword;
         this.invitationCode = invitationCode;
         this.superiorUserId = superiorUserId;
+        this.agentID = agentID;
+        this.userLevel = userLevel;
     }
 
     public long getUserId() {
@@ -120,6 +128,22 @@ public class User {
 
     public void setSuperiorUserId(long superiorUserId) {
         this.superiorUserId = superiorUserId;
+    }
+
+    public long getAgentID() {
+        return agentID;
+    }
+
+    public void setAgentID(long agentID) {
+        this.agentID = agentID;
+    }
+
+    public int getUserLevel() {
+        return userLevel;
+    }
+
+    public void setUserLevel(int userLevel) {
+        this.userLevel = userLevel;
     }
 
     public Date getRegisterTime() {

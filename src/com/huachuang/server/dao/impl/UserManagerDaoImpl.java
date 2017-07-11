@@ -1,7 +1,6 @@
 package com.huachuang.server.dao.impl;
 
 import com.huachuang.server.dao.UserManagerDao;
-import com.huachuang.server.entity.RecommendList;
 import com.huachuang.server.entity.User;
 import com.huachuang.server.entity.UserAbandoned;
 import org.apache.commons.logging.LogFactory;
@@ -10,7 +9,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Comparator;
@@ -166,20 +164,17 @@ public class UserManagerDaoImpl implements UserManagerDao {
     public List<User> findSubUsers(long userID) {
         Session session = sessionFactory.getCurrentSession();
         Transaction tx = session.beginTransaction();
-        Query<User> query = session.createQuery("from User where superiorUserId = ?", User.class);
+        Query<User> query = session.createQuery("from User where agentID = ?", User.class);
         query.setParameter(0, userID);
         List<User> result = query.getResultList();
         result.sort(new Comparator<User>() {
             @Override
             public int compare(User o1, User o2) {
-                if (o1.getUserType() == o2.getUserType()) {
+                if (o1.getUserLevel() == o2.getUserLevel()) {
                     return 0;
                 }
-                else if (o1.getUserType() == 0 || o2.getUserType() == 0) {
-                    return o1.getUserType() < o2.getUserType() ? 1 : -1;
-                }
                 else {
-                    return o1.getUserType() > o2.getUserType() ? 1 : -1;
+                    return o1.getUserLevel() < o2.getUserLevel() ? 1 : -1;
                 }
             }
         });
@@ -188,12 +183,11 @@ public class UserManagerDaoImpl implements UserManagerDao {
     }
 
     @Override
-    public List<User> findSubCommonUsers(long userID) {
+    public List<User> findSubDirectUsers(long userID) {
         Session session = sessionFactory.getCurrentSession();
         Transaction tx = session.beginTransaction();
-        Query<User> query = session.createQuery("from User where superiorUserId = ? and userType = ?", User.class);
+        Query<User> query = session.createQuery("from User where superiorUserId = ?", User.class);
         query.setParameter(0, userID);
-        query.setParameter(1, (byte) 0);
         List<User> result = query.getResultList();
         tx.commit();
         return result;

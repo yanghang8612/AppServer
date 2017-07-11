@@ -46,7 +46,7 @@ public class ApplyLoanDaoImpl implements ApplyLoanDao{
     public List<ApplyLoan> findAllApplyRecords() {
         Session session = sessionFactory.getCurrentSession();
         Transaction tx = session.beginTransaction();
-        Query<ApplyLoan> query = session.createQuery("from ApplyLoan", ApplyLoan.class);
+        Query<ApplyLoan> query = session.createQuery("from ApplyLoan order by applyTime desc", ApplyLoan.class);
         List<ApplyLoan> result = query.getResultList();
         tx.commit();
         return result;
@@ -56,7 +56,7 @@ public class ApplyLoanDaoImpl implements ApplyLoanDao{
     public List<ApplyLoan> findApplyRecordsByState(byte state) {
         Session session = sessionFactory.getCurrentSession();
         Transaction tx = session.beginTransaction();
-        Query<ApplyLoan> query = session.createQuery("from ApplyLoan where applyState = ?", ApplyLoan.class);
+        Query<ApplyLoan> query = session.createQuery("from ApplyLoan where applyState = ? order by applyTime desc", ApplyLoan.class);
         query.setParameter(0, state);
         List<ApplyLoan> result = query.getResultList();
         tx.commit();

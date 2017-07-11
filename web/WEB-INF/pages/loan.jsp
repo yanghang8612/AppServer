@@ -1,152 +1,167 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
 
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>掌触金控后台管理系统</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="/AppServer/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/AppServer/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/AppServer/static/font-awesome/css/font-awesome.css" rel="stylesheet">
 
-    <!-- MetisMenu CSS -->
-    <link href="/AppServer/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <link href="/AppServer/static/css/animate.css" rel="stylesheet">
+    <link href="/AppServer/static/css/style.css" rel="stylesheet">
+    <link href="/AppServer/static/css/server.css" rel="stylesheet">
 
-    <!-- DataTables CSS -->
-    <link href="/AppServer/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
+    <!-- DataTables style -->
+    <link href="/AppServer/static/css/plugins/dataTables/datatables.min.css" rel="stylesheet">
 
-    <!-- DataTables Responsive CSS -->
-    <link href="/AppServer/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="/AppServer/vendor/sb-admin/css/sb-admin-2.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="/AppServer/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <link href="/AppServer/vendor/css/server.css" rel="stylesheet" type="text/css">
-
-    <link href="https://cdn.bootcss.com/toastr.js/latest/toastr.min.css" rel="stylesheet">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <!-- Toastr style -->
+    <link href="/AppServer/static/css/plugins/toastr/toastr.min.css" rel="stylesheet">
 
 </head>
 
-<body>
-
-    <div id="wrapper">
-
-        <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">
-                    掌触金控
-                </a>
-            </div>
-            <!-- /.navbar-header -->
-
-            <ul class="nav navbar-nav">
-                <li><a href="main.html">代理商管理</a></li>
-                <li><a href="credit_card.html">信用卡管理</a></li>
-                <li class="active"><a href="loan.html">贷款管理</a></li>
-                <li><a href="into.html">用户进件</a></li>
-                <li><a href="feedback.html">意见反馈</a></li>
-            </ul>
-            <ul class="nav navbar-top-links navbar-right">
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i><i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> 注销</a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-user -->
+<body class="fixed-sidebar no-skin-config full-height-layout">
+<div id="wrapper">
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav metismenu" id="side-menu">
+                <li class="nav-header">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img alt="image" class="img-circle pull-left" src="/AppServer/static/img/profile_small.jpg" />
+                        </div>
+                        <div class="col-md-8">
+                            <span class="block m-t-xs"> <strong class="font-bold">admin</strong></span>
+                            <span class="text-muted text-xs block">管理员 </span>
+                        </div>
+                    </div>
                 </li>
-                <!-- /.dropdown -->
+                <li>
+                    <a href="main.html"><i class="fa fa-users"></i> <span class="nav-label">代理商管理 </span></a>
+                </li>
+                <li>
+                    <a href="credit_card.html"><i class="fa fa-credit-card"></i> <span class="nav-label">信用卡管理 </span></a>
+                </li>
+                <li class="active">
+                    <a href="loan.html"><i class="fa fa-money"></i> <span class="nav-label">贷款管理 </span></a>
+                </li>
+                <li>
+                    <a href="into.html"><i class="fa fa-user-circle"></i> <span class="nav-label">用户进件 </span></a>
+                </li>
+                <li>
+                    <a href="withdraw.html"><i class="fa fa-hand-paper-o"></i> <span class="nav-label">用户提现 </span></a>
+                </li>
+                <li>
+                    <a href="feedback.html"><i class="fa fa-commenting"></i> <span class="nav-label">意见反馈 </span><span class="label label-warning pull-right" id="unreadLabel">1</span></a>
+                </li>
+                <li>
+                    <a href="setting.html"><i class="fa fa-cog"></i> <span class="nav-label">参数设置 </span></a>
+                </li>
             </ul>
-            <!-- /.navbar-top-links -->
 
-            <div class="navbar-default sidebar" role="navigation">
-                <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
-                        <li>
-                            <a href="javascript:void(0)" class="active" onclick="get_apply_loan_records(this, -1)"> 全部申请</a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" onclick="get_apply_loan_records(this, 0)"> 未处理申请</a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" onclick="get_apply_loan_records(this, 1)"> 处理中申请</a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" onclick="get_apply_loan_records(this, 2)"> 已处理申请</a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- /.sidebar-collapse -->
-            </div>
-        </nav>
+        </div>
+    </nav>
 
-        <div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">全部申请</h1>
-                </div>
-            </div>
-            <div id="records-container">
+    <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
+                <ul class="nav navbar-top-links navbar-right">
+                    <li>
+                        <span class="m-r-sm text-muted welcome-message">欢迎使用掌触金控后台管理系统</span>
+                    </li>
+                    <li>
+                        <a href="login.html">
+                            <i class="fa fa-sign-out"></i> 注销
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-md-12">
+                <h2>贷款管理</h2>
             </div>
         </div>
+        <div class="fh-breadcrumb">
+            <div class="fh-column">
+                <div class="full-height-scroll">
+                    <ul class="list-group elements-list">
+                        <li class="list-group-item active">
+                            <a data-toggle="tab" href="javascript:void(0)" onclick="getApplyLoanRecords(-1)">
+                                <small>全部申请</small>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a data-toggle="tab" href="javascript:void(0)" onclick="getApplyLoanRecords(0)">
+                                <small>未处理申请</small>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a data-toggle="tab" href="javascript:void(0)" onclick="getApplyLoanRecords(1)">
+                                <small>处理中申请</small>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a data-toggle="tab" href="javascript:void(0)" onclick="getApplyLoanRecords(2)">
+                                <small>已处理申请</small>
+                            </a>
+                        </li>
 
+                    </ul>
+                </div>
+            </div>
+
+            <div class="full-height">
+                <div class="full-height-scroll white-bg border-left">
+                    <div class="element-detail-box">
+                        <div class="tab-content">
+                            <div class="tab-pane active">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div>
+                <strong>Copyright</strong> 掌触金控 &copy; 2017-2018
+            </div>
+        </div>
     </div>
-    <!-- /#wrapper -->
-    <div class="modal fade" id="recordInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    </div>
+</div>
 
-    <!-- jQuery -->
-    <script src="/AppServer/vendor/jquery/jquery.min.js"></script>
+<!-- Mainly scripts -->
+<script src="/AppServer/static/js/jquery-2.1.1.js"></script>
+<script src="/AppServer/static/js/bootstrap.min.js"></script>
+<script src="/AppServer/static/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="/AppServer/static/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="/AppServer/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!-- Custom and plugin javascript -->
+<script src="/AppServer/static/js/inspinia.js"></script>
+<script src="/AppServer/static/js/plugins/pace/pace.min.js"></script>
 
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="/AppServer/vendor/metisMenu/metisMenu.min.js"></script>
+<!-- DataTables script -->
+<script src="/AppServer/static/js/plugins/dataTables/datatables.min.js"></script>
 
-    <!-- DataTables JavaScript -->
-    <script src="/AppServer/vendor/datatables/js/jquery.dataTables.min.js"></script>
-    <script src="/AppServer/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
-    <script src="/AppServer/vendor/datatables-responsive/dataTables.responsive.js"></script>
+<!-- Toastr script -->
+<script src="/AppServer/static/js/plugins/toastr/toastr.min.js"></script>
 
-    <!-- Morris Charts JavaScript -->
-    <script src="/AppServer/vendor/raphael/raphael.min.js"></script>
-    <script src="/AppServer/vendor/morrisjs/morris.min.js"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="/AppServer/vendor/sb-admin/js/sb-admin-2.js"></script>
-
-    <script src="https://cdn.bootcss.com/toastr.js/latest/toastr.min.js"></script>
-
-    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
-    <script>
+<script>
+    $(document).ready(function(){
         toastr.options = {
-            "closeButton": false,
+            "closeButton": true,
             "debug": false,
+            "progressBar": false,
+            "preventDuplicates": false,
             "positionClass": "toast-bottom-center",
             "onclick": null,
-            "showDuration": "300",
-            "hideDuration": "300",
+            "showDuration": "400",
+            "hideDuration": "1000",
             "timeOut": "1500",
             "extendedTimeOut": "1000",
             "showEasing": "swing",
@@ -154,28 +169,31 @@
             "showMethod": "fadeIn",
             "hideMethod": "fadeOut"
         };
-        $('#records-container').load("/AppServer/loan_records.html?state=-1");
-        function get_apply_loan_records(obj, state) {
-            switch (state) {
-                case -1:
-                    $('.page-header').text('全部申请');
-                    break;
-                case 0:
-                    $('.page-header').text('未处理申请');
-                    break;
-                case 1:
-                    $('.page-header').text('处理中申请');
-                    break;
-                case 2:
-                    $('.page-header').text('已处理申请');
-                    break;
+        $('.tab-pane').load("/AppServer/loan_records.html?state=-1");
+        $.ajax({
+            type: "POST",
+            url: "/AppServer/UserManager/GetUnreadFeedbackCount",
+            data: {},
+            dataType: "json",
+            success: function (data) {
+                if (data.Status == 'true') {
+                    if (data.Count == 0) {
+                        $('#unreadLabel').hide();
+                    }
+                    else {
+                        $('#unreadLabel').text(data.Count);
+                    }
+                }
+                else {
+                    toastr.info(data.Info);
+                }
             }
-            $('#records-container').load("/AppServer/loan_records.html?state=" + state);
-            $('ul.nav a').removeClass('active');
-            $(obj).addClass('active');
-        }
-    </script>
+        });
+    });
+    function getApplyLoanRecords(state) {
+        $('.tab-pane').load("/AppServer/loan_records.html?state=" + state);
+    }
+</script>
 
 </body>
-
 </html>

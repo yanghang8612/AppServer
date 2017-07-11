@@ -1,9 +1,11 @@
 package com.huachuang.server.entity;
 
 import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 
 /**
@@ -36,6 +38,12 @@ public class UserAbandoned {
 
     @Column(name = "superior_user_id")
     private long superiorUserId;
+
+    @Column(name = "agent_id")
+    private long agentID;
+
+    @Column(name = "user_level")
+    private int userLevel;
 
     @Column(name = "register_time")
     private Date registerTime;
@@ -126,6 +134,22 @@ public class UserAbandoned {
 
     public void setSuperiorUserId(long superiorUserId) {
         this.superiorUserId = superiorUserId;
+    }
+
+    public long getAgentID() {
+        return agentID;
+    }
+
+    public void setAgentID(long agentID) {
+        this.agentID = agentID;
+    }
+
+    public int getUserLevel() {
+        return userLevel;
+    }
+
+    public void setUserLevel(int userLevel) {
+        this.userLevel = userLevel;
     }
 
     public Date getRegisterTime() {

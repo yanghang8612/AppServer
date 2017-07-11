@@ -1,6 +1,5 @@
 package com.huachuang.server.dao;
 
-import com.huachuang.server.entity.UserWallet;
 import com.huachuang.server.entity.WalletBalanceRecord;
 import com.huachuang.server.entity.WalletPointsRecord;
 

@@ -1,130 +1,51 @@
 <%@ page import="com.huachuang.server.entity.User" %>
 <%@ page import="com.huachuang.server.entity.UserCertificationInfo" %>
-<%@ page import="java.util.List" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.Map" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<div class="container">
-    <div class="row header-row">
-        <%
-            User agent = (User) request.getAttribute("agent");
-            UserCertificationInfo certificationInfo = (UserCertificationInfo) request.getAttribute("CertificationInfo");
-            List<User> users = (List<User>) request.getAttribute("users");
-        %>
-        <div class="col-lg-2 col-md-2">
-            <img src="<%=(agent.isHeaderState()?"/AppServer/header/"+agent.getUserId()+".jpg":"/AppServer/imgs/default_header_image.jpg")%>" class="img-circle img-responsive center-block">
-        </div>
-        <div class="col-lg-2">
-            <h3><%=agent.getUserPhoneNumber()%></h3>
-            <h4><%=(agent.isCertificationState())?certificationInfo.getUserName():"<未实名认证>"%></h4>
-            <p>级别:<%=(agent.getUserType()==1)?"一":(agent.getUserType()==2)?"二":"三"%>级代理商</p>
-            <p>邀请码:<%=agent.getInvitationCode()%></p>
-        </div>
-        <div class="col-lg-offset-6 col-lg-2">
-            <br/>
-            <a href="javascript:void(0)" onclick="delete_agent(<%=agent.getUserId()%>)"><i class="fa fa-times-circle-o"></i> 删除代理商</a>
-            <%
-                if (agent.getUserType() == 1) {
-                    %>
-                        <br/>
-                        <a href="javascript:void(0)" onclick="add_new_agent(<%=agent.getUserPhoneNumber()%>,2)"><i class="fa fa-user-plus"></i> 添加二级代理商</a>
-                        <br/>
-                        <a href="javascript:void(0)" onclick="add_new_agent(<%=agent.getUserPhoneNumber()%>,3)"><i class="fa fa-user-plus"></i> 添加三级代理商</a>
-                    <%
-                }
-                if (agent.getUserType() == 2) {
-                    %>
-                        <br/>
-                        <a href="javascript:void(0)" onclick="add_new_agent(<%=agent.getUserPhoneNumber()%>,3)"><i class="fa fa-user-plus"></i> 添加三级代理商</a>
-                    <%
-                }
-            %>
-        </div>
-        <!-- /.col-lg-12 -->
+
+<div class="ibox float-e-margins">
+    <div class="ibox-title">
+        <h5>用户列表</h5>
     </div>
-    <!-- /.row -->
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    用户列表
-                </div>
-                <!-- /.panel-heading -->
-                <div class="panel-body">
-                    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
-                        <thead>
-                            <tr>
-                                <th>手机号码</th>
-                                <th>用户类型</th>
-                                <th>注册日期</th>
-                                <th>上次登录时间</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <%
-                                for (User user : users) {
-                                    SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                                    %>
-                                        <tr onclick="get_user_info(<%=user.getUserPhoneNumber()%>)">
-                                            <td><%=user.getUserPhoneNumber()%></td>
-                                            <td><%=(user.isVip())?"VIP用户":"普通用户"%></td>
-                                            <td><%=fmt.format(user.getRegisterTime())%></td>
-                                            <td><%=(user.getLastLoginTime() == null ? "未登录" : fmt.format(user.getLastLoginTime()))%></td>
-                                        </tr>
-                                    <%
-                                }
-                            %>
-                        </tbody>
-                    </table>
-                </div>
-                <!-- /.panel-body -->
-            </div>
-            <!-- /.panel -->
+    <div class="ibox-content">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover" id="userList">
+                <thead>
+                     <tr>
+                         <th>用户等级</th>
+                         <th>手机号码</th>
+                         <th>姓名</th>
+                         <th>用户类型</th>
+                         <th>注册日期</th>
+                         <th>上次登录时间</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <%
+                    List<User> users = (List<User>) request.getAttribute("users");
+                    Map<Long, UserCertificationInfo> certifications = (Map<Long, UserCertificationInfo>) request.getAttribute("certifications");
+                    for (User user : users) {
+                        SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        %>
+                        <tr onclick="get_user_info(<%=user.getUserPhoneNumber()%>)">
+                            <td><%=(user.getUserLevel())%>级</td>
+                            <td><%=user.getUserPhoneNumber()%></td>
+                            <td><%=(user.isCertificationState() ? certifications.get(user.getUserId()).getUserName() : "<未实名认证>")%>
+                            <td><%=(user.isVip())?"VIP用户":"普通用户"%></td>
+                            <td><%=fmt.format(user.getRegisterTime())%></td>
+                            <td><%=(user.getLastLoginTime() == null ? "未登录" : fmt.format(user.getLastLoginTime()))%></td>
+                        </tr>
+                        <%
+                    }
+                %>
+                </tbody>
+            </table>
         </div>
-        <!-- /.col-lg-12 -->
     </div>
 </div>
-<!-- Modal -->
-<div class="modal fade" id="userInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        个人基本信息
-                    </div>
-                    <div class="panel-body">
-                        <div class="container">
-                            <img src="/imgs/default_header_image.jpg" width="64px" height="64px" class="img-circle">
-                            <h3>18511838501</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        实名认证信息
-                    </div>
-                    <div class="panel-body">
 
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        结算卡信息
-                    </div>
-                    <div class="panel-body">
-
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
 <!-- Modal -->
 <div class="modal fade" id="newAgentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -160,8 +81,7 @@
 </div>
 <!-- /.modal -->
 <script>
-    $('#dataTables-example').DataTable({
-        responsive: true,
+    $('#userList').DataTable({
         "language": {
             "sProcessing":   "处理中...",
             "sLengthMenu":   "显示 _MENU_ 项结果",
@@ -213,9 +133,6 @@
         }
         else if (type == 2) {
             $('#newAgentModal .modal-title').text('添加二级代理商');
-        }
-        else {
-            $('#newAgentModal .modal-title').text('添加三级代理商');
         }
         $('#newAgentModal').modal(0);
     }

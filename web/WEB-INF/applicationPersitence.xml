@@ -8,7 +8,7 @@
     <!-- 配置数据源 -->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://47.89.47.200/appserver" />
+        <property name="url" value="jdbc:mysql://localhost/appserver" />
         <property name="username" value="root" />
         <property name="password" value="8612" />
     </bean>
@@ -25,7 +25,7 @@
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-                <prop key="hibernate.show_sql">false</prop>
+                <prop key="hibernate.show_  sql">false</prop>
                 <prop key="hibernate.format_sql">true</prop>
                 <prop key="hibernate.current_session_context_class">thread</prop>
             </props>

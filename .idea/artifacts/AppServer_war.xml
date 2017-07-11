@@ -2,7 +2,24 @@
   <artifact type="war" name="AppServer:war">
     <output-path>$PROJECT_DIR$/out/artifacts/AppServer_war</output-path>
     <root id="archive" name="AppServer_war.war">
-      <element id="artifact" artifact-name="AppServer:war exploded" />
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="AppServer" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Spring-4.3.8.RELEASE" />
+          <element id="library" level="project" name="Hibernate 5.2.9-5.2.9" />
+          <element id="library" level="project" name="Spring MVC-4.3.8.RELEASE" />
+          <element id="library" level="project" name="mysql:mysql-connector-java:6.0.6" />
+          <element id="library" level="project" name="com.fasterxml.jackson.core:jackson-databind:Latest" />
+          <element id="library" level="project" name="commons-fileupload:commons-fileupload:Latest" />
+          <element id="library" level="project" name="javax.servlet:jstl:1.2" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="AppServer/web/Web" />
     </root>
   </artifact>
 </component>

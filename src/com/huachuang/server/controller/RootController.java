@@ -1,7 +1,9 @@
 package com.huachuang.server.controller;
 
+import com.huachuang.server.CommonUtils;
 import com.huachuang.server.dao.*;
 import com.huachuang.server.entity.*;
+import com.huachuang.server.service.FinancialService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,6 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -41,6 +45,9 @@ public class RootController {
     @Resource
     private UserFeedbackDao userFeedbackDao;
 
+    @Resource
+    private UserWithdrawDao userWithdrawDao;
+
     @RequestMapping(value = {"index.html", "index", "/", "login.html"}, method = RequestMethod.GET)
     public ModelAndView renderIndexPage(HttpServletRequest request) {
         ModelAndView mv = new ModelAndView("login");
@@ -51,8 +58,11 @@ public class RootController {
     @ResponseBody
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public Map<String, String> login(HttpServletRequest request,
+                                     HttpServletResponse response,
                      @RequestParam String username,
-                     @RequestParam String password) {
+                     @RequestParam String password) throws IOException {
+
+
 
         Map<String, String> result = new HashMap<>();
         if (username.equals("admin") && password.equals("admin")) {
@@ -63,6 +73,20 @@ public class RootController {
             result.put("Status", "false");
             result.put("Info", "用户名或密码错误");
         }
+//        Cookie[] cookies = request.getCookies();
+//        if (cookies == null) {
+//            Cookie cookie = new Cookie("yang", "8612");
+//            cookie.setMaxAge(10);
+//            cookie.setPath("/");
+//            response.addCookie(cookie);
+//            return new ModelAndView("forward:/main.html");
+//        }
+//        else {
+//            for (Cookie cookie : cookies) {
+//                System.out.println(cookies[0].getName() + ":" + cookies[0].getValue());
+//            }
+//            return new ModelAndView("redirect:https://www.baidu.com");
+//        }
         return result;
     }
 
@@ -84,11 +108,26 @@ public class RootController {
         return mv;
     }
 
+    @RequestMapping(value = "mainother.html", method = RequestMethod.GET)
+    public ModelAndView renderOtherPage() {
+        ModelAndView mv = new ModelAndView("main");
+        return mv;
+    }
+
     @RequestMapping(value = "main.html", method = RequestMethod.GET)
     public ModelAndView renderMainPage(HttpServletRequest request) {
         ModelAndView mv = new ModelAndView("main");
         List<User> agents = userManagerDao.findAllAgents();
+        Map<Long, UserCertificationInfo> certifications = new HashMap<>();
+        if (agents != null) {
+            for (User agent : agents) {
+                if (agent.isCertificationState()) {
+                    certifications.put(agent.getUserId(), certificationInfoDao.findCertificationInfoByUserID(agent.getUserId()));
+                }
+            }
+        }
         request.setAttribute("agents", agents);
+        request.setAttribute("certifications", certifications);
         return mv;
     }
 
@@ -97,12 +136,21 @@ public class RootController {
         ModelAndView mv = new ModelAndView("agent_info");
         User agent = userManagerDao.findUserByPhoneNumber(phoneNumber);
         request.setAttribute("agent", agent);
-        List<User> users = userManagerDao.findSubCommonUsers(agent.getUserId());
-        request.setAttribute("users", users);
         if (agent.isCertificationState()) {
             UserCertificationInfo certificationInfo = certificationInfoDao.findCertificationInfoByUserID(agent.getUserId());
-            request.setAttribute("CertificationInfo", certificationInfo);
+            request.setAttribute("certificationInfo", certificationInfo);
         }
+        List<User> users = userManagerDao.findSubUsers(agent.getUserId());
+        request.setAttribute("users", users);
+        Map<Long, UserCertificationInfo> certifications = new HashMap<>();
+        if (users != null) {
+            for (User user : users) {
+                if (user.isCertificationState()) {
+                    certifications.put(user.getUserId(), certificationInfoDao.findCertificationInfoByUserID(user.getUserId()));
+                }
+            }
+        }
+        request.setAttribute("certifications", certifications);
         return mv;
     }
 
@@ -206,8 +254,15 @@ public class RootController {
                 users.put(userID, userManagerDao.findUserByUserID(userID));
             }
         }
+        Map<Long, UserCertificationInfo> certifications = new HashMap<>();
+        for (Map.Entry<Long, User> entry : users.entrySet()) {
+            if (entry.getValue().isCertificationState()) {
+                certifications.put(entry.getKey(), certificationInfoDao.findCertificationInfoByUserID(entry.getKey()));
+            }
+        }
         request.setAttribute("feedback", feedbacks);
         request.setAttribute("users", users);
+        request.setAttribute("certifications", certifications);
         return mv;
     }
 
@@ -249,6 +304,66 @@ public class RootController {
         request.setAttribute("user", userManagerDao.findUserByUserID(userID));
         request.setAttribute("certification", certificationInfoDao.findCertificationInfoByUserID(userID));
         request.setAttribute("card", debitCardDao.findDebitCardByUserID(userID));
+        return mv;
+    }
+
+    @RequestMapping(value = "setting.html", method = RequestMethod.GET)
+    public ModelAndView renderSettingPage() {
+        ModelAndView mv = new ModelAndView("setting");
+        return mv;
+    }
+
+    @RequestMapping(value = "withdraw.html", method = RequestMethod.GET)
+    public ModelAndView renderWithdrawPage() {
+        ModelAndView mv = new ModelAndView("withdraw");
+        return mv;
+    }
+
+    @RequestMapping(value = "withdraw_records.html", method = RequestMethod.GET)
+    public ModelAndView renderWithdrawRecordsPage(HttpServletRequest request, @RequestParam byte state) {
+        ModelAndView mv = new ModelAndView("withdraw_records");
+        List<UserWithdraw> records = new ArrayList<>();
+        switch (state) {
+            case -1:
+                records.addAll(userWithdrawDao.findAllWithdraw());
+                break;
+            case 0:
+                records.addAll(userWithdrawDao.findWithdrawByState((byte) 0));
+                break;
+            case 1:
+                records.addAll(userWithdrawDao.findWithdrawByState((byte) 1));
+                break;
+            case 2:
+                records.addAll(userWithdrawDao.findWithdrawByState((byte) 2));
+                break;
+        }
+        Map<Long, User> users = new HashMap<>();
+        Map<Long, UserCertificationInfo> certifications = new HashMap<>();
+        for (UserWithdraw record : records) {
+            long userID = record.getUserId();
+            if (!users.containsKey(userID)) {
+                User user = userManagerDao.findUserByUserID(userID);
+                users.put(userID, user);
+                if (user.isCertificationState()) {
+                    certifications.put(userID, certificationInfoDao.findCertificationInfoByUserID(userID));
+                }
+            }
+        }
+        request.setAttribute("records", records);
+        request.setAttribute("users", users);
+        request.setAttribute("certifications", certifications);
+        return mv;
+    }
+
+    @RequestMapping(value = "withdraw_record_info.html", method = RequestMethod.GET)
+    public ModelAndView renderWithdrawRecordInfoPage(HttpServletRequest request, @RequestParam long id) {
+        ModelAndView mv = new ModelAndView("withdraw_record_info");
+        UserWithdraw record = userWithdrawDao.findWithdrawByID(id);
+        User user = userManagerDao.findUserByUserID(record.getUserId());
+        UserCertificationInfo certification = certificationInfoDao.findCertificationInfoByUserID(user.getUserId());
+        request.setAttribute("user", user);
+        request.setAttribute("certification", certification);
+        request.setAttribute("record", record);
         return mv;
     }
 }

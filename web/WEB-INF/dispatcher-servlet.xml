@@ -57,6 +57,7 @@
 
     <mvc:resources mapping="/imgs/**" location="/resources/static/imgs/"/>
     <mvc:resources mapping="/vendor/**" location="/resources/static/vendor/"/>
+    <mvc:resources mapping="/static/**" location="/resources/static/"/>
 
     <mvc:default-servlet-handler/>
 

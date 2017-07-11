@@ -31,8 +31,12 @@ public class UserFeedbackDaoImpl implements UserFeedbackDao {
     }
 
     @Override
-    public void delete(UserFeedback userFeedback) {
-
+    public void delete(long id) {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        UserFeedback feedback = session.get(UserFeedback.class, id);
+        session.delete(feedback);
+        tx.commit();
     }
 
     @Override
@@ -47,7 +51,7 @@ public class UserFeedbackDaoImpl implements UserFeedbackDao {
     public List<UserFeedback> findAllFeedback() {
         Session session = sessionFactory.getCurrentSession();
         Transaction tx = session.beginTransaction();
-        Query<UserFeedback> query = session.createQuery("from UserFeedback", UserFeedback.class);
+        Query<UserFeedback> query = session.createQuery("from UserFeedback order by commitTime desc", UserFeedback.class);
         List<UserFeedback> result = query.getResultList();
         tx.commit();
         return result;
@@ -71,6 +75,17 @@ public class UserFeedbackDaoImpl implements UserFeedbackDao {
 
     @Override
     public UserFeedback findFeedbackByID(long id) {
-        return null;
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        Query<UserFeedback> query = session.createQuery("from UserFeedback where id = ?", UserFeedback.class);
+        query.setParameter(0, id);
+        List<UserFeedback> result = query.getResultList();
+        tx.commit();
+        if (result == null || result.size() == 0) {
+            return null;
+        }
+        else {
+            return result.get(0);
+        }
     }
 }

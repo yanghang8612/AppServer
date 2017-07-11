@@ -21,7 +21,7 @@ public class UserFeedback {
     @GenericGenerator(name="increment", strategy = "increment")
     private long id;
 
-    @Column(name = "user_id", nullable = false, unique = true)
+    @Column(name = "user_id", nullable = false)
     private long userId;
 
     @Column(name = "message", nullable = false)
@@ -29,6 +29,9 @@ public class UserFeedback {
 
     @Column(name = "commit_time")
     private Date commitTime;
+
+    @Column(name = "state")
+    private byte state;
 
     public long getId() {
         return id;
@@ -60,5 +63,13 @@ public class UserFeedback {
 
     public void setCommitTime(Date commitTime) {
         this.commitTime = commitTime;
+    }
+
+    public byte getState() {
+        return state;
+    }
+
+    public void setState(byte state) {
+        this.state = state;
     }
 }

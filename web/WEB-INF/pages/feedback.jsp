@@ -1,156 +1,200 @@
-<%@ page import="java.util.List" %>
-<%@ page import="com.huachuang.server.entity.UserFeedback" %>
-<%@ page import="java.util.Map" %>
 <%@ page import="com.huachuang.server.entity.User" %>
+<%@ page import="com.huachuang.server.entity.UserCertificationInfo" %>
+<%@ page import="com.huachuang.server.entity.UserFeedback" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.Map" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
 
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>掌触金控后台管理系统</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="/AppServer/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/AppServer/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/AppServer/static/font-awesome/css/font-awesome.css" rel="stylesheet">
 
-    <!-- MetisMenu CSS -->
-    <link href="/AppServer/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <link href="/AppServer/static/css/animate.css" rel="stylesheet">
+    <link href="/AppServer/static/css/style.css" rel="stylesheet">
+    <link href="/AppServer/static/css/server.css" rel="stylesheet">
 
-    <!-- DataTables CSS -->
-    <link href="/AppServer/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
+    <!-- Sweet Alert -->
+    <link href="/AppServer/static/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 
-    <!-- DataTables Responsive CSS -->
-    <link href="/AppServer/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
+    <!-- Toastr style -->
+    <link href="/AppServer/static/css/plugins/toastr/toastr.min.css" rel="stylesheet">
 
-    <!-- Custom CSS -->
-    <link href="/AppServer/vendor/sb-admin/css/sb-admin-2.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="/AppServer/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <link href="/AppServer/vendor/css/server.css" rel="stylesheet" type="text/css">
-
-    <link href="https://cdn.bootcss.com/toastr.js/latest/toastr.min.css" rel="stylesheet">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <!-- iCheck style -->
+    <link href="/AppServer/static/css/plugins/iCheck/custom.css" rel="stylesheet">
 
 </head>
 
 <body>
-
-    <div id="wrapper">
-
-        <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">
-                    掌触金控
-                </a>
-            </div>
-            <!-- /.navbar-header -->
-
-            <ul class="nav navbar-nav">
-                <li><a href="main.html">代理商管理</a></li>
-                <li><a href="credit_card.html">信用卡管理</a></li>
-                <li><a href="loan.html">贷款管理</a></li>
-                <li><a href="into.html">用户进件</a></li>
-                <li class="active"><a href="feedback.html">意见反馈</a></li>
-            </ul>
-            <ul class="nav navbar-top-links navbar-right">
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i><i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> 注销</a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-user -->
+<div id="wrapper">
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav metismenu" id="side-menu">
+                <li class="nav-header">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img alt="image" class="img-circle pull-left" src="/AppServer/static/img/profile_small.jpg" />
+                        </div>
+                        <div class="col-md-8">
+                            <span class="block m-t-xs"> <strong class="font-bold">admin</strong></span>
+                            <span class="text-muted text-xs block">管理员 </span>
+                        </div>
+                    </div>
                 </li>
-                <!-- /.dropdown -->
+                <li>
+                    <a href="main.html"><i class="fa fa-users"></i> <span class="nav-label">代理商管理 </span></a>
+                </li>
+                <li>
+                    <a href="credit_card.html"><i class="fa fa-credit-card"></i> <span class="nav-label">信用卡管理 </span></a>
+                </li>
+                <li>
+                    <a href="loan.html"><i class="fa fa-money"></i> <span class="nav-label">贷款管理 </span></a>
+                </li>
+                <li>
+                    <a href="into.html"><i class="fa fa-user-circle"></i> <span class="nav-label">用户进件 </span></a>
+                </li>
+                <li>
+                    <a href="withdraw.html"><i class="fa fa-hand-paper-o"></i> <span class="nav-label">用户提现 </span></a>
+                </li>
+                <li class="active">
+                    <a href="feedback.html"><i class="fa fa-commenting"></i> <span class="nav-label">意见反馈 </span><span class="label label-warning pull-right" id="unreadLabel">1</span></a>
+                </li>
+                <li>
+                    <a href="setting.html"><i class="fa fa-cog"></i> <span class="nav-label">参数设置 </span></a>
+                </li>
             </ul>
-            <!-- /.navbar-top-links -->
-        </nav>
 
-        <div class="container-fluid" id="feedback-content">
-            <%
-                List<UserFeedback> feedbacks = (List<UserFeedback>) request.getAttribute("feedback");
-                Map<Long, User> users = (Map<Long, User>) request.getAttribute("users");
-                SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                int rows = (int) Math.ceil((double) feedbacks.size() / 4.0);
-                for (int i = 0; i < rows; i++) {
-                    %><div class="row" id="feedback-row"><%
-                    for (int j = 0; j < 4 && i * 4 + j < feedbacks.size(); j++) {
-                        UserFeedback userFeedback = feedbacks.get(i * 4 + j);
-                        %>
-                            <div class="col-lg-3">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <%=users.get(userFeedback.getUserId()).getUserPhoneNumber()%>
-                                    </div>
-                                    <div class="panel-body">
-                                        <%=userFeedback.getMessage()%>
-                                        <h5 class="text-right"><%=fmt.format(userFeedback.getCommitTime())%></h5>
-                                    </div>
-                                </div>
-                            </div>
-                        <%
-                    }
-                    %></div><%
-                }
-            %>
         </div>
+    </nav>
 
+    <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
+                <ul class="nav navbar-top-links navbar-right">
+                    <li>
+                        <span class="m-r-sm text-muted welcome-message">欢迎使用掌触金控后台管理系统</span>
+                    </li>
+                    <li>
+                        <a href="login.html">
+                            <i class="fa fa-sign-out"></i> 注销
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="wrapper wrapper-content">
+            <div class="row">
+                <div class="col-md-12 animated fadeInRight">
+                    <div class="mail-box-header">
+                        <%--<form method="get" action="" class="pull-right mail-search">--%>
+                            <%--<div class="input-group">--%>
+                                <%--<input type="text" class="form-control input-sm" name="search">--%>
+                                <%--<div class="input-group-btn">--%>
+                                    <%--<button type="submit" class="btn btn-sm btn-primary">--%>
+                                        <%--搜索--%>
+                                    <%--</button>--%>
+                                <%--</div>--%>
+                            <%--</div>--%>
+                        <%--</form>--%>
+                        <h2>
+                            消息中心
+                        </h2>
+                        <div class="mail-tools tooltip-demo m-t-md">
+                            <div class="btn-group pull-right">
+                                <button class="btn btn-white btn-sm"><i class="fa fa-arrow-left"></i></button>
+                                <button class="btn btn-white btn-sm"><i class="fa fa-arrow-right"></i></button>
+
+                            </div>
+                            <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="left" title="Refresh inbox"><i class="fa fa-refresh"></i> 刷新</button>
+                            <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Move to trash"><i class="fa fa-trash-o"></i> </button>
+
+                        </div>
+                    </div>
+                    <div class="mail-box">
+                        <table class="table table-hover table-mail">
+                            <tbody>
+                            <%
+                                List<UserFeedback> feedbacks = (List<UserFeedback>) request.getAttribute("feedback");
+                                Map<Long, User> users = (Map<Long, User>) request.getAttribute("users");
+                                Map<Long, UserCertificationInfo> certifications = (Map<Long, UserCertificationInfo>) request.getAttribute("certifications");
+                                SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                for (UserFeedback feedback : feedbacks) {
+                                    User user = users.get(feedback.getUserId());
+                                    if (feedback.getState() == 0) {
+                                        %><tr class="unread"><%
+                                    }
+                                    else {
+                                        %><tr class="read"><%
+                                    }
+                                    %>
+                                        <td class="check-mail"><input type="checkbox" class="i-checks"></td>
+                                        <td class="mail-ontact"><%=(user.isCertificationState() ? certifications.get(user.getUserId()).getUserName() : user.getUserPhoneNumber())%></td>
+                                        <td class="mail-subject"><a href="javascript:void(0)" onclick="<%=(feedback.getState() == 0 ? "setMessageReaded(this, "+ feedback.getId() + ")" : "")%>"><%=feedback.getMessage()%></a></td>
+                                        <td class="text-right mail-date"><%=fmt.format(feedback.getCommitTime())%></td>
+                                        <td class="text-right">
+                                            <a class="label label-primary" onclick="deleteFeedback(this, <%=feedback.getId()%>)">
+                                                <i class="fa fa-check-circle-o"></i>
+                                                &nbsp;删除
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <%
+                                }
+                            %>
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div>
+                <strong>Copyright</strong> 掌触金控 &copy; 2017-2018
+            </div>
+        </div>
     </div>
-    <!-- /#wrapper -->
-    <div class="modal fade" id="recordInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    </div>
+</div>
 
-    <!-- jQuery -->
-    <script src="/AppServer/vendor/jquery/jquery.min.js"></script>
+<!-- Mainly scripts -->
+<script src="/AppServer/static/js/jquery-2.1.1.js"></script>
+<script src="/AppServer/static/js/bootstrap.min.js"></script>
+<script src="/AppServer/static/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="/AppServer/static/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="/AppServer/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!-- Custom and plugin javascript -->
+<script src="/AppServer/static/js/inspinia.js"></script>
+<script src="/AppServer/static/js/plugins/pace/pace.min.js"></script>
 
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="/AppServer/vendor/metisMenu/metisMenu.min.js"></script>
+<!-- Sweet alert -->
+<script src="/AppServer/static/js/plugins/sweetalert/sweetalert.min.js"></script>
 
-    <!-- DataTables JavaScript -->
-    <script src="/AppServer/vendor/datatables/js/jquery.dataTables.min.js"></script>
-    <script src="/AppServer/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
-    <script src="/AppServer/vendor/datatables-responsive/dataTables.responsive.js"></script>
+<!-- Toastr script -->
+<script src="/AppServer/static/js/plugins/toastr/toastr.min.js"></script>
 
-    <!-- Morris Charts JavaScript -->
-    <script src="/AppServer/vendor/raphael/raphael.min.js"></script>
-    <script src="/AppServer/vendor/morrisjs/morris.min.js"></script>
+<!-- iCheck script -->
+<script src="/AppServer/static/js/plugins/iCheck/icheck.min.js"></script>
 
-    <!-- Custom Theme JavaScript -->
-    <script src="/AppServer/vendor/sb-admin/js/sb-admin-2.js"></script>
-
-    <script src="https://cdn.bootcss.com/toastr.js/latest/toastr.min.js"></script>
-
-    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
-    <script>
+<script>
+    $(document).ready(function(){
         toastr.options = {
-            "closeButton": false,
+            "closeButton": true,
             "debug": false,
+            "progressBar": false,
+            "preventDuplicates": false,
             "positionClass": "toast-bottom-center",
             "onclick": null,
-            "showDuration": "300",
-            "hideDuration": "300",
+            "showDuration": "400",
+            "hideDuration": "1000",
             "timeOut": "1500",
             "extendedTimeOut": "1000",
             "showEasing": "swing",
@@ -158,8 +202,80 @@
             "showMethod": "fadeIn",
             "hideMethod": "fadeOut"
         };
-    </script>
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
+        updateUnreadCount();
+    });
+    function updateUnreadCount() {
+        $.ajax({
+            type: "POST",
+            url: "/AppServer/UserManager/GetUnreadFeedbackCount",
+            data: {},
+            dataType: "json",
+            success: function (data) {
+                if (data.Status == 'true') {
+                    if (data.Count != 0) {
+                        $('#unreadLabel').css({visibility: "visible"});
+                        $('#unreadLabel').text(data.Count);
+                    }
+                }
+                else {
+                    toastr.info(data.Info);
+                }
+            }
+        });
+    }
+    function setMessageReaded(obj, id) {
+        $.ajax({
+            type: "POST",
+            url: "/AppServer/UserManager/UpdateFeedbackState",
+            data: {id:id},
+            dataType: "json",
+            success: function (data) {
+                if (data.Status == 'true') {
+                    $(obj).parents('tr').removeClass('unread');
+                    $(obj).parents('tr').addClass('read');
+                    $(obj).removeAttr('onclick');
+                    updateUnreadCount();
+                }
+                else {
+                    toastr.info(data.Info);
+                }
+            }
+        });
+    }
+    function deleteFeedback(obj, id) {
+        swal({
+            title: "",
+            text: "确认删除该条消息吗？",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "确认删除",
+            cancelButtonText: "取消",
+            closeOnConfirm: false
+        }, function () {
+            swal("成功", "该条消息已删除", "success");
+            $.ajax({
+                type: "POST",
+                url: "/AppServer/UserManager/DeleteFeedback",
+                data: {id:id},
+                dataType: "json",
+                success: function (data) {
+                    if (data.Status == 'true') {
+                        $(obj).parents('tr').hide();
+                        updateUnreadCount();
+                    }
+                    else {
+                        toastr.info(data.Info);
+                    }
+                }
+            });
+        });
+    }
+</script>
 
 </body>
-
 </html>

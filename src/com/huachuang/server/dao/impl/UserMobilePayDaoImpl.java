@@ -1,7 +1,6 @@
 package com.huachuang.server.dao.impl;
 
 import com.huachuang.server.dao.UserMobilePayDao;
-import com.huachuang.server.entity.User;
 import com.huachuang.server.entity.UserMobilePay;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Session;

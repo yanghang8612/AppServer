@@ -1,6 +1,5 @@
 package com.huachuang.server.dao;
 
-import com.huachuang.server.entity.ApplyCreditCard;
 import com.huachuang.server.entity.PaymentOrder;
 
 import java.util.List;

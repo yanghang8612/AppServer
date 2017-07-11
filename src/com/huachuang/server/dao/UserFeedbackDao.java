@@ -1,6 +1,5 @@
 package com.huachuang.server.dao;
 
-import com.huachuang.server.entity.ApplyCreditCard;
 import com.huachuang.server.entity.UserFeedback;
 
 import java.util.List;
@@ -13,7 +12,7 @@ public interface UserFeedbackDao {
 
     void create(UserFeedback userFeedback);
 
-    void delete(UserFeedback userFeedback);
+    void delete(long id);
 
     void update(UserFeedback userFeedback);
 

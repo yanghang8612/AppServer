@@ -1,7 +1,6 @@
 package com.huachuang.server.dao;
 
 import com.huachuang.server.entity.ApplyLoan;
-import com.huachuang.server.entity.UserToken;
 
 import java.util.List;
 

@@ -4,6 +4,7 @@ import com.huachuang.server.entity.ApplyCreditCard;
 import com.huachuang.server.entity.ApplyLoan;
 import com.huachuang.server.entity.PaymentOrder;
 import com.huachuang.server.service.FinancialService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import java.util.Date;
 import java.util.Map;
 
 /**
@@ -23,6 +23,7 @@ import java.util.Map;
 public class FinancialController {
 
     @Resource
+    @Autowired
     private FinancialService financialService;
 
     @ResponseBody
@@ -112,5 +113,46 @@ public class FinancialController {
         paymentOrder.setOrderState(orderState);
         paymentOrder.setPaymentID(paymentID);
         return financialService.createPaymentOrder(paymentOrder);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/UpdateIntoState", method = RequestMethod.POST)
+    private Map<String, String> updateIntoState(
+            @RequestParam long userID,
+            @RequestParam byte state,
+            @RequestParam(required = false) String mid,
+            @RequestParam(required = false) String key) {
+
+        return financialService.updateMobilePayLoan(userID, state, mid, key);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/CommitWithdraw", method = RequestMethod.POST)
+    public Map<String, String> commitWithdraw(
+            @RequestParam long userID,
+            @RequestParam String cardNumber,
+            @RequestParam String cardType,
+            @RequestParam String bankName,
+            @RequestParam double amount) {
+
+
+        return financialService.commitWithdraw(userID, cardNumber, cardType, bankName, amount);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/UpdateWithdrawState", method = RequestMethod.POST)
+    public Map<String, String> updateWithdrawState(
+            @RequestParam long id,
+            @RequestParam byte state) {
+
+        return financialService.updateWithdrawState(id, state);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/GetWithdrawRecords", method = RequestMethod.POST)
+    public Map<String, Object> getWithdrawRecords(
+            @RequestParam long userID) {
+
+        return financialService.getWithdrawRecords(userID);
     }
 }

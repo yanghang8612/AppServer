@@ -30,6 +30,9 @@ public class UserCertificationInfo {
     @Column(name = "user_identity_card", nullable = false, unique = true)
     private String userIdentityCard;
 
+    @Column(name = "user_email", nullable = false)
+    private String userEMail;
+
     @Column(name = "user_address", nullable = false)
     private String userAddress;
 
@@ -74,6 +77,14 @@ public class UserCertificationInfo {
 
     public void setUserIdentityCard(String userIdentityCard) {
         this.userIdentityCard = userIdentityCard;
+    }
+
+    public String getUserEMail() {
+        return userEMail;
+    }
+
+    public void setUserEMail(String userEMail) {
+        this.userEMail = userEMail;
     }
 
     public String getUserAddress() {

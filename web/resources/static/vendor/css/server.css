@@ -94,3 +94,11 @@
 	width: 150px;
 	heght: 100px;
 }
+
+.dataTable {
+	text-align: center;
+}
+
+.table>thead:first-child>tr:first-child>th{
+	text-align:center;
+}

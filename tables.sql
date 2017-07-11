@@ -1,16 +1,19 @@
 CREATE TABLE `user` (
   `user_id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `user_phone_number` char(11) NOT NULL,
+  `user_phone_number` char(11) NOT NULL UNIQUE,
   `user_password` varchar(16) NOT NULL,
   `user_type` tinyint(1) DEFAULT 0,
   `is_vip` boolean DEFAULT FALSE,
   `invitation_code` char(6) DEFAULT NULL UNIQUE,
   `superior_user_id` bigint(20) DEFAULT 0,
+  `agent_id` bigint(20) NOT NULL,
+  `user_level` int(10) NOT NULL,
   `register_time` datetime DEFAULT CURRENT_TIMESTAMP,
   `last_login_time` datetime DEFAULT NULL,
   `certification_state` boolean DEFAULT FALSE,
   `debit_card_state` boolean DEFAULT FALSE,
   `header_state` boolean DEFAULT FALSE,
+	`mobile_pay_state` tinyint(1) DEFAULT 0,
   PRIMARY KEY (`user_id`)
 );
 
@@ -22,6 +25,8 @@ CREATE TABLE `user_abandoned` (
 	`is_vip` boolean DEFAULT FALSE,
 	`invitation_code` char(6) DEFAULT NULL,
 	`superior_user_id` bigint(20) DEFAULT 0,
+	`agent_id` bigint(20) NOT NULL,
+	`user_level` int(10) NOT NULL,
 	`register_time` datetime DEFAULT CURRENT_TIMESTAMP,
 	`last_login_time` datetime DEFAULT NULL,
 	`certification_state` boolean DEFAULT FALSE,
@@ -71,6 +76,7 @@ CREATE TABLE `user_certification_info` (
 	`user_name` varchar(16) NOT NULL,
 	`user_spell` varchar(64) NOT NULL,
 	`user_identity_card` char(18) NOT NULL UNIQUE,
+	`user_email` varchar(64) NOT NULL,
 	`user_address` varchar(128) NOT NULL,
 	`user_sex` char(1) NOT NULL,
 	PRIMARY KEY (`id`)
@@ -180,5 +186,16 @@ CREATE TABLE `user_feedback` (
 	`user_id` bigint(20) NOT NULL,
 	`message` varchar(256) NOT NULL,
 	`commit_time` datetime DEFAULT CURRENT_TIMESTAMP,
+	`state` tinyint(1) DEFAULT 0,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `user_withdraw` (
+	`id` bigint(20) NOT NULL AUTO_INCREMENT,
+	`user_id` bigint(20) NOT NULL,
+	`card_number` varchar(20) NOT NULL,
+	`amount` decimal(10,2) NOT NULL,
+	`commit_time` datetime DEFAULT CURRENT_TIMESTAMP,
+	`state` tinyint(1) DEFAULT 0,
 	PRIMARY KEY (`id`)
 );

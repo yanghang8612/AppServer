@@ -1,5 +1,6 @@
 package com.huachuang.server.controller;
 
+import com.huachuang.server.entity.UserWithdraw;
 import com.huachuang.server.service.UserManagerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,6 +45,14 @@ public class UserManagerController {
     }
 
     @ResponseBody
+    @RequestMapping(value = "/Update", method = RequestMethod.POST)
+    public Map<String, Object> update(
+            @RequestParam long userID) {
+
+        return userManagerService.update(userID);
+    }
+
+    @ResponseBody
     @RequestMapping(value = "/VerifyPhoneNumber", method = RequestMethod.POST)
     public Map<String, String> verifyPhoneNumber(
             @RequestParam String phoneNumber) {
@@ -77,6 +86,15 @@ public class UserManagerController {
     }
 
     @ResponseBody
+    @RequestMapping(value = "/ResetPassword", method = RequestMethod.POST)
+    public Map<String, String> resetPassword(
+            @RequestParam String phoneNumber,
+            @RequestParam String newPassword) {
+
+        return userManagerService.resetPassword(phoneNumber, newPassword);
+    }
+
+    @ResponseBody
     @RequestMapping(value = "/ChangePhoneNumber", method = RequestMethod.POST)
     public Map<String, String> changePhoneNumber(
             HttpServletRequest request,
@@ -104,20 +122,19 @@ public class UserManagerController {
     @ResponseBody
     @RequestMapping(value = "/AddAgent", method = RequestMethod.POST)
     public Map<String, String> addAgent(
-            @RequestParam String superiorPhoneNumber,
             @RequestParam String phoneNumber,
             @RequestParam String password,
             @RequestParam byte type) {
 
-        return userManagerService.addAgent(superiorPhoneNumber, phoneNumber, password, type);
+        return userManagerService.addAgent(phoneNumber, password, type);
     }
 
     @ResponseBody
     @RequestMapping(value = "/DeleteUser", method = RequestMethod.POST)
     public Map<String, String> deleteUser(
-            @RequestParam long userID) {
+            @RequestParam String phoneNumber) {
 
-        return userManagerService.deleteUser(userID);
+        return userManagerService.deleteUser(phoneNumber);
     }
 
     @ResponseBody
@@ -129,12 +146,20 @@ public class UserManagerController {
     }
 
     @ResponseBody
+    @RequestMapping(value = "/GetSubDirectUser", method = RequestMethod.POST)
+    public Map<String, Object> getSubDirectUser(
+            @RequestParam long userID) {
+
+        return userManagerService.getSubDirectUser(userID);
+    }
+
+    @ResponseBody
     @RequestMapping(value = "/GetRecommendCount", method = RequestMethod.POST)
     public Map<String, String> getRecommendCount(
             @RequestParam long userID) {
 
         return userManagerService.getRecommendCount(userID);
-    }
+}
 
     @ResponseBody
     @RequestMapping(value = "/GetRecommendRecord", method = RequestMethod.POST)
@@ -151,5 +176,28 @@ public class UserManagerController {
             @RequestParam String message) {
 
         return userManagerService.commitFeedback(userID, message);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/GetUnreadFeedbackCount", method = RequestMethod.POST)
+    public Map<String, String> getUnreadFeedbackCount() {
+
+        return userManagerService.getUnreadFeedbackCount();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/UpdateFeedbackState", method = RequestMethod.POST)
+    public Map<String, String> updateFeedbackState(
+            @RequestParam long id) {
+
+        return userManagerService.updateFeedbackState(id);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/DeleteFeedback", method = RequestMethod.POST)
+    public Map<String, String> deleteFeedback(
+            @RequestParam long id) {
+
+        return userManagerService.deleteFeedback(id);
     }
 }

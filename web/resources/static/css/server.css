@@ -1,0 +1,11 @@
+.dataTable {
+	text-align: center;
+}
+
+.table>thead:first-child>tr:first-child>th{
+	text-align:center;
+}
+
+#unreadLabel {
+	visibility:hidden;
+}

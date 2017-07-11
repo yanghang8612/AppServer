@@ -1,7 +1,6 @@
 package com.huachuang.server.dao.impl;
 
 import com.huachuang.server.dao.PaymentOrderDao;
-import com.huachuang.server.entity.ApplyCreditCard;
 import com.huachuang.server.entity.PaymentOrder;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

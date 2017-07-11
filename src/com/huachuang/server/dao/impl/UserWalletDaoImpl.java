@@ -4,13 +4,11 @@ import com.huachuang.server.dao.UserWalletDao;
 import com.huachuang.server.entity.UserWallet;
 import com.huachuang.server.entity.WalletBalanceRecord;
 import com.huachuang.server.entity.WalletPointsRecord;
-import org.apache.commons.logging.LogFactory;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
